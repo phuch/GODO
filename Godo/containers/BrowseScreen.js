@@ -10,7 +10,7 @@ class BrowseScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>Here goes browse screen</Text>
+                <Text>Browse Screen</Text>
             </View>
         );
     }
