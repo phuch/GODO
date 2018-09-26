@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "name": "Late night football",
+    "category": "Sports",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus massa vel consectetur accumsan.",
+    "location": {
+      "id": 1001,
+      "name": "Metropolia UAS - Leppävaara",
+      "coordinate" : {
+        "latitude": 60.221197,
+        "longitude": 24.804916
+      }
+    },
+    "time": "2018-09-30T10:30:37.000Z",
+    "publisher": "Dynamike"
+  },
+  {
+    "id": 2,
+    "name": "Dance class",
+    "category": "Arts & Music",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus massa vel consectetur accumsan.",
+    "location": {
+      "id": 1002,
+      "name": "Helsinki Tanssiopisto",
+      "coordinate": {
+        "latitude": 60.174516,
+        "longitude": 24.927750
+      }
+    },
+    "time": "2018-09-27T13:00:37.000Z",
+    "publisher": "Jessie"
+  },
+  {
+    "id": 3,
+    "name": "Carpentry workshop",
+    "category": "Craft",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus massa vel consectetur accumsan.",
+    "location": {
+      "id": 1003,
+      "name": "HAM Helsinki Art Museum",
+      "coordinate": {
+        "latitude": 60.169926,
+        "longitude": 24.930205
+      }
+    },
+    "time": "2018-09-26T11:30:37.000Z",
+    "publisher": "Tara"
+  },
+  {
+    "id": 4,
+    "name": "Nuksio trekking",
+    "category": "Outdoor",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus massa vel consectetur accumsan.",
+    "location": {
+      "id": 1004,
+      "name": "Nuksio National Park",
+      "coordinate": {
+        "latitude": 60.312983,
+        "longitude": 24.483269
+      }
+    },
+    "time": "2018-09-26T11:30:37.000Z",
+    "publisher": "Colt"
+  }
+]
