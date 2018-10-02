@@ -14,7 +14,8 @@ const HomeNavigator = createStackNavigator(
         }
     },
     {
-        initialRouteName: 'Home'
+        initialRouteName: 'Home',
+        headerMode: 'none'
     }
 )
 
@@ -23,6 +24,10 @@ const BrowseNavigator = createStackNavigator(
         Browse: {
             screen: BrowseScreen
         }
+    },
+    {
+        initialRouteName: 'Browse',
+        headerMode: 'none'
     }
 )
 
@@ -31,6 +36,10 @@ const ProfileNavigator = createStackNavigator(
         Profile: {
             screen: ProfileScreen
         }
+    },
+    {
+        initialRouteName: 'Profile',
+        headerMode: 'none'
     }
 )
 
@@ -73,7 +82,8 @@ const AppNavigator = createBottomTabNavigator(
         initialRouteName: 'Home',
         tabBarOptions: {
             showLabel: false
-        }
+        },
+        headerMode: 'none'
     }
 )
 

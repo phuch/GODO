@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
-import appReducer from './app-reducer'
+import appReducer from './app-reducer';
+import eventReducer from './event-reducer';
 
 export default combineReducers({
-    appState: appReducer
+    appState: appReducer,
+    events: eventReducer
 })
