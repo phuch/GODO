@@ -1,3 +1,4 @@
+import React from 'react';
 import SvgIcon from '../components/SvgIcon';
 
 export const renderCategoryIcon = (category) => {

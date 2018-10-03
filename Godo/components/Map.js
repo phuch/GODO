@@ -12,37 +12,53 @@ export default class Map extends React.Component {
 
 
     render() {
-        const {userLocation, eventLocations} = this.props;
-        let userLatitude, userLongitude;
+        const {userLocation, eventLocation, eventLocations} = this.props;
+        let latitude, longitude, initialRegion;
         if (userLocation) {
-            userLatitude = userLocation.coords.latitude;
-            userLongitude = userLocation.coords.longitude;
+            latitude = userLocation.coords.latitude;
+            longitude = userLocation.coords.longitude;
+            initialRegion = {
+                latitude: latitude,
+                longitude: longitude,
+                latitudeDelta: 0.347,
+                longitudeDelta: 0.101,
+            }
+        } else if (eventLocation) {
+            latitude = eventLocation.coordinate.latitude;
+            longitude = eventLocation.coordinate.longitude;
+            initialRegion = {
+                latitude: latitude,
+                longitude: longitude,
+                latitudeDelta: 0.0074,
+                longitudeDelta: 0.0033,
+            }
         }
 
         return (
-            <View style={styles.container}>
-                {userLocation &&
-                    <MapView
-                        initialRegion={{
-                            latitude: userLatitude,
-                            longitude: userLongitude,
-                            latitudeDelta: 0.347,
-                            longitudeDelta: 0.101,
-                        }}
-                        style={styles.map}
-                        showsUserLocation={true}
-                    >
-                        {eventLocations && eventLocations.map(location => (
-                            <Marker
-                                key={location.id}
-                                coordinate={location.coordinate}
-                                title={location.name}
-                                image={MARKER_LOGO}
-                            />
-                        ))}
+            <View>
+                <MapView
+                    initialRegion={initialRegion}
+                    style={styles.map}
+                    showsUserLocation={true}
+                >
+                    {eventLocations && eventLocations.map(location => (
+                        <Marker
+                            key={location.id}
+                            coordinate={location.coordinate}
+                            title={location.name}
+                            image={MARKER_LOGO}
+                        />
+                    ))}
 
-                    </MapView>
-                }
+                    {eventLocation &&
+                        <Marker
+                            key={eventLocation.id}
+                            coordinate={eventLocation.coordinate}
+                            title={eventLocation.name}
+                            image={MARKER_LOGO}
+                        />
+                    }
+                </MapView>
             </View>
         );
     }
@@ -51,7 +67,7 @@ export default class Map extends React.Component {
 const styles = StyleSheet.create({
     map: {
         width: Dimensions.get('window').width,
-        height: 250,
+        height: 230,
         borderRadius: 10,
     },
 });

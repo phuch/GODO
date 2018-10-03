@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity,View,Image } from 'react-native'
 import moment from 'moment';
+import colors from '../constants/colors';
 import {renderCategoryIcon} from '../util/iconsUtil';
 
 
@@ -10,6 +11,11 @@ class EventListItem extends React.Component {
         super(props)
     }
 
+    onPress = () => {
+        const {event, onPress} = this.props;
+        onPress('EventDetail', {event});
+    }
+
     render() {
         const { event: { name, location, time, category }, backgroundColor } = this.props;
         const formattedDate = moment(time).format('MMM D');
@@ -17,6 +23,7 @@ class EventListItem extends React.Component {
         return (
             <TouchableOpacity
                 style={[styles.container, { backgroundColor: backgroundColor }]}
+                onPress={this.onPress}
             >
                 <View style={styles.icon}>
                     {renderCategoryIcon(category)}
@@ -53,7 +60,7 @@ const styles = StyleSheet.create({
         paddingBottom: 15,
         marginTop: 10,
         borderRadius: 10,
-        shadowColor: '#000',
+        shadowColor: colors.black,
         shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 0.2,
         flexDirection: 'row',
@@ -69,12 +76,13 @@ const styles = StyleSheet.create({
     },
     eventName: {
         fontSize: 16,
-        fontWeight: '400',
-        color: '#FFF'
+        fontWeight: '600',
+        color: colors.white
     },
     text: {
-        fontSize: 13,
-        color: '#FFF'
+        fontSize: 14,
+        color: colors.white,
+        fontWeight: '400',
     }
 })
 

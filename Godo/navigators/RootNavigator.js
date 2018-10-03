@@ -3,7 +3,8 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import Ripple from "react-native-material-ripple"
 import HomeScreen from '../containers/HomeScreen';
 import BrowseScreen from '../containers/BrowseScreen';
-import ProfileScreen from '../containers/ProfileScreen'
+import ProfileScreen from '../containers/ProfileScreen';
+import EventDetailScreen from '../containers/EventDetailScreen';
 import Icon from "react-native-vector-icons/Feather"
 
 
@@ -11,6 +12,9 @@ const HomeNavigator = createStackNavigator(
     {
         Home: {
             screen: HomeScreen
+        },
+        EventDetail: {
+            screen: EventDetailScreen
         }
     },
     {

@@ -18,7 +18,7 @@
   {
     "id": 2,
     "name": "Dance class",
-    "category": "Arts & Music",
+    "category": "Music and Arts",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus massa vel consectetur accumsan.",
     "location": {
       "id": 1002,
@@ -34,7 +34,7 @@
   {
     "id": 3,
     "name": "Carpentry workshop",
-    "category": "Craft",
+    "category": "Crafts",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus massa vel consectetur accumsan.",
     "location": {
       "id": 1003,

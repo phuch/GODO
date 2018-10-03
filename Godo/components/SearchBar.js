@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput } from 'react-native';
+import { StyleSheet, View, TextInput } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -8,18 +8,17 @@ import colors from '../constants/colors';
 import { search } from '../actions/search-action';
 
 class SearchBar extends React.Component {
-
     render() {
-        const { search, term } = this.props;
+        const { search, term, style } = this.props;
 
         return (
-            <View style={[styles.inputField, { 'width': this.props.width }]}>
-                <Icon name='search' color={colors.darkGrey} size={24} />
+            <View style={[styles.inputField, { 'width': this.props.width }, style]}>
+                <Icon name='search' color={colors.darkGrey} size={24}/>
                 <TextInput
                     style={styles.textInput}
                     placeholder='Search for events'
                     underlineColorAndroid='transparent'
-                    onChangeText={(text) => search(text)}
+                    onChangeText={(text) => {search(text);}}
                     value={term} />
             </View>
         )
@@ -39,6 +38,7 @@ const mapDispatchToProps = (dispatch) => {
 const styles = StyleSheet.create({
     inputField: {
         flexDirection: 'row',
+        alignItems: 'center',
         backgroundColor: colors.lightGrey,
         borderColor: colors.darkGrey,
         marginTop: 10,

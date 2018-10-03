@@ -7,6 +7,7 @@ import CategoryList from '../components/CategoryList';
 import SearchBar from '../components/SearchBar';
 import EventList from '../components/EventList';
 import {assignCardBackgroundColor} from '../util/colorUtil';
+import colors from '../constants/colors'
 
 class BrowseScreen extends React.Component {
 
@@ -29,7 +30,6 @@ class BrowseScreen extends React.Component {
     }
 
     renderResultEventList = () => {
-        console.log(this.props.events);
         return <EventList events={this.props.events} backgroundColor={assignCardBackgroundColor}/>
     }
 

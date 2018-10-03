@@ -23,6 +23,7 @@
     "expo": "^27.0.1",
     "moment": "^2.22.2",
     "react": "16.5.2",
+    "prop-types": "^15.6.2",
     "react-native": "~0.55.2",
     "react-native-indicators": "^0.13.0",
     "react-native-maps": "^0.21.0",
