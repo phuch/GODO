@@ -10,7 +10,7 @@ const EventList = (props) => {
             <FlatList
                 data={events}
                 keyExtractor={event => `${event.id}`}
-                renderItem={({ item }) => <EventListItem event={item}/>}
+                renderItem={({ item }) => <EventListItem event={item} backgroundColor={props.backgroundColor(item.category)}/>}
             />
         </View>
     )

@@ -5,7 +5,7 @@ import { BarIndicator } from 'react-native-indicators';
 import Map from '../components/Map';
 import EventList from '../components/EventList'
 import events from '../fixtures/events.json';
-
+import {assignCardBackgroundColor} from '../util/colorUtil';
 
 class HomeScreen extends React.Component {
     constructor(props) {
@@ -56,7 +56,7 @@ class HomeScreen extends React.Component {
                 {isLoading && <BarIndicator color='#FF696B' count={6}/>}
                 <View style={styles.content}>
                     {errorMessage ? <Text>{errorMessage}</Text> : <Map userLocation={userLocation} eventLocations={eventLocations}/>}
-                    <EventList events={events}/>
+                    <EventList events={events} backgroundColor={assignCardBackgroundColor}/>
                 </View>
             </View>
         );

@@ -1,17 +1,15 @@
-import {CRAFT_ICON, SPORTS_ICON, AM_ICON, DEFAULT_ICON} from '../images';
+import SvgIcon from '../components/SvgIcon';
 
 export const renderCategoryIcon = (category) => {
     switch (category) {
         case 'Sports':
-            return SPORTS_ICON;
-        case 'Arts & Music':
-            return AM_ICON;
-        case 'Craft':
-            return CRAFT_ICON;
-        case 'Outdoor':
-            return DEFAULT_ICON;
+            return <SvgIcon name='Football' width={30} />;
+        case 'Music and Arts':
+            return <SvgIcon name='Guitar' width={30} />;
+        case 'Crafts':
+            return <SvgIcon name='Scissors' width={30} />;
         default:
-            return DEFAULT_ICON;
+            return <SvgIcon name='Mascot' width={30} />;
     }
 }
 

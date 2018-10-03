@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity,View,Image } from 'react-native'
 import moment from 'moment';
-import categoryColors from '../constants/category-colors';
 import {renderCategoryIcon} from '../util/iconsUtil';
+
 
 class EventListItem extends React.Component {
 
@@ -11,15 +11,15 @@ class EventListItem extends React.Component {
     }
 
     render() {
-        const { event: { name, location, time, category } } = this.props;
+        const { event: { name, location, time, category }, backgroundColor } = this.props;
         const formattedDate = moment(time).format('MMM D');
         const formattedTime = moment(time).format('k:mm');
         return (
             <TouchableOpacity
-                style={[styles.container, {backgroundColor: categoryColors[category]}]}
+                style={[styles.container, { backgroundColor: backgroundColor }]}
             >
                 <View style={styles.icon}>
-                    <Image source={renderCategoryIcon(category)} style={{width: 34, height: 34}}/>
+                    {renderCategoryIcon(category)}
                 </View>
                 <View style={styles.info}>
                     <View>
@@ -47,7 +47,7 @@ class EventListItem extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex:1,
+        flex: 1,
         padding: 10,
         paddingTop: 15,
         paddingBottom: 15,
@@ -63,9 +63,9 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     info: {
-        flex:1,
+        flex: 1,
         flexDirection: 'row',
-        justifyContent:'space-between'
+        justifyContent: 'space-between'
     },
     eventName: {
         fontSize: 16,
