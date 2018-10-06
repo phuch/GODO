@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Platform, ViewPropTypes } from 'react-native';
-import { Svg } from 'expo';
+import Svg from 'react-native-svg';
 import { svgs } from '../assets/svgs/CombineSvgs';
 
 const SvgIcon = (props) => {

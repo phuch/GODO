@@ -1,8 +1,6 @@
 import React from 'react';
-import { Svg } from 'expo';
+import Svg, { G, Path, Circle, Ellipse } from 'react-native-svg';
 import colors from '../../constants/colors';
-
-const { G, Path, Circle, Ellipse } = Svg;
 
 export default {
     SearchBottomBarGrey: {

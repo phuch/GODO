@@ -1,8 +1,6 @@
 import React from 'react';
-import { Svg } from 'expo';
+import { G, Path, Circle }  from 'react-native-svg';
 import colors from '../../constants/colors';
-
-const { G, Path, Circle } = Svg;
 
 export default {
     ReviewStar: {
