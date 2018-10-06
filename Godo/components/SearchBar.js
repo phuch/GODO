@@ -17,6 +17,7 @@ class SearchBar extends React.Component {
                 <TextInput
                     style={styles.textInput}
                     placeholder='Search for events'
+                    clearButtonMode='while-editing'
                     underlineColorAndroid='transparent'
                     onChangeText={(text) => {search(text);}}
                     value={term} />

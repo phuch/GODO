@@ -38,7 +38,10 @@ export default HomeHeader = (props) => {
                                 size={35}
                                 color={colors.darkGrey}/>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.leftMargin}>
+                        <TouchableOpacity
+                            style={styles.leftMargin}
+                            onPress={() => handleNavigation('CreateEvent')}
+                        >
                             <Icon
                                 name='plus'
                                 size={35}

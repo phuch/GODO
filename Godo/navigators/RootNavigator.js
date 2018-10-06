@@ -6,6 +6,7 @@ import BrowseScreen from '../containers/BrowseScreen';
 import ProfileScreen from '../containers/ProfileScreen';
 import EventDetailScreen from '../containers/EventDetailScreen';
 import Icon from "react-native-vector-icons/Feather"
+import CreateEventScreen from '../containers/CreateEventScreen';
 
 
 const HomeNavigator = createStackNavigator(
@@ -15,6 +16,9 @@ const HomeNavigator = createStackNavigator(
         },
         EventDetail: {
             screen: EventDetailScreen
+        },
+        CreateEvent: {
+            screen: CreateEventScreen
         }
     },
     {

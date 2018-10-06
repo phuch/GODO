@@ -20,8 +20,8 @@ export default class Map extends React.Component {
             initialRegion = {
                 latitude: latitude,
                 longitude: longitude,
-                latitudeDelta: 0.347,
-                longitudeDelta: 0.101,
+                latitudeDelta: 0.017,
+                longitudeDelta: 0.003,
             }
         } else if (eventLocation) {
             latitude = eventLocation.coordinate.latitude;

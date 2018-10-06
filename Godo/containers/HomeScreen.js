@@ -21,14 +21,7 @@ class HomeScreen extends React.Component {
     }
 
     componentWillMount() {
-        if (!Constants.isDevice) {
-            this.setState({
-                errorMessage: 'Oops, this map will not work in an emulator.' +
-                ' Try it on your device!',
-            });
-        } else {
-            this.getLocationAsync();
-        }
+        this.getLocationAsync();
     }
 
     getLocationAsync = async () => {
@@ -72,11 +65,13 @@ class HomeScreen extends React.Component {
                         <Text>{errorMessage}</Text> :
                         <Map userLocation={userLocation} eventLocations={eventLocations}/>
                     }
-                    <EventList
-                        events={this.props.events}
-                        backgroundColor={assignCardBackgroundColor}
-                        handleNavigation={this.handleNavigation}
-                    />
+                    {this.props.events.length ?
+                        <EventList
+                            events={this.props.events}
+                            backgroundColor={assignCardBackgroundColor}
+                             handleNavigation={this.handleNavigation}
+                        /> : <Text style={styles.noResultText}>No results found</Text>
+                    }
                 </View>
             </View>
         );
@@ -94,6 +89,11 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         backgroundColor: 'white'
+    },
+    noResultText: {
+        marginTop: 20,
+        fontSize: 20,
+        fontWeight: '500',
     }
 })
 
