@@ -1,0 +1,23 @@
+dependencies: \
+  /Users/tringuyen/Documents/Private/GODO/Godo/node_modules/react-native/React/Modules/RCTDevSettings.mm \
+  /Users/tringuyen/Documents/Private/GODO/Godo/node_modules/react-native/React/Modules/RCTDevSettings.h \
+  /Users/tringuyen/Documents/Private/GODO/Godo/node_modules/react-native/React/Base/RCTBridge.h \
+  /Users/tringuyen/Documents/Private/GODO/Godo/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Users/tringuyen/Documents/Private/GODO/Godo/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Users/tringuyen/Documents/Private/GODO/Godo/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/tringuyen/Documents/Private/GODO/Godo/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/tringuyen/Documents/Private/GODO/Godo/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/tringuyen/Documents/Private/GODO/Godo/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/tringuyen/Documents/Private/GODO/Godo/ios/build/Build/Products/Debug-iphoneos/include/jschelpers/JavaScriptCore.h \
+  /Users/tringuyen/Documents/Private/GODO/Godo/ios/build/Build/Products/Debug-iphoneos/include/jschelpers/JSCWrapper.h \
+  /Users/tringuyen/Documents/Private/GODO/Godo/node_modules/react-native/React/Base/RCTBridge+Private.h \
+  /Users/tringuyen/Documents/Private/GODO/Godo/node_modules/react-native/React/Base/RCTEventDispatcher.h \
+  /Users/tringuyen/Documents/Private/GODO/Godo/node_modules/react-native/React/Modules/RCTJSCSamplingProfiler.h \
+  /Users/tringuyen/Documents/Private/GODO/Godo/node_modules/react-native/React/Base/RCTLog.h \
+  /Users/tringuyen/Documents/Private/GODO/Godo/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/tringuyen/Documents/Private/GODO/Godo/node_modules/react-native/React/Base/RCTUtils.h \
+  /Users/tringuyen/Documents/Private/GODO/Godo/node_modules/react-native/React/DevSupport/RCTPackagerClient.h \
+  /Users/tringuyen/Documents/Private/GODO/Godo/node_modules/react-native/React/Profiler/RCTProfile.h \
+  /Users/tringuyen/Documents/Private/GODO/Godo/node_modules/react-native/React/DevSupport/RCTPackagerConnection.h \
+  /Users/tringuyen/Documents/Private/GODO/Godo/node_modules/react-native/React/DevSupport/RCTInspectorDevServerHelper.h \
+  /Users/tringuyen/Documents/Private/GODO/Godo/node_modules/react-native/React/Inspector/RCTInspectorPackagerConnection.h
