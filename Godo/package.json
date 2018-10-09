@@ -3,25 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "react-native-scripts": "2.0.1",
+    "jest-expo": "~30.0.0",
     "react-test-renderer": "16.5.2"
   },
+  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
-    "start": "react-native start",
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "ios-7": "react-native run-ios --simulator=\"iPhone 7\"",
+    "start": "react-native-scripts start",
+    "eject": "react-native-scripts eject",
+    "android": "react-native-scripts android",
+    "ios": "react-native-scripts ios",
     "test": "jest"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "jest-expo"
   },
   "dependencies": {
     "@babel/preset-react": "^7.0.0",
+    "expo": "^27.0.1",
     "moment": "^2.22.2",
     "react": "16.5.2",
     "react-native": "~0.55.2",
     "react-native-material-ripple": "^0.8.0",
-    "react-native-svg": "^7.0.3",
     "react-native-vector-icons": "^5.0.0",
     "react-navigation": "^2.16.0",
     "react-redux": "^5.0.7",

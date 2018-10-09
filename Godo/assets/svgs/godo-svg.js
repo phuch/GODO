@@ -1,6 +1,8 @@
 import React from 'react';
-import Svg, { G, Path }  from 'react-native-svg';
+import { Svg } from 'expo';
 import colors from '../../constants/colors';
+
+const { G, Path } = Svg;
 
 export default {
     GodoLogo: {

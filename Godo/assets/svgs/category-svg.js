@@ -1,6 +1,8 @@
 import React from 'react';
-import Svg, { G, Path, Circle, Polygon, Polyline, Ellipse }  from 'react-native-svg';
+import { Svg } from 'expo';
 import colors from '../../constants/colors';
+
+const { G, Path, Circle, Polygon, Polyline, Ellipse } = Svg;
 
 export default {
     Football: {

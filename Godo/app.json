@@ -1,4 +1,5 @@
 {
-  "name": "Godo",
-  "displayName": "Godo"
+  "expo": {
+    "sdkVersion": "27.0.0"
+  }
 }
