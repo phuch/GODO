@@ -12,7 +12,7 @@ export default class Map extends React.Component {
 
 
     render() {
-        const {userLocation, eventLocation, eventLocations} = this.props;
+        const {userLocation, eventLocation, nearbyEvents} = this.props;
         let latitude, longitude, initialRegion;
         if (userLocation) {
             latitude = userLocation.coords.latitude;
@@ -41,14 +41,17 @@ export default class Map extends React.Component {
                     style={styles.map}
                     showsUserLocation={true}
                 >
-                    {eventLocations && eventLocations.map(location => (
-                        <Marker
-                            key={location.id}
-                            coordinate={location.coordinate}
-                            title={location.name}
-                            image={MARKER_LOGO}
-                        />
-                    ))}
+                    {nearbyEvents && nearbyEvents.map(event => {
+                        const {id, coordinate,name} = event.location;
+                        return (
+                            <Marker
+                                key={id}
+                                coordinate={coordinate}
+                                title={name}
+                                image={MARKER_LOGO}
+                            />
+                        )
+                    })}
 
                     {eventLocation &&
                         <Marker

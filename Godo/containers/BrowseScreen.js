@@ -6,7 +6,7 @@ import categories from '../fixtures/categories.json';
 import CategoryList from '../components/CategoryList';
 import SearchBar from '../components/SearchBar';
 import EventList from '../components/EventList';
-import {assignCardBackgroundColor} from '../util/colorUtil';
+import {assignCardBackgroundColor} from '../util/colorUtils';
 import colors from '../constants/colors'
 
 class BrowseScreen extends React.Component {

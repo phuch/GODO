@@ -1,5 +1,8 @@
 import React from "react"
-import {StyleSheet,View, Text} from "react-native";
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/EvilIcons';
+import colors from '../constants/colors';
+import AppHeader from '../components/AppHeader';
 
 class CreateEventScreen extends React.Component {
 
@@ -9,7 +12,22 @@ class CreateEventScreen extends React.Component {
 
     render() {
         return (
-            <Text>Here goes create activity screen</Text>
+            <View>
+                <AppHeader
+                    hasBackButton={true}
+                    title="Create activity"
+                    rightIcons={
+                        <TouchableOpacity>
+                            <Icon
+                                name='check'
+                                size={40}
+                                color={colors.darkGrey}
+                            />
+                        </TouchableOpacity>
+                    }
+                    navigation={this.props.navigation}
+                />
+            </View>
         )
     }
 }

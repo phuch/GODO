@@ -1,26 +1,26 @@
 import React from "react"
 import {StyleSheet, View, Text} from 'react-native';
-import { Constants, Location, Permissions } from 'expo';
-import { BarIndicator } from 'react-native-indicators';
+import { Location, Permissions } from 'expo';
 import Map from '../components/Map';
 import EventList from '../components/EventList';
 import HomeHeader from '../components/HomeHeader';
-import {assignCardBackgroundColor} from '../util/colorUtil';
+import {assignCardBackgroundColor} from '../util/colorUtils';
+import {calculateDistance} from '../util/geolocationUtils';
 import {connect} from 'react-redux';
+import { DotIndicator } from 'react-native-indicators';
 
 class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             userLocation: null,
-            eventLocations: null,
+            nearbyEvents: null,
             errorMessage: null,
-            isSearching: false,
-            isLoading: true
+            isSearching: false
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.getLocationAsync();
     }
 
@@ -34,11 +34,23 @@ class HomeScreen extends React.Component {
         }
 
         const userLocation = await Location.getCurrentPositionAsync({});
-        const eventLocations = this.props.events.map(event => {
-            return event.location;
-        })
-        this.setState({ isLoading:false, userLocation, eventLocations });
+        const nearbyEvents = this.getNearbyEvents(userLocation);
+        this.setState({ userLocation, nearbyEvents});
+
+
     };
+
+    getNearbyEvents = (userLocation) => {
+        const userLatitude = userLocation.coords.latitude;
+        const userLongitude = userLocation.coords.longitude;
+        const nearbyEvents = this.props.events
+            .filter(event => {
+                const eventLatitude = event.location.coordinate.latitude;
+                const eventLongitude = event.location.coordinate.longitude;
+                return calculateDistance(userLatitude, userLongitude, eventLatitude, eventLongitude, "K") <= 3;
+            })
+        return nearbyEvents;
+    }
 
     toggleSearchMode = () => {
         const {isSearching} = this.state
@@ -51,10 +63,9 @@ class HomeScreen extends React.Component {
     }
 
     render() {
-        const {isLoading, errorMessage, userLocation, eventLocations, isSearching} = this.state
+        const {errorMessage, userLocation, nearbyEvents, isSearching} = this.state
         return (
             <View style={styles.container}>
-                {isLoading && <BarIndicator color='#FF696B' count={6}/>}
                 <View style={styles.content}>
                     <HomeHeader
                         isSearching={isSearching}
@@ -63,14 +74,25 @@ class HomeScreen extends React.Component {
                     />
                     {errorMessage ?
                         <Text>{errorMessage}</Text> :
-                        <Map userLocation={userLocation} eventLocations={eventLocations}/>
+                        <Map userLocation={userLocation} nearbyEvents={nearbyEvents}/>
                     }
-                    {this.props.events.length ?
-                        <EventList
-                            events={this.props.events}
-                            backgroundColor={assignCardBackgroundColor}
-                             handleNavigation={this.handleNavigation}
-                        /> : <Text style={styles.noResultText}>No results found</Text>
+                    {nearbyEvents ?
+                        (nearbyEvents.length ?
+                            <EventList
+                                events={nearbyEvents}
+                                backgroundColor={assignCardBackgroundColor}
+                                handleNavigation={this.handleNavigation}
+                            />
+                            :
+                            <Text style={styles.noResultText}>No activities found nearby, please relocate to see more activities </Text>
+                        )
+                        :
+                        <DotIndicator
+                            count={3}
+                            size={10}
+                            color='#FF696B'
+                            animationDuration={800}
+                        />
                     }
                 </View>
             </View>
@@ -91,9 +113,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     noResultText: {
-        marginTop: 20,
-        fontSize: 20,
+        margin: 20,
+        fontSize: 18,
         fontWeight: '500',
+        textAlign: 'center'
     }
 })
 
