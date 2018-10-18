@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 import appReducer from './app-reducer';
-import eventReducer from './event-reducer';
+import browseReducer from './browse-reducer';
+import homeReducer from './home-reducer';
 
 export default combineReducers({
     appState: appReducer,
-    events: eventReducer
+    homeScreenState: homeReducer,
+    browseScreenState: browseReducer
 })

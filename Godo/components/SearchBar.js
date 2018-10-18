@@ -1,16 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import colors from '../constants/colors';
-import { search } from '../actions/search-action';
 
 class SearchBar extends React.Component {
     render() {
-        const { search, term, style } = this.props;
-
+        const {handleSearch, style, autoFocus} = this.props;
         return (
             <View style={[styles.inputField, { 'width': this.props.width }, style]}>
                 <Icon name='search' color={colors.darkGrey} size={24}/>
@@ -18,22 +14,13 @@ class SearchBar extends React.Component {
                     style={styles.textInput}
                     placeholder='Search for events'
                     clearButtonMode='while-editing'
+                    autoFocus={autoFocus}
                     underlineColorAndroid='transparent'
-                    onChangeText={(text) => {search(text);}}
-                    value={term} />
+                    onChangeText={(text) => {handleSearch(text);}}
+                />
             </View>
         )
     }
-}
-
-const mapStateToProps = ({events}) => {
-    return {
-        term: events.term
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ search }, dispatch)
 }
 
 const styles = StyleSheet.create({
@@ -60,7 +47,13 @@ const styles = StyleSheet.create({
 })
 
 SearchBar.propTypes = {
-    width: PropTypes.number
+    width: PropTypes.number,
+    autoFocus: PropTypes.bool,
+    handleSearch: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+SearchBar.defaultProps = {
+    autoFocus: false,
+}
+
+export default SearchBar;

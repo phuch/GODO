@@ -11,13 +11,18 @@ const screenWidth = Dimensions.get("window").width;
 const ICON_WIDTH_RATIO = 0.75;
 export default HomeHeader = (props) => {
 
-    const { handleNavigation, isSearching, toggleSearchMode } = props;
+    const { handleNavigation, isSearching, toggleSearchMode, handleSearch } = props;
 
     return (
         <View style={styles.container}>
             {isSearching ?
                 <View style={styles.contentSearchMode}>
-                    <SearchBar width={screenWidth * ICON_WIDTH_RATIO} style={styles.searchBar}/>
+                    <SearchBar
+                        width={screenWidth * ICON_WIDTH_RATIO}
+                        style={styles.searchBar}
+                        handleSearch={handleSearch}
+                        autoFocus={true}
+                    />
                     <Button
                         onPress={toggleSearchMode}
                         title="Cancel"
