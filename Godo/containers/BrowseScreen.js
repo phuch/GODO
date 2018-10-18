@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, View, SectionList, Dimensions } from "react-native";
 import { connect } from "react-redux";
-import colors from "../constants/colors";
 import categories from "../fixtures/categories.json";
+import { assignCardBackgroundColor } from "../util/colorUtils";
 
 import SvgIcon from "../components/SvgIcon";
 import { SectionHeaderText } from "../components/Text";
@@ -14,19 +14,6 @@ class BrowseScreen extends React.Component {
   constructor(props) {
     super(props);
   }
-
-  assignCardBackgroundColor = type => {
-    switch (type) {
-      case "Sports":
-        return colors.secondary;
-      case "Music and Arts":
-        return colors.primary;
-      case "Crafts":
-        return colors.yellow;
-      default:
-        return colors.blue;
-    }
-  };
 
   renderSectionList = () => {
     return (
@@ -41,7 +28,7 @@ class BrowseScreen extends React.Component {
         renderItem={({ item, index, section }) => (
           <CategoryList
             category={item}
-            backgroundColor={this.assignCardBackgroundColor(section.title)}
+            backgroundColor={assignCardBackgroundColor(section.title)}
           />
         )}
         stickySectionHeadersEnabled={false}
@@ -50,12 +37,10 @@ class BrowseScreen extends React.Component {
   };
 
   renderResultEventList = () => {
-    console.log(this.props.events);
     return (
-      <EventList
-        events={this.props.events}
-        backgroundColor={this.assignCardBackgroundColor}
-      />
+      <View style={{ paddingHorizontal: 15 }}>
+        <EventList events={this.props.events} />
+      </View>
     );
   };
 
@@ -67,13 +52,19 @@ class BrowseScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <SvgIcon
-          name="LookingFor"
-          width={screenWidth * ICON_WIDTH_RATIO}
-          height={80}
-        />
-        <SearchBar width={screenWidth * ICON_WIDTH_RATIO} />
-        {isSearching ? this.renderResultEventList() : this.renderSectionList()}
+        <View style={{ alignItems: "center" }}>
+          <SvgIcon
+            name="LookingFor"
+            width={screenWidth * ICON_WIDTH_RATIO}
+            height={80}
+          />
+          <SearchBar width={screenWidth * ICON_WIDTH_RATIO} />
+        </View>
+        <View>
+          {isSearching
+            ? this.renderResultEventList()
+            : this.renderSectionList()}
+        </View>
       </View>
     );
   }
@@ -89,9 +80,8 @@ const mapStateToProps = ({ events }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50,
     backgroundColor: "#FFF",
-    alignItems: "center",
+    alignItems: "stretch",
     paddingTop: 90
   }
 });

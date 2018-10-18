@@ -1,10 +1,9 @@
 import React from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/EvilIcons";
-import colors from "../constants/colors";
+import { connect } from "react-redux";
+import { fetchAllEvents } from "../actions/event-action";
 
-import AppHeader from "../components/AppHeader";
-import ReviewListItem from "../components/ReviewListItem";
+import UserScreen from "./UserScreen";
 
 class ProfileScreen extends React.Component {
   constructor(props) {
@@ -12,16 +11,10 @@ class ProfileScreen extends React.Component {
   }
 
   render() {
+
     return (
       <View style={styles.container}>
-        <AppHeader
-          rightIcons={
-            <TouchableOpacity>
-              <Icon name="pencil" size={30} color={colors.darkGrey} />
-            </TouchableOpacity>
-          }
-        />
-        <ReviewListItem />
+        <UserScreen ofCurrentUser={true}/>
       </View>
     );
   }
@@ -29,10 +22,17 @@ class ProfileScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#FFF",
-    alignItems: "center"
+    flex: 1
   }
 });
 
-export default ProfileScreen;
+const mapStateToProps = ({ events }) => {
+  return {
+    events: events.events
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchAllEvents }
+)(ProfileScreen);

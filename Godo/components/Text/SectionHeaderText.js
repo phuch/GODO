@@ -13,6 +13,7 @@ export default (SectionHeaderText = props => {
 
 const styles = StyleSheet.create({
   sectionHeader: {
-    fontWeight: "bold"
+    fontWeight: "bold",
+    paddingVertical: 10,
   }
 });

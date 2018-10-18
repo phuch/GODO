@@ -56,13 +56,11 @@ class EventListItem extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
-    paddingTop: 15,
-    paddingBottom: 15,
-    marginTop: 10,
-    borderRadius: 10,
+    padding: 15,
+    marginBottom: 10,
+    borderRadius: 15,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 0 },
+    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.2,
     flexDirection: "row",
     alignItems: "center"
