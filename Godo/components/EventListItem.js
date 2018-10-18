@@ -1,7 +1,9 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity,View,Image } from 'react-native'
 import moment from 'moment';
-import SvgIcon from '../components/SvgIcon';
+import colors from '../constants/colors';
+import {renderCategoryIcon} from '../util/iconsUtils';
+
 
 class EventListItem extends React.Component {
 
@@ -9,19 +11,10 @@ class EventListItem extends React.Component {
         super(props)
     }
 
-    renderCategoryIcon = (category) => {
-        switch (category) {
-            case 'Sports':
-                return <SvgIcon name='Football' width={30} />;
-            case 'Music and Arts':
-                return <SvgIcon name='Guitar' width={30} />;
-            case 'Crafts':
-                return <SvgIcon name='Scissors' width={30} />;
-            default:
-                return <SvgIcon name='Mascot' width={30} />;
-        }
+    onPress = () => {
+        const {event, onPress} = this.props;
+        onPress('EventDetail', {event});
     }
-
 
     render() {
         const { event: { name, location, time, category }, backgroundColor } = this.props;
@@ -30,9 +23,10 @@ class EventListItem extends React.Component {
         return (
             <TouchableOpacity
                 style={[styles.container, { backgroundColor: backgroundColor }]}
+                onPress={this.onPress}
             >
                 <View style={styles.icon}>
-                    {this.renderCategoryIcon(category)}
+                    {renderCategoryIcon(category)}
                 </View>
                 <View style={styles.info}>
                     <View>
@@ -66,7 +60,7 @@ const styles = StyleSheet.create({
         paddingBottom: 15,
         marginTop: 10,
         borderRadius: 10,
-        shadowColor: '#000',
+        shadowColor: colors.black,
         shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 0.2,
         flexDirection: 'row',
@@ -82,12 +76,13 @@ const styles = StyleSheet.create({
     },
     eventName: {
         fontSize: 16,
-        fontWeight: '400',
-        color: '#FFF'
+        fontWeight: '600',
+        color: colors.white
     },
     text: {
-        fontSize: 13,
-        color: '#FFF'
+        fontSize: 14,
+        color: colors.white,
+        fontWeight: '400',
     }
 })
 

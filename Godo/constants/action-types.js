@@ -1,1 +1,5 @@
-export const SEARCH = 'SEARCH';
+export const TOGGLE_SEARCH = 'TOGGLE_SEARCH';
+export const SEARCH_ALL = 'SEARCH_ALL';
+export const SEARCH_NEARBY = 'SEARCH_NEARBY';
+export const GET_LOCATION_SUCCESS = 'GET_LOCATION_SUCCESS';
+export const GET_LOCATION_ERROR = 'GET_LOCATION_ERROR';
