@@ -87,11 +87,12 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = ({ events }) => {
-  return {
-    events: events.events
+const mapStateToProps = (store) => {
+    const {events} = store.browseScreenState;
+      return {
+          events
+      }
   };
-};
 
 export default connect(
   mapStateToProps,

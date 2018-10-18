@@ -6,8 +6,8 @@ import { assignCardBackgroundColor } from "../util/colorUtils";
 import { SectionHeaderText } from "./Text";
 import EventListItem from "./EventListItem";
 
-const EventList = props => {
-  const { events } = props;
+const EventList = (props) => {
+    const { events, handleNavigation } = props
 
   return (
     <View style={styles.container}>
@@ -20,6 +20,7 @@ const EventList = props => {
         renderItem={({ item }) => (
           <EventListItem
             event={item}
+            onPress={handleNavigation}
             backgroundColor={assignCardBackgroundColor(item.category)}
           />
         )}
@@ -30,7 +31,9 @@ const EventList = props => {
 };
 
 const styles = StyleSheet.create({
-
+  container: {
+    flex: 1
+  }
 });
 
 EventList.propTypes = {

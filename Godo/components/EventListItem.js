@@ -1,28 +1,20 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import moment from "moment";
+import colors from "../constants/colors";
+import { renderCategoryIcon } from "../util/iconsUtils";
 
 import BaseText from "./Text";
 import { HeaderText } from "./Text";
-import SvgIcon from "./SvgIcon";
-import { colors } from "react-native-elements";
 
 class EventListItem extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  renderCategoryIcon = category => {
-    switch (category) {
-      case "Sports":
-        return <SvgIcon name="Football" width={30} />;
-      case "Music and Arts":
-        return <SvgIcon name="Guitar" width={30} />;
-      case "Crafts":
-        return <SvgIcon name="Scissors" width={30} />;
-      default:
-        return <SvgIcon name="Mascot" width={30} />;
-    }
+  onPress = () => {
+    const { event, onPress } = this.props;
+    onPress("EventDetail", { event });
   };
 
   render() {
@@ -36,7 +28,7 @@ class EventListItem extends React.Component {
       <TouchableOpacity
         style={[styles.container, { backgroundColor: backgroundColor }]}
       >
-        <View style={styles.icon}>{this.renderCategoryIcon(category)}</View>
+        <View style={styles.icon}>{renderCategoryIcon(category)}</View>
         <View style={styles.info}>
           <View>
             <HeaderText style={{ color: colors.white }}>{name}</HeaderText>

@@ -9,7 +9,7 @@ const initalState = {
 
 export default (state = initalState, action) => {
     switch (action.type) {
-        case actionTypes.SEARCH:
+        case actionTypes.SEARCH_ALL:
             const term = action.payload;
             const results = allEvents.filter(event => event.name.toLowerCase().includes(term.toLowerCase())
             );

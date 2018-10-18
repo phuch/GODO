@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         color: colors.darkGrey,
         textAlign: 'center',
         marginBottom: 5,
-        fontSize: 16,
+        fontSize: 18,
         flex: 2
     },
     backButton: {

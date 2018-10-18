@@ -1,14 +1,19 @@
 import React from "react";
 import { StyleSheet, View, SectionList, Dimensions } from "react-native";
 import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
 import categories from "../fixtures/categories.json";
 import { assignCardBackgroundColor } from "../util/colorUtils";
+import SvgIcon from '../components/SvgIcon';
 
-import SvgIcon from "../components/SvgIcon";
+import CategoryList from '../components/CategoryList';
+import SearchBar from '../components/SearchBar';
+import EventList from '../components/EventList';
+
+import colors from '../constants/colors';
+import {searchAllAction} from '../actions/browse-action';
+
 import { SectionHeaderText } from "../components/Text";
-import CategoryList from "../components/CategoryList";
-import SearchBar from "../components/SearchBar";
-import EventList from "../components/EventList";
 
 class BrowseScreen extends React.Component {
   constructor(props) {
@@ -45,45 +50,54 @@ class BrowseScreen extends React.Component {
   };
 
   render() {
-    const { isSearching } = this.props;
+    const { isSearching, searchAllAction } = this.props;
 
     const screenWidth = Dimensions.get("window").width;
     const ICON_WIDTH_RATIO = 0.6;
 
-    return (
-      <View style={styles.container}>
-        <View style={{ alignItems: "center" }}>
-          <SvgIcon
-            name="LookingFor"
-            width={screenWidth * ICON_WIDTH_RATIO}
-            height={80}
-          />
-          <SearchBar width={screenWidth * ICON_WIDTH_RATIO} />
-        </View>
-        <View>
-          {isSearching
-            ? this.renderResultEventList()
-            : this.renderSectionList()}
-        </View>
-      </View>
-    );
-  }
+        return (
+            <View style={styles.container}>
+                <SvgIcon name='LookingFor' width={screenWidth * ICON_WIDTH_RATIO} height={80} />
+                <SearchBar
+                    width={screenWidth * ICON_WIDTH_RATIO}
+                    handleSearch={searchAllAction}
+                />
+                {isSearching ? this.renderResultEventList() : this.renderSectionList()}
+            </View>
+        );
+    }
 }
 
-const mapStateToProps = ({ events }) => {
-  return {
-    isSearching: events.isSearching,
-    events: events.events
-  };
+const mapStateToProps = (store) => {
+    const {isSearching, events} = store.browseScreenState;
+    return {
+        isSearching,
+        events
+    }
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFF",
-    alignItems: "stretch",
-    paddingTop: 90
-  }
-});
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ searchAllAction}, dispatch);
+}
 
-export default connect(mapStateToProps)(BrowseScreen);
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#FFF",
+        alignItems: 'center',
+        paddingTop: 90
+    },
+    sectionTitle: {
+        fontWeight: 'bold',
+        color: colors.darkGrey,
+        marginLeft: 15
+    },
+    noResultText: {
+        margin: 20,
+        fontSize: 18,
+        fontWeight: '500',
+        textAlign: 'center'
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(BrowseScreen);
