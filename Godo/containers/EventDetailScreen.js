@@ -7,6 +7,7 @@ import IconInfo from '../components/IconInfo';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import colors from '../constants/colors';
 import moment from 'moment/moment';
+import basicStyles from '../constants/basicStyles'
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -60,17 +61,17 @@ class EventDetailScreen extends React.Component {
                         </View>
                         {isGoing ?
                             <Button
-                                containerViewStyle={styles.buttonContainer}
+                                containerViewStyle={[basicStyles.buttonContainer, styles.buttonContainer]}
                                 title="NOT GOING"
                                 buttonStyle={styles.notGoingButton}
-                                textStyle={styles.buttonTitle}
+                                textStyle={basicStyles.buttonTitle}
                                 onPress={this.toggleGoingStatus}
                             /> :
                             <Button
-                                containerViewStyle={styles.buttonContainer}
+                                containerViewStyle={[basicStyles.buttonContainer, styles.buttonContainer]}
                                 title="GOING"
                                 buttonStyle={styles.goingButton}
-                                textStyle={styles.buttonTitle}
+                                textStyle={basicStyles.buttonTitle}
                                 onPress={this.toggleGoingStatus}
                             />
                         }
@@ -102,16 +103,8 @@ const styles = StyleSheet.create({
         paddingRight: 20
     },
     buttonContainer: {
-        flex:1,
-        width: screenWidth,
-        paddingLeft: 20,
-        paddingRight: 20,
         paddingBottom: 10,
         justifyContent: 'flex-end'
-    },
-    buttonTitle: {
-        fontWeight: "700",
-        color: colors.white
     },
     goingButton: {
         backgroundColor: colors.primary,

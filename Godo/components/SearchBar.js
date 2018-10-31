@@ -3,12 +3,13 @@ import { StyleSheet, View, TextInput } from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import colors from '../constants/colors';
+import basicStyles from '../constants/basicStyles'
 
 class SearchBar extends React.Component {
     render() {
         const {handleSearch, style, autoFocus} = this.props;
         return (
-            <View style={[styles.inputField, { 'width': this.props.width }, style]}>
+            <View style={[basicStyles.textInput, { 'width': this.props.width }, style]}>
                 <Icon name='search' color={colors.darkGrey} size={24}/>
                 <TextInput
                     style={styles.textInput}

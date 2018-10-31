@@ -27,6 +27,7 @@ class EventListItem extends React.Component {
     return (
       <TouchableOpacity
         style={[styles.container, { backgroundColor: backgroundColor }]}
+        onPress={this.onPress}
       >
         <View style={styles.icon}>{renderCategoryIcon(category)}</View>
         <View style={styles.info}>
