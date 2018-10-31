@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, SectionList, Dimensions } from "react-native";
+import { StyleSheet, View, SectionList, Dimensions, Text } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import categories from "../fixtures/categories.json";
@@ -12,13 +12,17 @@ import EventList from "../components/EventList";
 
 import colors from "../constants/colors";
 import { searchAllAction } from "../actions/browse-action";
-
-import { SectionHeaderText } from "../components/Text";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 class BrowseScreen extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  handleNavigation = (routeName, params) => {
+    const { navigation } = this.props;
+    navigation.navigate(routeName, params);
+  };
 
   renderSectionList = () => {
     return (
@@ -26,9 +30,7 @@ class BrowseScreen extends React.Component {
         sections={categories}
         keyExtractor={(item, index) => item + index}
         renderSectionHeader={({ section: { title } }) => (
-          <SectionHeaderText style={{ paddingLeft: 15 }}>
-            {title}
-          </SectionHeaderText>
+          <Text style={styles.sectionTitle}>{title}</Text>
         )}
         renderItem={({ item, index, section }) => (
           <CategoryList
@@ -42,10 +44,19 @@ class BrowseScreen extends React.Component {
   };
 
   renderResultEventList = () => {
-    return (
-      <View style={{ paddingHorizontal: 15, flex: 1 }}>
-        <EventList events={this.props.events} />
-      </View>
+    const { events } = this.props;
+    return events.length ? (
+      <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}>
+        <EventList
+          events={this.props.events}
+          backgroundColor={assignCardBackgroundColor}
+          handleNavigation={this.handleNavigation}
+        />
+      </KeyboardAwareScrollView>
+    ) : (
+      <Text style={styles.noResultText}>
+        No activities found, please try another keyword
+      </Text>
     );
   };
 
