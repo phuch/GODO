@@ -1,7 +1,6 @@
 import React from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
-import { fetchAllEvents } from "../actions/event-action";
 
 import UserScreen from "./UserScreen";
 
@@ -11,10 +10,9 @@ class ProfileScreen extends React.Component {
   }
 
   render() {
-
     return (
       <View style={styles.container}>
-        <UserScreen ofCurrentUser={true}/>
+        <UserScreen ofCurrentUser={true} />
       </View>
     );
   }
@@ -26,14 +24,11 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (store) => {
-  const {events} = store.browseScreenState;
-    return {
-        events
-    }
+const mapStateToProps = store => {
+  const { events } = store.browseScreenState;
+  return {
+    events
+  };
 };
 
-export default connect(
-  mapStateToProps,
-  { fetchAllEvents }
-)(ProfileScreen);
+export default connect(mapStateToProps)(ProfileScreen);
