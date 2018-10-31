@@ -18,6 +18,11 @@ class BrowseScreen extends React.Component {
         super(props);
     }
 
+    handleNavigation = (routeName, params) => {
+        const {navigation} = this.props;
+        navigation.navigate(routeName,params)
+    }
+
     renderSectionList = () => {
         return <SectionList
             sections={categories}
@@ -39,7 +44,11 @@ class BrowseScreen extends React.Component {
                 <KeyboardAwareScrollView
                     resetScrollToCoords={{ x: 0, y: 0 }}
                 >
-                    <EventList events={this.props.events} backgroundColor={assignCardBackgroundColor}/>
+                    <EventList
+                        events={this.props.events}
+                        backgroundColor={assignCardBackgroundColor}
+                        handleNavigation={this.handleNavigation}
+                    />
                 </KeyboardAwareScrollView>
                 :
                 <Text style={styles.noResultText}>No activities found, please try another keyword</Text>

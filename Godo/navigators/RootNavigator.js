@@ -7,6 +7,7 @@ import ProfileScreen from '../containers/ProfileScreen';
 import EventDetailScreen from '../containers/EventDetailScreen';
 import Icon from "react-native-vector-icons/Feather"
 import CreateEventScreen from '../containers/CreateEventScreen';
+import AuthenticationScreen from '../containers/AuthenticationScreen';
 
 
 const HomeNavigator = createStackNavigator(
@@ -31,7 +32,10 @@ const BrowseNavigator = createStackNavigator(
     {
         Browse: {
             screen: BrowseScreen
-        }
+        },
+        EventDetail: {
+            screen: EventDetailScreen
+        },
     },
     {
         initialRouteName: 'Browse',
@@ -97,15 +101,16 @@ const AppNavigator = createBottomTabNavigator(
 
 const RootNavigator = createStackNavigator(
     {
+        Authentication: {
+            screen: AuthenticationScreen
+        },
         App: {
-            screen: AppNavigator,
-            navigationOptions: {
-                header: null
-            }
+            screen: AppNavigator
         }
     },
     {
         initialRouteName: 'App',
+        headerMode: 'none'
     }
 )
 
