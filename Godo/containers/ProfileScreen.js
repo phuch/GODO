@@ -1,28 +1,34 @@
-import React from "react"
-import {StyleSheet,View, Text} from "react-native";
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { connect } from "react-redux";
+
+import UserScreen from "./UserScreen";
 
 class ProfileScreen extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text>Here goes profile screen</Text>
-            </View>
-        );
-    }
+  render() {
+    return (
+      <View style={styles.container}>
+        <UserScreen ofCurrentUser={true} />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingTop: 50,
-        backgroundColor: "#FFF",
-        alignItems: 'center'
-    }
-})
+  container: {
+    flex: 1
+  }
+});
 
-export default ProfileScreen;
+const mapStateToProps = store => {
+  const { events } = store.browseScreenState;
+  return {
+    events
+  };
+};
+
+export default connect(mapStateToProps)(ProfileScreen);

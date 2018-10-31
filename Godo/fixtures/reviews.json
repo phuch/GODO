@@ -1,0 +1,38 @@
+[
+    {
+        "id": "r001",
+        "title": "Lorem ipsum dolor sit amet",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Done tincidunt tincidunt ex, a rhoncus ligula feugiat fermentum. Sed vel lorem aliquet, sagittis justo sollicitudin, tincidunt quam. Phasellus vel leo nec neque rhoncus congue. Phasellus a tincidunt enim. Aenean auctor mauris rhoncus, elementum orci nec, condimentum sem. Nunc et tristique sapien. Suspendisse turpis ex, luctus eget tempor sit amet, tempus et lorem. Etiam at libero volutpat, aliquam quam vitae, vehicula ligula. Sed vehicula feugiat lorem, tincidunt cursus lacus sollicitudin eget. Sed efficitur nulla in ex malesuada, ac ornare massa bibendum. Fusce ultricies sollicitudin diam ac tincidunt.",
+        "time": "2018-09-30T10:30:37.000Z",
+        "rating": 4,
+        "author": "John Appleseed",
+        "for": 98134
+    },
+    {
+        "id": "r002",
+        "title": "Lorem ipsum dolor sit amet",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Done tincidunt tincidunt ex, a rhoncus ligula feugiat fermentum. Sed vel lorem aliquet, sagittis justo sollicitudin, tincidunt quam. Phasellus vel leo nec neque rhoncus congue. Phasellus a tincidunt enim. Aenean auctor mauris rhoncus, elementum orci nec, condimentum sem. Nunc et tristique sapien. Suspendisse turpis ex, luctus eget tempor sit amet, tempus et lorem. Etiam at libero volutpat, aliquam quam vitae, vehicula ligula. Sed vehicula feugiat lorem, tincidunt cursus lacus sollicitudin eget. Sed efficitur nulla in ex malesuada, ac ornare massa bibendum. Fusce ultricies sollicitudin diam ac tincidunt.",
+        "time": "2018-09-15T10:30:37.000Z",
+        "rating": 5,
+        "author": "John Melonseed",
+        "for": 98134
+    },
+    {
+        "id": "r003",
+        "title": "Lorem ipsum dolor sit amet",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Done tincidunt tincidunt ex, a rhoncus ligula feugiat fermentum. Sed vel lorem aliquet, sagittis justo sollicitudin, tincidunt quam. Phasellus vel leo nec neque rhoncus congue. Phasellus a tincidunt enim. Aenean auctor mauris rhoncus, elementum orci nec, condimentum sem. Nunc et tristique sapien. Suspendisse turpis ex, luctus eget tempor sit amet, tempus et lorem. Etiam at libero volutpat, aliquam quam vitae, vehicula ligula. Sed vehicula feugiat lorem, tincidunt cursus lacus sollicitudin eget. Sed efficitur nulla in ex malesuada, ac ornare massa bibendum. Fusce ultricies sollicitudin diam ac tincidunt.",
+        "time": "2018-09-30T10:30:37.000Z",
+        "rating": 3,
+        "author": "John Orangeseed",
+        "for": 98134
+    },
+    {
+        "id": "r004",
+        "title": "Lorem ipsum dolor sit amet",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Done tincidunt tincidunt ex, a rhoncus ligula feugiat fermentum. Sed vel lorem aliquet, sagittis justo sollicitudin, tincidunt quam. Phasellus vel leo nec neque rhoncus congue. Phasellus a tincidunt enim. Aenean auctor mauris rhoncus, elementum orci nec, condimentum sem. Nunc et tristique sapien. Suspendisse turpis ex, luctus eget tempor sit amet, tempus et lorem. Etiam at libero volutpat, aliquam quam vitae, vehicula ligula. Sed vehicula feugiat lorem, tincidunt cursus lacus sollicitudin eget. Sed efficitur nulla in ex malesuada, ac ornare massa bibendum. Fusce ultricies sollicitudin diam ac tincidunt.",
+        "time": "2018-09-30T10:30:37.000Z",
+        "rating": 4,
+        "author": "John Berryseed",
+        "for": 98134
+    }
+]

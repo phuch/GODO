@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import colors from '../constants/colors';
 
@@ -61,5 +62,12 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end'
     }
 })
+
+AppHeader.propTypes = {
+    title: PropTypes.string,
+    navigation: PropTypes.object,
+    hasBackButton: PropTypes.bool,
+    rightIcons: PropTypes.element
+}
 
 export default AppHeader;

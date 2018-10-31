@@ -2,7 +2,8 @@ import * as actionTypes from '../constants/action-types';
 import allEvents from '../fixtures/events.json';
 
 const initalState = {
-    events: allEvents,
+    events: [],
+    term: null,
     isSearching: false
 }
 
@@ -10,13 +11,20 @@ export default (state = initalState, action) => {
     switch (action.type) {
         case actionTypes.SEARCH_ALL:
             const term = action.payload;
-            const events = allEvents.filter(event => event.name.toLowerCase().includes(term.toLowerCase())
+            const results = allEvents.filter(event => event.name.toLowerCase().includes(term.toLowerCase())
             );
             const isSearching = term !== '';
             return {
                 ...state,
-                events,
+                term,
+                events: results,
                 isSearching
+            }
+        case actionTypes.FETCH_ALL_EVENTS:
+            const all = action.payload;
+            return {
+                ...state,
+                events: all
             }
         default:
             return state

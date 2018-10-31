@@ -35,7 +35,10 @@ class HomeScreen extends React.Component {
                     />
                     {errorMessage ?
                         <Text>{errorMessage}</Text> :
-                        <Map userLocation={userLocation} nearbyEvents={nearbyEvents}/>
+                        <View style={{ padding: 5 }}>
+                            <Map userLocation={userLocation} nearbyEvents={nearbyEvents}/>
+                        </View>
+                        
                     }
                     {this.renderListArea()}
                 </View>
@@ -86,14 +89,15 @@ class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
+        alignItems: 'stretch',
         justifyContent: 'space-between'
     },
     content: {
         ...StyleSheet.absoluteFillObject,
         justifyContent: 'flex-start',
-        alignItems: 'center',
-        backgroundColor: 'white'
+        alignItems: 'stretch',
+        backgroundColor: 'white',
+        paddingHorizontal: 10
     },
     noResultText: {
         margin: 20,
