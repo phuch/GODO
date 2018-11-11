@@ -17,35 +17,6 @@ class HomeScreen extends React.Component {
         this.props.getLocationAction()
     }
 
-    handleNavigation = (routeName, params) => {
-        const {navigation} = this.props;
-        navigation.navigate(routeName,params)
-    }
-
-    render() {
-        const {errorMessage, userLocation, nearbyEvents, isSearching, searchAction, toggleSearchAction} = this.props;
-        return (
-            <View style={styles.container}>
-                <View style={styles.content}>
-                    <HomeHeader
-                        isSearching={isSearching}
-                        toggleSearchMode={toggleSearchAction}
-                        handleSearch={searchAction}
-                        handleNavigation={this.handleNavigation}
-                    />
-                    {errorMessage ?
-                        <Text>{errorMessage}</Text> :
-                        <View style={{ padding: 5 }}>
-                            <Map userLocation={userLocation} nearbyEvents={nearbyEvents}/>
-                        </View>
-                        
-                    }
-                    {this.renderListArea()}
-                </View>
-            </View>
-        );
-    }
-
     renderListArea = () => {
         const {nearbyEvents, searchResult} = this.props;
         if(searchResult) {
@@ -72,7 +43,7 @@ class HomeScreen extends React.Component {
                     <EventList
                         events={eventList}
                         backgroundColor={assignCardBackgroundColor}
-                        handleNavigation={this.handleNavigation}
+                        navigation={this.props.navigation}
                     />
                 </KeyboardAwareScrollView>
             )
@@ -84,6 +55,30 @@ class HomeScreen extends React.Component {
             )
         }
     };
+
+    render() {
+        const {errorMessage, userLocation, nearbyEvents, isSearching, searchAction, toggleSearchAction} = this.props;
+        return (
+            <View style={styles.container}>
+                <View style={styles.content}>
+                    <HomeHeader
+                        isSearching={isSearching}
+                        toggleSearchMode={toggleSearchAction}
+                        handleSearch={searchAction}
+                        handleNavigation={this.handleNavigation}
+                    />
+                    {errorMessage ?
+                        <Text>{errorMessage}</Text> :
+                        <View style={{ padding: 5 }}>
+                            <Map userLocation={userLocation} nearbyEvents={nearbyEvents}/>
+                        </View>
+
+                    }
+                    {this.renderListArea()}
+                </View>
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({

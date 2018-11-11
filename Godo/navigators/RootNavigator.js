@@ -10,6 +10,7 @@ import ProfileScreen from "../containers/ProfileScreen";
 import EventDetailScreen from "../containers/EventDetailScreen";
 import Icon from "react-native-vector-icons/Feather";
 import CreateEventScreen from "../containers/CreateEventScreen";
+import AuthenticationScreen from "../containers/AuthenticationScreen";
 
 const HomeNavigator = createStackNavigator(
   {
@@ -48,6 +49,9 @@ const ProfileNavigator = createStackNavigator(
   {
     Profile: {
       screen: ProfileScreen
+    },
+    EventDetail: {
+      screen: EventDetailScreen
     }
   },
   {
@@ -103,10 +107,13 @@ const RootNavigator = createStackNavigator(
   {
     App: {
       screen: AppNavigator
+    },
+    Authentication: {
+      screen: AuthenticationScreen
     }
   },
   {
-    initialRouteName: "App",
+    initialRouteName: "Authentication",
     headerMode: "none"
   }
 );

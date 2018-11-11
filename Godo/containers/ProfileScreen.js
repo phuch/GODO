@@ -12,7 +12,7 @@ class ProfileScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <UserScreen ofCurrentUser={true} />
+        <UserScreen ofCurrentUser={true} navigation={this.props.navigation}/>
       </View>
     );
   }

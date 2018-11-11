@@ -75,7 +75,6 @@ class EventDetailScreen extends React.Component {
                                 onPress={this.toggleGoingStatus}
                             />
                         }
-
                 </View>
             </View>
         );
