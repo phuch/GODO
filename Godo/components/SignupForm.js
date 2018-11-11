@@ -14,27 +14,27 @@ class SignupForm extends React.Component {
         return (
             <View style={styles.container}>
                 <TextInput
-                    style={basicStyles.textInput}
+                    style={[basicStyles.textInput, styles.userInput]}
                     placeholder="Email address"
                     placeholderTextColor={colors.darkGrey}
                 />
                 <TextInput
                     secureTextEntry={true}
-                    style={basicStyles.textInput}
+                    style={[basicStyles.textInput, styles.userInput]}
                     placeholder="Password"
                     placeholderTextColor={colors.darkGrey}
                 />
                 <TextInput
                     secureTextEntry={true}
-                    style={basicStyles.textInput}
+                    style={[basicStyles.textInput, styles.userInput]}
                     placeholder="Confirm password"
                     placeholderTextColor={colors.darkGrey}
                 />
                 <Button
                     title="SIGN UP"
-                    containerViewStyle={basicStyles.buttonContainer}
                     buttonStyle={styles.button}
                     textStyle={basicStyles.buttonTitle}
+                    onPress={() => console.log('User Sign Up')}
                 />
             </View>
         )
@@ -42,11 +42,18 @@ class SignupForm extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flexDirection: "column",
+    },
+    userInput: {
+        borderRadius: 10,
+        height: 40,
+        marginBottom: 20,
+    },
     button: {
         backgroundColor: colors.secondary,
         borderRadius: 10,
     }
-
 });
 
 export default SignupForm;

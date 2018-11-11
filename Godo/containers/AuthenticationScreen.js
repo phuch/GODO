@@ -1,10 +1,11 @@
 import React from 'react';
-import {StyleSheet,View,Text} from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import {StyleSheet,View} from 'react-native';
 import colors from '../constants/colors';
 import SvgIcon from '../components/SvgIcon';
 import LoginForm from '../components/LoginForm';
 import SignupForm from '../components/SignupForm';
+import BaseText from '../components/Text/BaseText';
+import LinkText from '../components/Text/LinkText';
 
 class AuthenticationScreen extends React.Component {
 
@@ -18,6 +19,12 @@ class AuthenticationScreen extends React.Component {
     handleNavigation = (routeName, params) => {
         const { navigation } = this.props;
         navigation.navigate(routeName, params);
+    }
+
+    toggleForm = () => {
+        this.setState({
+            showLoginForm: !this.state.showLoginForm
+        })
     }
 
     render() {
@@ -37,7 +44,19 @@ class AuthenticationScreen extends React.Component {
                         :
                         <View>
                             <SignupForm/>
-                            <Text>Already have an account ? Sign In</Text>
+                        </View>
+                    }
+                </View>
+                <View style={styles.toggleFormContainer}>
+                    {showLoginForm ?
+                        <View style={styles.toggleFormText}>
+                            <BaseText>Don't have an account?</BaseText>
+                            <LinkText onPress={this.toggleForm}> Sign Up</LinkText>
+                        </View>
+                        :
+                        <View style={styles.toggleFormText}>
+                            <BaseText>Already have an account?</BaseText>
+                            <LinkText onPress={this.toggleForm}>Sign In</LinkText>
                         </View>
                     }
                 </View>
@@ -49,16 +68,27 @@ class AuthenticationScreen extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        backgroundColor: colors.white
     },
     logo: {
         flex:1,
-        paddingTop: 100
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        paddingBottom: 50
     },
     authenticationForm: {
-        flex: 1,
-        backgroundColor: colors.darkYellow,
+        flex: 2,
         marginHorizontal: 20
+    },
+    toggleFormContainer: {
+        flex: 0.5,
+        alignItems: 'center'
+    },
+    toggleFormText: {
+        flexDirection: 'row'
     }
 })
 

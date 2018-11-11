@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet,View,Text,TextInput,Image} from 'react-native';
+import {StyleSheet, View, TextInput, Dimensions} from 'react-native';
 import {Button} from 'react-native-elements';
 import colors from '../constants/colors';
 import basicStyles from '../constants/basicStyles';
@@ -11,21 +11,20 @@ class LoginForm extends React.Component {
         return (
             <View style={styles.container}>
                 <TextInput
-                    style={basicStyles.textInput}
+                    style={[basicStyles.textInput, styles.userInput]}
                     placeholder="Email address"
                     placeholderTextColor={colors.darkGrey}
                 />
                 <TextInput
                     secureTextEntry={true}
-                    style={basicStyles.textInput}
+                    style={[basicStyles.textInput, styles.userInput]}
                     placeholder="Password"
                     placeholderTextColor={colors.darkGrey}
                 />
                 <Button
-                    title="SIGN UP"
-                    containerViewStyle={basicStyles.buttonContainer}
                     buttonStyle={styles.button}
                     textStyle={basicStyles.buttonTitle}
+                    title="LOG IN"
                     onPress={() => onNavigation('App')}
                 />
             </View>
@@ -35,7 +34,12 @@ class LoginForm extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: "column"
+        flexDirection: "column",
+    },
+    userInput: {
+        borderRadius: 10,
+        height: 40,
+        marginBottom: 20,
     },
     button: {
         backgroundColor: colors.secondary,
