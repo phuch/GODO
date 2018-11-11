@@ -17,11 +17,6 @@ class HomeScreen extends React.Component {
         this.props.getLocationAction()
     }
 
-    handleNavigation = (routeName, params) => {
-        const {navigation} = this.props;
-        navigation.navigate(routeName,params)
-    }
-
     render() {
         const {errorMessage, userLocation, nearbyEvents, isSearching, searchAction, toggleSearchAction} = this.props;
         return (
@@ -38,7 +33,7 @@ class HomeScreen extends React.Component {
                         <View style={{ padding: 5 }}>
                             <Map userLocation={userLocation} nearbyEvents={nearbyEvents}/>
                         </View>
-                        
+
                     }
                     {this.renderListArea()}
                 </View>
@@ -72,7 +67,7 @@ class HomeScreen extends React.Component {
                     <EventList
                         events={eventList}
                         backgroundColor={assignCardBackgroundColor}
-                        handleNavigation={this.handleNavigation}
+                        navigation={this.props.navigation}
                     />
                 </KeyboardAwareScrollView>
             )

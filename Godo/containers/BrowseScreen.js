@@ -19,11 +19,6 @@ class BrowseScreen extends React.Component {
     super(props);
   }
 
-  handleNavigation = (routeName, params) => {
-    const { navigation } = this.props;
-    navigation.navigate(routeName, params);
-  };
-
   renderSectionList = () => {
     return (
       <SectionList
@@ -50,7 +45,7 @@ class BrowseScreen extends React.Component {
         <EventList
           events={this.props.events}
           backgroundColor={assignCardBackgroundColor}
-          handleNavigation={this.handleNavigation}
+          navigation={this.props.navigation}
         />
       </KeyboardAwareScrollView>
     ) : (

@@ -13,8 +13,8 @@ class EventListItem extends React.Component {
   }
 
   onPress = () => {
-    const { event, onPress } = this.props;
-    onPress("EventDetail", { event });
+    const { event, navigation } = this.props;
+    navigation.navigate("EventDetail", { event });
   };
 
   render() {

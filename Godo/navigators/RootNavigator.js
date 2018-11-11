@@ -48,6 +48,9 @@ const ProfileNavigator = createStackNavigator(
   {
     Profile: {
       screen: ProfileScreen
+    },
+    EventDetail: {
+      screen: EventDetailScreen
     }
   },
   {

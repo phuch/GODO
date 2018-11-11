@@ -7,7 +7,7 @@ import { SectionHeaderText } from "./Text";
 import EventListItem from "./EventListItem";
 
 const EventList = (props) => {
-    const { events, handleNavigation } = props
+    const { events,navigation } = props;
 
   return (
     <View style={styles.container}>
@@ -20,7 +20,7 @@ const EventList = (props) => {
         renderItem={({ item }) => (
           <EventListItem
             event={item}
-            onPress={handleNavigation}
+            navigation={navigation}
             backgroundColor={assignCardBackgroundColor(item.category)}
           />
         )}
