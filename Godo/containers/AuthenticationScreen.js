@@ -56,7 +56,7 @@ class AuthenticationScreen extends React.Component {
                         :
                         <View style={styles.toggleFormText}>
                             <BaseText>Already have an account?</BaseText>
-                            <LinkText onPress={this.toggleForm}>Sign In</LinkText>
+                            <LinkText onPress={this.toggleForm}> Sign In</LinkText>
                         </View>
                     }
                 </View>
