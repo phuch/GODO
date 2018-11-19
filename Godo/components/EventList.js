@@ -6,9 +6,10 @@ import { assignCardBackgroundColor } from "../util/colorUtils";
 import { SectionHeaderText } from "./Text";
 import EventListItem from "./EventListItem";
 
-const EventList = (props) => {
-    const { events,navigation } = props;
+const EventList = props => {
+  const { events, navigation } = props;
 
+  console.log("eventList", events);
   return (
     <View style={styles.container}>
       {props.showHeader && (
