@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = store => {
-  const { events } = store.userScreenState;
+  const { events } = store.userState;
   return {
     events
   };

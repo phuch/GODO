@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet,View} from 'react-native';
+import {StyleSheet,View, KeyboardAvoidingView} from 'react-native';
 import colors from '../constants/colors';
 import SvgIcon from '../components/SvgIcon';
 import LoginForm from '../components/LoginForm';
@@ -30,7 +30,7 @@ class AuthenticationScreen extends React.Component {
     render() {
         const {showLoginForm} = this.state
         return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView style={styles.container} enabled>
                 <View style={styles.logo}>
                     <SvgIcon name='GodoLogo' width={250} height={70}/>
                 </View>
@@ -60,7 +60,7 @@ class AuthenticationScreen extends React.Component {
                         </View>
                     }
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }
@@ -69,6 +69,7 @@ class AuthenticationScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        flexGrow: 1,
         flexDirection: 'column',
         justifyContent: 'center',
         backgroundColor: colors.white
