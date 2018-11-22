@@ -3,6 +3,7 @@ import {StyleSheet, View, TextInput } from 'react-native';
 import {Button} from 'react-native-elements';
 import colors from '../constants/colors';
 import basicStyles from '../constants/basicStyles'
+import Toast, {DURATION} from 'react-native-easy-toast'
 
 /*redux*/
 import { connect } from "react-redux";
@@ -22,13 +23,13 @@ class SignupForm extends React.Component {
     }
 
     handleSignUp = () => {
+        const {handleSignup, isLoading} = this.props
         const newUser = {
             email: this.state.email,
             password: this.state.password,
             fullName: this.state.fullName
         };
-        this.props.userSignUp(newUser);
-        console.log('hehe');
+        handleSignup(newUser)
     };
 
     render() {
@@ -60,12 +61,25 @@ class SignupForm extends React.Component {
                     placeholderTextColor={colors.darkGrey}
                     onChangeText={confirmPassword => this.setState({confirmPassword})}
                 />
-                <Button
-                    title="SIGN UP"
-                    buttonStyle={styles.button}
-                    textStyle={basicStyles.buttonTitle}
-                    onPress={() => this.handleSignUp()}
-                />
+
+                {isLoading ?
+                    <Button
+                        title="LOADING"
+                        loading
+                        loadingProps={{ size: "large", color: "rgba(111, 202, 186, 1)" }}
+                        titleStyle={{ fontWeight: "700" }}
+                        buttonStyle={styles.button}
+                        onPress={() => this.handleSignUp()}
+                    /> :
+                    <Button
+                        title="SIGN UP"
+                        buttonStyle={styles.button}
+                        textStyle={basicStyles.buttonTitle}
+                        onPress={() => this.handleSignUp()}
+                    />
+                }
+
+
             </View>
         )
     }
@@ -89,7 +103,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (store) => {
     return {
         auth: store.firebase.auth,
-        authErr: store.userState.authErr
+        message: store.userState.message
     };
 };
 

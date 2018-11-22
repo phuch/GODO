@@ -13,6 +13,9 @@ export const fetchUsersEvents = () => {
 
 export const userSignUp = (newUser) => {
     return async dispatch => {
+        dispatch ({
+            type:  actionTypes.AUTH_REQUEST
+        })
         try {
             const signupResponse = await firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password);
             await firebase.firestore().collection('users').doc(signupResponse.user.uid).set({
@@ -26,3 +29,33 @@ export const userSignUp = (newUser) => {
         }
     }
 }
+
+export const userSignIn = (credentials) => {
+    return async (dispatch) => {
+        dispatch ({
+            type:  actionTypes.AUTH_REQUEST
+        })
+        try {
+            await firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password);
+            dispatch({
+                type: actionTypes.USER_LOGIN_SUCCESS
+            })
+        } catch(err) {
+            dispatch({type: actionTypes.USER_LOGIN_ERROR,err})
+        }
+    }
+}
+
+export const userSignOut = () => {
+    return async dispatch => {
+        dispatch ({
+            type:  actionTypes.AUTH_REQUEST
+        })
+        await firebase.auth().signOut();
+        dispatch({
+            type: actionTypes.USER_SIGNOUT
+        })
+    }
+}
+
+
