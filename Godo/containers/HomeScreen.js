@@ -4,7 +4,6 @@ import Map from "../components/Map";
 import EventList from "../components/EventList";
 import HomeHeader from "../components/HomeHeader";
 import { assignCardBackgroundColor } from "../util/colorUtils";
-import { DotIndicator } from "react-native-indicators";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {
@@ -12,8 +11,7 @@ import {
   searchAction,
   toggleSearchAction
 } from "../actions/home-action";
-import { fetchAllEvents } from "../actions/events-action";
-import colors from "../constants/colors";
+import { fetchAllEvents, fetchNearbyEvents } from "../actions/events-action";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 class HomeScreen extends React.Component {
@@ -23,31 +21,27 @@ class HomeScreen extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.userLocation !== nextProps.userLocation) {
-      this.props.fetchAllEvents();
+      this.props.fetchNearbyEvents(nextProps.userLocation);
     }
     return true;
   }
 
+  handleNavigation = (routeName, params) => {
+    const { navigation } = this.props;
+    navigation.navigate(routeName, params);
+  };
+
   renderListArea = () => {
-    const { nearbyEvents, searchResult, events } = this.props;
+    const { nearbyEvents, searchResult } = this.props;
     if (searchResult) {
       return this.renderEventList(searchResult, "keyword");
-    } else if (events) {
-      return this.renderEventList(events, "area");
+    } else if (nearbyEvents) {
+      return this.renderEventList(nearbyEvents, "area");
     } else {
-      return (
-        <DotIndicator
-          count={3}
-          size={10}
-          color={colors.secondary}
-          animationDuration={800}
-        />
-      );
     }
   };
 
   renderEventList = (eventList, msg) => {
-    console.log(eventList.length);
     if (eventList) {
       return (
         <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}>
@@ -55,6 +49,7 @@ class HomeScreen extends React.Component {
             events={eventList}
             backgroundColor={assignCardBackgroundColor}
             navigation={this.props.navigation}
+            loading={this.props.loading}
           />
         </KeyboardAwareScrollView>
       );
@@ -123,25 +118,25 @@ const styles = StyleSheet.create({
 const mapStateToProps = store => {
   const {
     userLocation,
-    nearbyEvents,
     errorMessage,
     isSearching,
     searchResult
   } = store.homeScreenState;
-  const { events } = store.events;
+  const { nearbyEvents, errorEvents, loading } = store.events;
   return {
     userLocation,
-    nearbyEvents,
     searchResult,
     errorMessage,
     isSearching,
-    events
+    nearbyEvents,
+    errorEvents,
+    loading
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { getLocationAction, searchAction, toggleSearchAction, fetchAllEvents },
+    { getLocationAction, searchAction, toggleSearchAction, fetchNearbyEvents },
     dispatch
   );
 };

@@ -71,7 +71,8 @@ class BrowseScreen extends React.Component {
           />
           <SearchBar
             width={screenWidth * ICON_WIDTH_RATIO}
-            handleSearch={searchAllAction}
+            onChangeText={text => searchAllAction(text)}
+            placeholder="Search for events"
           />
         </View>
         <View style={{ flex: 1 }}>

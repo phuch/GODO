@@ -11,6 +11,8 @@ import EventDetailScreen from "../containers/EventDetailScreen";
 import Icon from "react-native-vector-icons/Feather";
 import CreateEventScreen from "../containers/CreateEventScreen";
 import AuthenticationScreen from "../containers/AuthenticationScreen";
+import LocationPickerModal from "../containers/LocationPickerModal";
+import DateTimePickerModal from "../containers/DateTimePickerModal";
 
 const HomeNavigator = createStackNavigator(
   {
@@ -22,13 +24,37 @@ const HomeNavigator = createStackNavigator(
     },
     CreateEvent: {
       screen: CreateEventScreen
+    },
+    LocationPicker: {
+      screen: LocationPickerModal,
+      navigationOptions: {
+        tabBarVisible: false
+      }
+    },
+    DateTimePicker: {
+      screen: DateTimePickerModal,
+      navigationOptions: {
+        tabBarVisible: false
+      }
     }
   },
   {
     initialRouteName: "Home",
-    headerMode: "none"
+    headerMode: "none",
+    mode: "modal"
   }
 );
+
+HomeNavigator.navigationOptions = ({ navigation }) => {
+  let { routeName } = navigation.state.routes[navigation.state.index];
+  let navigationOptions = {};
+
+  if (routeName === "LocationPicker" || routeName === "DateTimePicker") {
+    navigationOptions.tabBarVisible = false;
+  }
+
+  return navigationOptions;
+};
 
 const BrowseNavigator = createStackNavigator(
   {
@@ -70,7 +96,8 @@ const AppNavigator = createBottomTabNavigator(
           const iconName = "map-pin";
           return <Icon name={iconName} size={24} color={tintColor} />;
         },
-        tabBarButtonComponent: Ripple
+        tabBarButtonComponent: Ripple,
+        tabBarLabel: "Home"
       }
     },
     Browse: {
@@ -80,7 +107,8 @@ const AppNavigator = createBottomTabNavigator(
           const iconName = "search";
           return <Icon name={iconName} size={24} color={tintColor} />;
         },
-        tabBarButtonComponent: Ripple
+        tabBarButtonComponent: Ripple,
+        tabBarLabel: "Browse"
       }
     },
     Profile: {
@@ -90,7 +118,8 @@ const AppNavigator = createBottomTabNavigator(
           const iconName = "user";
           return <Icon name={iconName} size={24} color={tintColor} />;
         },
-        tabBarButtonComponent: Ripple
+        tabBarButtonComponent: Ripple,
+        tabBarLabel: "Profile"
       }
     }
   },

@@ -30,8 +30,9 @@ export default (HomeHeader = props => {
           <SearchBar
             width={screenWidth * ICON_WIDTH_RATIO}
             style={styles.searchBar}
-            handleSearch={handleSearch}
+            onChangeText={term => handleSearch(term)}
             autoFocus={true}
+            placeholder="Search for events"
           />
           <Button
             onPress={toggleSearchMode}

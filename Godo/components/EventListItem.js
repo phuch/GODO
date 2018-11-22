@@ -24,6 +24,7 @@ class EventListItem extends React.Component {
     } = this.props;
     const formattedDate = moment.unix(time.seconds).format("MMM D");
     const formattedTime = moment.unix(time.seconds).format("k:mm");
+    console.log(location.name);
     return (
       <TouchableOpacity
         style={[styles.container, { backgroundColor: backgroundColor }]}

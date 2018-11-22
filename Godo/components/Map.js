@@ -42,10 +42,14 @@ export default class Map extends React.Component {
           {nearbyEvents &&
             nearbyEvents.map(event => {
               const { id, coordinate, name } = event.location;
+              const latLngCoordinate = {
+                latitude: coordinate.latitude,
+                longitude: coordinate.longitude
+              };
               return (
                 <Marker
                   key={id}
-                  coordinate={coordinate}
+                  coordinate={latLngCoordinate}
                   title={name}
                   image={MARKER_LOGO}
                 />
