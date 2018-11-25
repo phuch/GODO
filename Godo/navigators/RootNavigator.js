@@ -12,7 +12,6 @@ import Icon from "react-native-vector-icons/Feather";
 import CreateEventScreen from "../containers/CreateEventScreen";
 import AuthenticationScreen from "../containers/AuthenticationScreen";
 import LocationPickerModal from "../containers/LocationPickerModal";
-import DateTimePickerModal from "../containers/DateTimePickerModal";
 
 const HomeNavigator = createStackNavigator(
   {
@@ -27,12 +26,6 @@ const HomeNavigator = createStackNavigator(
     },
     LocationPicker: {
       screen: LocationPickerModal,
-      navigationOptions: {
-        tabBarVisible: false
-      }
-    },
-    DateTimePicker: {
-      screen: DateTimePickerModal,
       navigationOptions: {
         tabBarVisible: false
       }

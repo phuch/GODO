@@ -131,7 +131,11 @@ class UserScreen extends React.Component {
             showAddButton={showAddButton}
           />
           <View style={{ flex: 1 }}>
-            <EventList events={this.props.events} showHeader={true} navigation={this.props.navigation}/>
+            <EventList
+              events={this.props.events}
+              showHeader={true}
+              navigation={this.props.navigation}
+            />
           </View>
         </View>
       </View>

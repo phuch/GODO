@@ -3,7 +3,9 @@ import {
   FETCH_ALL_EVENTS,
   LOADING_EVENTS,
   FETCH_NEARBY_EVENTS_SUCCESS,
-  FETCH_NEARBY_EVENTS_ERROR
+  FETCH_NEARBY_EVENTS_ERROR,
+  POST_EVENT_ERROR,
+  POST_EVENT_SUCCESS
 } from "../constants/action-types";
 import { calculateDistance } from "../util/geolocationUtils";
 
@@ -24,10 +26,10 @@ const _fetchNearbyEventsSuccess = events => {
   };
 };
 
-const _fetchNearbyEventsError = eventId => {
+const _createEventSuccess = newEvent => {
   return {
-    type: FETCH_NEARBY_EVENTS_ERROR,
-    eventId
+    type: POST_EVENT_SUCCESS,
+    newEvent
   };
 };
 
@@ -58,8 +60,6 @@ export const fetchNearbyEvents = location => async (dispatch, getState) => {
   const userLocation = location
     ? location
     : getState().homeScreenState.userLocation;
-
-  console.log("fetching");
   const userLatitude = userLocation.coords.latitude;
   const userLongitude = userLocation.coords.longitude;
 
@@ -107,8 +107,9 @@ export const fetchNearbyEvents = location => async (dispatch, getState) => {
   });
 };
 
-export const postEvent = (event, callback) => {
-  eventsDb
+export const createEvent = async event => {
+  dispatch(_loadingEvents(true));
+  return eventsDb
     .add({
       name: event.name,
       category: event.category,
@@ -121,11 +122,13 @@ export const postEvent = (event, callback) => {
       tags: event.tags,
       time: event.time
     })
-    .then(function(docRef) {
-      console.log("Document written with ID: ", docRef.id);
-      callback();
+    .then(() => {
+      dispatch(_loadingEvents(false));
+      dispatch(_createEventSuccess(event));
+      return event;
     })
     .catch(function(error) {
+      dispatch(_loadingEvents(false));
       console.error("Error adding document: ", error);
     });
 };

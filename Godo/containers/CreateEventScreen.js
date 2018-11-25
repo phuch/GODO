@@ -40,8 +40,21 @@ class CreateEventScreen extends React.Component {
   };
 
   handleFormSubmit = () => {
-    this.props.navigation.pop();
-    postEvent(this.state.newEvent, this.props.fetchNearbyEvents);
+    //postEvent(this.state.newEvent);
+  };
+
+  checkCanSubmit = () => {
+    const { newEvent } = this.state;
+    if (!newEvent) return true;
+    return (
+      !newEvent.name ||
+      !newEvent.location ||
+      !newEvent.time ||
+      !newEvent.category ||
+      !newEvent.description ||
+      !(newEvent.slots || newEvent.slots === 0) ||
+      !(newEvent.fee || newEvent.fee === 0)
+    );
   };
 
   onChangeData = event => {
@@ -55,8 +68,17 @@ class CreateEventScreen extends React.Component {
           hasBackButton={true}
           title="Create activity"
           rightIcons={
-            <TouchableOpacity onPress={this.handleFormSubmit}>
-              <Icon name="check" size={40} color={colors.darkGrey} />
+            <TouchableOpacity
+              onPress={this.handleFormSubmit}
+              disabled={this.checkCanSubmit()}
+            >
+              <Icon
+                name="check"
+                size={40}
+                color={
+                  this.checkCanSubmit() ? colors.lightGrey : colors.primary
+                }
+              />
             </TouchableOpacity>
           }
           navigation={this.props.navigation}

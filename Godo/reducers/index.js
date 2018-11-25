@@ -11,7 +11,7 @@ export default combineReducers({
   appState: appReducer,
   homeScreenState: homeReducer,
   browseScreenState: browseReducer,
-  userScreenState: userReducer,
+  userState: userReducer,
   events: eventsReducer,
   location: locationReducer,
   firebase: firebaseReducer

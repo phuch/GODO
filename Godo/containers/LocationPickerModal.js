@@ -38,6 +38,7 @@ class LocationPickerModal extends React.Component {
           hasBackButton={true}
           title="Location"
           navigation={navigation}
+          onNavigateBack={onSelectLocation}
         />
         <View style={styles.body}>
           <View>

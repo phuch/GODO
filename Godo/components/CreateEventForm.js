@@ -20,7 +20,9 @@ class CreateEventForm extends Component {
       isDateTimePickerVisible: false,
       seletedDateTime: null,
       selectedLocation: null,
-      event: null
+      event: {},
+      validation: {},
+      value: {}
     };
   }
 
@@ -29,62 +31,75 @@ class CreateEventForm extends Component {
   _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
   _handleDatePicked = date => {
-    this.setState({
-      seletedDateTime: date,
-      event: { ...this.state.event, time: moment(date).unix() }
-    });
-    this.props.onChangeData(this.state.event);
+    if (!date && !this.state.seletedDateTime) {
+      this.setState(prevState => {
+        const validation = { ...prevState.validation };
+        validation.dateTime = true;
+
+        return { validation };
+      });
+    } else if (date) {
+      delete this.state.validation.dateTime;
+      this.setState(
+        {
+          seletedDateTime: date,
+          event: { ...this.state.event, time: date }
+        },
+        () => {
+          console.log("date", this.state.event.time);
+          this.props.onChangeData(this.state.event);
+        }
+      );
+    }
     this._hideDateTimePicker();
   };
 
   _handleLocationPicked = location => {
+    if (!location && !this.state.selectedLocation) {
+      this.setState(prevState => {
+        const validation = { ...prevState.validation };
+        validation.location = true;
+
+        return { validation };
+      });
+    } else if (location) {
+      delete this.state.validation.location;
+      this.setState(
+        {
+          selectedLocation: location,
+          event: { ...this.state.event, location: `/locations/${location.id}` }
+        },
+        () => this.props.onChangeData(this.state.event)
+      );
+    }
+  };
+
+  _handleChangeValue = (field, value) => {
+    const event = { ...this.state.event };
+    event[field] = value;
+    this.setState({ event }, () => this.props.onChangeData(this.state.event));
+    if (value || value === 0) {
+      delete this.state.validation[field];
+    }
+  };
+
+  _handleChangeTags = tagsString => {
+    const tags = tagsString.split(",").map(tag => tag.trim());
     this.setState({
-      selectedLocation: location,
-      event: { ...this.state.event, location: `/locations/${location.id}` }
+      event: { ...this.state.event, tags: tags }
     });
     this.props.onChangeData(this.state.event);
   };
 
-  _handleChangeName = text => {
-    this.setState({
-      event: { ...this.state.event, name: text }
-    });
-    this.props.onChangeData(this.state.event);
-  };
+  _validateField = field => {
+    if (!this.state.event[field]) {
+      this.setState(prevState => {
+        const validation = { ...prevState.validation };
+        validation[field] = true;
 
-  _handleChangePeople = number => {
-    this.setState({
-      event: { ...this.state.event, slots: number }
-    });
-    this.props.onChangeData(this.state.event);
-  };
-
-  _handleChangeFee = number => {
-    this.setState({
-      event: { ...this.state.event, fee: number }
-    });
-    this.props.onChangeData(this.state.event);
-  };
-
-  _handleChangeCategory = value => {
-    this.setState({
-      event: { ...this.state.event, category: value }
-    });
-    this.props.onChangeData(this.state.event);
-  };
-
-  _handleChangeDescription = desc => {
-    this.setState({
-      event: { ...this.state.event, description: desc }
-    });
-    this.props.onChangeData(this.state.event);
-  };
-
-  _handleChangeTags = tags => {
-    this.setState({
-      event: { ...this.state.event, tags: [tags] }
-    });
-    this.props.onChangeData(this.state.event);
+        return { validation };
+      });
+    }
   };
 
   _renderDateTimePicker = () => {
@@ -92,7 +107,7 @@ class CreateEventForm extends Component {
       <DateTimePicker
         isVisible={this.state.isDateTimePickerVisible}
         onConfirm={this._handleDatePicked}
-        onCancel={this._hideDateTimePicker}
+        onCancel={this._handleDatePicked}
         mode="datetime"
       />
     );
@@ -102,17 +117,40 @@ class CreateEventForm extends Component {
     const { category } = this.props;
     return (
       <View style={styles.container}>
+        {/* NAME FIELD */}
         <View style={styles.inputContainer}>
-          <BaseText style={styles.inputLabel}>Event's name</BaseText>
+          <BaseText
+            style={[
+              styles.inputLabel,
+              this.state.validation.name && styles.warningText
+            ]}
+          >
+            Event's name
+          </BaseText>
           <TextInput
-            style={styles.textInput}
-            onChangeText={this._handleChangeName}
+            style={[
+              styles.textInput,
+              this.state.validation.name && styles.warningField
+            ]}
+            value={this.state.event.name}
+            onChangeText={text => this._handleChangeValue("name", text)}
+            onBlur={() => this._validateField("name")}
           />
+          {this.state.validation.name && (
+            <BaseText style={[styles.warningText, { paddingTop: 2 }]}>
+              Name field is required
+            </BaseText>
+          )}
         </View>
 
+        {/* LOCATION FIELD */}
         <View>
           <TouchableOpacity
-            style={[styles.inputContainer, styles.modalButton]}
+            style={[
+              styles.inputContainer,
+              styles.modalButton,
+              this.state.validation.location && styles.warningField
+            ]}
             onPress={() =>
               this.props.navigate("LocationPicker", {
                 onSelectLocation: this._handleLocationPicked
@@ -128,97 +166,204 @@ class CreateEventForm extends Component {
                   </BaseText>
                 </View>
               ) : (
-                <BaseText style={styles.inputLabel}>Add Location</BaseText>
+                <BaseText
+                  style={[
+                    styles.inputLabel,
+                    this.state.validation.location && styles.warningText
+                  ]}
+                >
+                  Add Location
+                </BaseText>
               )}
             </View>
             <View>
               <Icon
                 name="chevron-right"
                 size={35}
-                color={colors.darkGrey}
+                color={
+                  this.state.validation.location
+                    ? colors.secondary
+                    : colors.darkGrey
+                }
                 style={{ marginBottom: 10, marginTop: 20 }}
               />
             </View>
-            {this._renderDateTimePicker()}
           </TouchableOpacity>
+          {this.state.validation.location && (
+            <BaseText style={[styles.warningText, { paddingTop: 2 }]}>
+              Location field is required
+            </BaseText>
           )}
         </View>
 
-        <TouchableOpacity
-          style={[styles.inputContainer, styles.modalButton]}
-          onPress={this._showDateTimePicker}
-        >
-          <View>
-            {this.state.seletedDateTime ? (
-              <View>
-                <BaseText style={styles.smallLabel}>Date and Time</BaseText>
-                <BaseText style={{ fontSize: 17, marginBottom: 7 }}>
-                  {moment(this.state.date).format("MMM D YYYY, h:mm A")}
+        {/* DATETIME FIELD */}
+        <View>
+          <TouchableOpacity
+            style={[
+              styles.inputContainer,
+              styles.modalButton,
+              this.state.validation.dateTime && styles.warningField
+            ]}
+            onPress={this._showDateTimePicker}
+          >
+            <View>
+              {this.state.seletedDateTime ? (
+                <View>
+                  <BaseText style={styles.smallLabel}>Date and Time</BaseText>
+                  <BaseText style={{ fontSize: 17, marginBottom: 7 }}>
+                    {moment(this.state.seletedDateTime).format(
+                      "MMM D YYYY, h:mm A"
+                    )}
+                  </BaseText>
+                </View>
+              ) : (
+                <BaseText
+                  style={[
+                    styles.inputLabel,
+                    this.state.validation.dateTime && styles.warningText
+                  ]}
+                >
+                  Date and Time
                 </BaseText>
-              </View>
-            ) : (
-              <BaseText style={styles.inputLabel}>Date and Time</BaseText>
-            )}
-          </View>
-          <View>
-            <Icon
-              name="chevron-right"
-              size={35}
-              color={colors.darkGrey}
-              style={{ marginBottom: 10, marginTop: 20 }}
-            />
-          </View>
-        </TouchableOpacity>
+              )}
+            </View>
+            <View>
+              <Icon
+                name="chevron-right"
+                size={35}
+                color={
+                  this.state.validation.dateTime
+                    ? colors.secondary
+                    : colors.darkGrey
+                }
+                style={{ marginBottom: 10, marginTop: 20 }}
+              />
+            </View>
+          </TouchableOpacity>
+          {this._renderDateTimePicker()}
+          {this.state.validation.dateTime && (
+            <BaseText style={[styles.warningText, { paddingTop: 2 }]}>
+              Date and Time field is required
+            </BaseText>
+          )}
+        </View>
 
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          {/* PEOPLE FIELD */}
           <View style={[styles.inputContainer, { flex: 1, marginRight: 20 }]}>
-            <BaseText style={styles.inputLabel}>People</BaseText>
+            <BaseText
+              style={[
+                this.state.validation.slots && styles.warningText,
+                styles.inputLabel
+              ]}
+            >
+              People
+            </BaseText>
             <TextInput
-              style={styles.textInput}
+              style={[
+                this.state.validation.slots && styles.warningField,
+                styles.textInput
+              ]}
               keyboardType="number-pad"
-              onChangeText={this._handleChangePeople}
+              onChangeText={number => this._handleChangeValue("slots", number)}
+              onBlur={() => this._validateField("slots")}
             />
+            {this.state.validation.slots && (
+              <BaseText style={[styles.warningText, { paddingTop: 2 }]}>
+                People field is required
+              </BaseText>
+            )}
           </View>
+
+          {/* FEE FIELD */}
           <View style={[styles.inputContainer, { flex: 1 }]}>
-            <BaseText style={styles.inputLabel}>Fee</BaseText>
+            <BaseText
+              style={[
+                this.state.validation.fee && styles.warningText,
+                styles.inputLabel
+              ]}
+            >
+              Fee
+            </BaseText>
             <TextInput
-              style={styles.textInput}
+              style={[
+                this.state.validation.fee && styles.warningField,
+                styles.textInput
+              ]}
               keyboardType="number-pad"
-              onChangeText={this._handleChangeFee}
+              onChangeText={number => this._handleChangeValue("fee", number)}
+              onBlur={() => this._validateField("fee")}
             />
+            {this.state.validation.fee && (
+              <BaseText style={[styles.warningText, { paddingTop: 2 }]}>
+                Fee field is required
+              </BaseText>
+            )}
           </View>
         </View>
 
+        {/* CATEGORY FIELD */}
         <View style={styles.inputContainer}>
           <View style={styles.dropDownArea}>
             <Dropdown
               label="Category"
               data={category}
-              baseColor={colors.darkGrey}
+              baseColor={
+                this.state.validation.category
+                  ? colors.secondary
+                  : colors.darkGrey
+              }
               itemColor={colors.darkGrey}
               dropdownPosition={0}
               itemTextStyle={styles.pickerText}
               labelTextStyle={styles.pickerTextLabel}
               baseTextStyle={styles.pickerText}
-              onChangeText={this._handleChangeCategory}
+              onChangeText={value => this._handleChangeValue("category", value)}
+              onBlur={() => this._validateField("category")}
             />
           </View>
+          {this.state.validation.category && (
+            <BaseText style={[styles.warningText, { paddingTop: 2 }]}>
+              Category field is required
+            </BaseText>
+          )}
         </View>
 
+        {/* DESCRIPTION FIELD */}
         <View style={styles.inputContainer}>
-          <BaseText style={styles.inputLabel}>Description</BaseText>
+          <BaseText
+            style={[
+              this.state.validation.description && styles.warningText,
+              styles.inputLabel
+            ]}
+          >
+            Description
+          </BaseText>
           <TextInput
-            style={styles.textInput}
+            style={[
+              this.state.validation.description && styles.warningField,
+              styles.textInput
+            ]}
             multiline={true}
-            onChangeText={this._handleChangeDescription}
+            onChangeText={value =>
+              this._handleChangeValue("description", value)
+            }
+            onBlur={() => this._validateField("description")}
           />
+          {this.state.validation.description && (
+            <BaseText style={[styles.warningText, { paddingTop: 2 }]}>
+              Description field is required
+            </BaseText>
+          )}
         </View>
 
+        {/* TAGS FIELD */}
         <View style={styles.inputContainer}>
           <BaseText style={styles.inputLabel}>Tags</BaseText>
           <TextInput
             style={styles.textInput}
             onChangeText={this._handleChangeTags}
+            placeholder="Seperate tags with commas"
           />
         </View>
       </View>
@@ -266,21 +411,11 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: colors.darkGrey
   },
-  pickedDate: {
-    marginTop: 0,
-    textAlign: "center"
+  warningText: {
+    color: colors.secondary
   },
-  buttonContainer: {
-    alignItems: "center",
-    marginTop: 50
-  },
-  buttonTitle: {
-    color: colors.darkGrey
-  },
-  button: {
-    backgroundColor: "#ED6A5A",
-    borderRadius: 10,
-    width: 150
+  warningField: {
+    borderBottomColor: colors.secondary
   }
 });
 
