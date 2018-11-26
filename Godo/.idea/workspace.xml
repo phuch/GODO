@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5695350-aabb-45b9-85a7-cbebccccaace" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actions/user-action.js" beforeDir="false" afterPath="$PROJECT_DIR$/actions/user-action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/containers/AuthenticationScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/containers/AuthenticationScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/containers/LoadingScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/containers/LoadingScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/navigators/RootNavigator.js" beforeDir="false" afterPath="$PROJECT_DIR$/navigators/RootNavigator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/images/index.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -32,24 +29,28 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="js" value="28" />
+          <entry key="js" value="30" />
+          <entry key="png" value="1" />
+          <entry key="svg" value="1" />
           <entry key="ts" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JavaScript" value="28" />
+          <entry key="Image" value="1" />
+          <entry key="JavaScript" value="30" />
+          <entry key="SVG" value="1" />
           <entry key="TypeScript" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="3046" />
+          <entry key="js" value="3145" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="3046" />
+          <entry key="JavaScript" value="3145" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
@@ -64,8 +65,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/containers/AuthenticationScreen.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="26" column="5" lean-forward="true" selection-start-line="23" selection-start-column="4" selection-end-line="26" selection-end-column="5" />
+            <state relative-caret-position="199">
+              <caret line="81" column="23" lean-forward="true" selection-start-line="79" selection-start-column="16" selection-end-line="81" selection-end-column="23" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -73,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/containers/LoadingScreen.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="19" column="50" lean-forward="true" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
+            <state relative-caret-position="254">
+              <caret line="24" column="50" selection-start-line="24" selection-start-column="50" selection-end-line="24" selection-end-column="50" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -85,14 +86,39 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/images/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="23">
+              <caret line="1" column="48" selection-start-line="1" selection-start-column="48" selection-end-line="1" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/images/loading.svg">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/images/marker.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/constants/colors.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="92">
+              <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/navigators/RootNavigator.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="119" column="30" lean-forward="true" selection-start-line="119" selection-start-column="30" selection-end-line="119" selection-end-column="30" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-7">
+              <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -153,7 +179,6 @@
         <option value="$PROJECT_DIR$/containers/EventDetailScreen.js" />
         <option value="$PROJECT_DIR$/components/EventList.js" />
         <option value="$PROJECT_DIR$/assets/svgs/loading-svg.js" />
-        <option value="$PROJECT_DIR$/images/index.js" />
         <option value="$PROJECT_DIR$/components/Map.js" />
         <option value="$PROJECT_DIR$/actions/search-action.js" />
         <option value="$PROJECT_DIR$/fixtures/events.json" />
@@ -175,8 +200,9 @@
         <option value="$PROJECT_DIR$/components/LoginForm.js" />
         <option value="$PROJECT_DIR$/actions/user-action.js" />
         <option value="$PROJECT_DIR$/containers/AuthenticationScreen.js" />
-        <option value="$PROJECT_DIR$/containers/LoadingScreen.js" />
         <option value="$PROJECT_DIR$/navigators/RootNavigator.js" />
+        <option value="$PROJECT_DIR$/images/index.js" />
+        <option value="$PROJECT_DIR$/containers/LoadingScreen.js" />
       </list>
     </option>
   </component>
@@ -248,6 +274,17 @@
             <path>
               <item name="Godo" type="b2602c69:ProjectViewProjectNode" />
               <item name="Godo" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Godo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Godo" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="svgs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Godo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Godo" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -264,6 +301,11 @@
               <item name="Godo" type="b2602c69:ProjectViewProjectNode" />
               <item name="Godo" type="462c0819:PsiDirectoryNode" />
               <item name="fixtures" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Godo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Godo" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Godo" type="b2602c69:ProjectViewProjectNode" />
@@ -337,12 +379,12 @@
       <workItem from="1539682408136" duration="7161000" />
       <workItem from="1542830542607" duration="16554000" />
       <workItem from="1543218726480" duration="8000" />
-      <workItem from="1543264562815" duration="3231000" />
+      <workItem from="1543264562815" duration="3995000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103631000" />
+    <option name="totallyTimeSpent" value="104395000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -409,14 +451,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="26" lean-forward="true" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/constants/category-colors.js" />
     <entry file="file://$PROJECT_DIR$/util/colorUtil.js" />
     <entry file="file://$PROJECT_DIR$/fixtures/categories.json">
       <provider selected="true" editor-type-id="text-editor" />
@@ -504,13 +538,6 @@
     <entry file="file://$PROJECT_DIR$/assets/svgs/event-detail-svg.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-593" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
@@ -644,13 +671,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/constants/colors.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="23" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/LoginForm.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -701,32 +721,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/navigators/RootNavigator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/containers/AuthenticationScreen.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="26" column="5" lean-forward="true" selection-start-line="23" selection-start-column="4" selection-end-line="26" selection-end-column="5" />
+        <state relative-caret-position="199">
+          <caret line="81" column="23" lean-forward="true" selection-start-line="79" selection-start-column="16" selection-end-line="81" selection-end-column="23" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/constants/colors.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/marker.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/loading.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" column="48" selection-start-line="1" selection-start-column="48" selection-end-line="1" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/containers/LoadingScreen.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="19" column="50" lean-forward="true" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
+        <state relative-caret-position="254">
+          <caret line="24" column="50" selection-start-line="24" selection-start-column="50" selection-end-line="24" selection-end-column="50" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/navigators/RootNavigator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="119" column="30" lean-forward="true" selection-start-line="119" selection-start-column="30" selection-end-line="119" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>

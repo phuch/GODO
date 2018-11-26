@@ -1,5 +1,7 @@
 import React from 'react'
-import { View, Text, ActivityIndicator, StyleSheet, AsyncStorage } from 'react-native'
+import { View, ActivityIndicator, StyleSheet, AsyncStorage, Image } from 'react-native'
+import SvgIcon from "../components/SvgIcon";
+import { LOADING } from "../images";
 
 export default class LoadingScreen extends React.Component {
     componentDidMount() {
@@ -16,8 +18,13 @@ export default class LoadingScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>Loading</Text>
-                <ActivityIndicator size="large" />
+                <View style={styles.logo}>
+                    <SvgIcon name='GodoLogo' width={250} height={70}/>
+                </View>
+                <Image
+                    style={{width: 100, height: 100}}
+                    source={LOADING}
+                />
             </View>
         )
     }
