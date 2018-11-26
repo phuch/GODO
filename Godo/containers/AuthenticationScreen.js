@@ -35,26 +35,22 @@ class AuthenticationScreen extends React.Component {
     handleLogin = (credentials) => {
         this.props.userSignIn(credentials).then(() => {
             const {message, auth} = this.props
-            AsyncStorage.setItem('authToken', auth.stsTokenManager.accessToken).then(() => {
-                if (message !== null) {
-                    this.refs.toast.show(message, 1500);
-                } else {
-                    this.handleNavigation('App', {user: auth})
-                }
-            }).catch(() => console.log('Error occurred'))
+            if (message !== null) {
+                this.refs.toast.show(message, 1500);
+            } else {
+                this.handleNavigation('App', {user: auth})
+            }
         })
     }
 
     handleSignup = (newUser) => {
         this.props.userSignUp(newUser).then(() => {
             const {message, auth} = this.props
-            AsyncStorage.setItem('token', auth.stsTokenManager.accessToken).then(() => {
-                if (message !== null) {
-                    this.refs.toast.show(message, 1500);
-                } else {
-                    this.handleNavigation('App', {user: auth})
-                }
-            }).catch(() => console.log('Error occurred'))
+            if (message !== null) {
+                this.refs.toast.show(message, 1500);
+            } else {
+                this.handleNavigation('App', {user: auth})
+            }
         })
     }
 

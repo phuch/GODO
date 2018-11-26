@@ -1,18 +1,19 @@
 import React from 'react'
-import { View, ActivityIndicator, StyleSheet, AsyncStorage, Image } from 'react-native'
+import { View, StyleSheet, Image } from 'react-native'
 import SvgIcon from "../components/SvgIcon";
 import { LOADING } from "../images";
+import firebase from "../Firebase";
 
-export default class LoadingScreen extends React.Component {
+class LoadingScreen extends React.Component {
     componentDidMount() {
-        AsyncStorage.getItem("authToken")
-            .then(value => {
-                if(value) {
-                    this.props.navigation.navigate('App')
-                } else {
-                    this.props.navigation.navigate('Authentication')
-                }
-            })
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                console.log(user)
+                this.props.navigation.navigate('App', {user})
+            } else {
+                this.props.navigation.navigate('Authentication')
+            }
+        })
     }
 
     render() {
@@ -32,7 +33,10 @@ export default class LoadingScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
     }
 })
+
+export default LoadingScreen
