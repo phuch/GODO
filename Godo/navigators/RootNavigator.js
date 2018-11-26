@@ -11,6 +11,7 @@ import EventDetailScreen from "../containers/EventDetailScreen";
 import Icon from "react-native-vector-icons/Feather";
 import CreateEventScreen from "../containers/CreateEventScreen";
 import AuthenticationScreen from "../containers/AuthenticationScreen";
+import LoadingSreen from "../containers/LoadingScreen";
 
 const HomeNavigator = createStackNavigator(
   {
@@ -105,6 +106,9 @@ const AppNavigator = createBottomTabNavigator(
 
 const RootNavigator = createStackNavigator(
   {
+    Loading: {
+      screen: LoadingSreen
+    },
     App: {
       screen: AppNavigator
     },
@@ -113,7 +117,7 @@ const RootNavigator = createStackNavigator(
     }
   },
   {
-    initialRouteName: "Authentication",
+    initialRouteName: "Loading",
     headerMode: "none"
   }
 );

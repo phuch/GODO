@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet,View} from 'react-native';
+import {StyleSheet,View, AsyncStorage} from 'react-native';
 import colors from '../constants/colors';
 import SvgIcon from '../components/SvgIcon';
 import LoginForm from '../components/LoginForm';
@@ -35,23 +35,26 @@ class AuthenticationScreen extends React.Component {
     handleLogin = (credentials) => {
         this.props.userSignIn(credentials).then(() => {
             const {message, auth} = this.props
-            if (message !== null) {
-                this.refs.toast.show(message, 1500);
-            } else {
-                this.handleNavigation('App', {user: auth})
-            }
+            AsyncStorage.setItem('authToken', auth.stsTokenManager.accessToken).then(() => {
+                if (message !== null) {
+                    this.refs.toast.show(message, 1500);
+                } else {
+                    this.handleNavigation('App', {user: auth})
+                }
+            }).catch(() => console.log('Error occurred'))
         })
     }
 
     handleSignup = (newUser) => {
         this.props.userSignUp(newUser).then(() => {
-            console.log(this.props.auth)
             const {message, auth} = this.props
-            if (message !== null) {
-                this.refs.toast.show(message, 1500);
-            } else {
-                this.handleNavigation('App', {user: auth})
-            }
+            AsyncStorage.setItem('token', auth.stsTokenManager.accessToken).then(() => {
+                if (message !== null) {
+                    this.refs.toast.show(message, 1500);
+                } else {
+                    this.handleNavigation('App', {user: auth})
+                }
+            }).catch(() => console.log('Error occurred'))
         })
     }
 
@@ -135,6 +138,7 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (store) => {
+    console.log(store.firebase.auth)
     return {
         auth: store.firebase.auth,
         message: store.userState.message,

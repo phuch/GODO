@@ -19,6 +19,7 @@ export const userSignUp = (newUser) => {
         try {
             const signupResponse = await firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password);
             await firebase.firestore().collection('users').doc(signupResponse.user.uid).set({
+                email: newUser.email,
                 fullName: newUser.fullName
             });
             dispatch({
