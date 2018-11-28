@@ -23,7 +23,7 @@ class SignupForm extends React.Component {
     }
 
     handleSignUp = () => {
-        const {handleSignup, isLoading} = this.props
+        const {handleSignup} = this.props
         const newUser = {
             email: this.state.email,
             password: this.state.password,
@@ -33,6 +33,7 @@ class SignupForm extends React.Component {
     };
 
     render() {
+        const {isLoading} = this.props
         return (
             <View style={styles.container}>
                 <TextInput
