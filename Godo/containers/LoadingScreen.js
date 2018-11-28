@@ -2,17 +2,15 @@ import React from 'react'
 import { View, StyleSheet, Image } from 'react-native'
 import SvgIcon from "../components/SvgIcon";
 import { LOADING } from "../images";
-import firebase from "../Firebase";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import { getCurrentUser } from "../actions/user-action";
 
 class LoadingScreen extends React.Component {
     componentDidMount() {
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                console.log(user)
-                this.props.navigation.navigate('App', {user})
-            } else {
-                this.props.navigation.navigate('Authentication')
-            }
+        this.props.getCurrentUser().then(() => {
+            const { currentUser, navigation } = this.props
+            navigation.navigate(currentUser ? 'App' : 'Authentication')
         })
     }
 
@@ -39,4 +37,14 @@ const styles = StyleSheet.create({
     }
 })
 
-export default LoadingScreen
+const mapStateToProps = (store) => {
+    return {
+        currentUser: store.userState.currentUser
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({ getCurrentUser }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoadingScreen)

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet,View, AsyncStorage} from 'react-native';
+import {StyleSheet,View} from 'react-native';
 import colors from '../constants/colors';
 import SvgIcon from '../components/SvgIcon';
 import LoginForm from '../components/LoginForm';
@@ -134,7 +134,6 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (store) => {
-    console.log(store.firebase.auth)
     return {
         auth: store.firebase.auth,
         message: store.userState.message,

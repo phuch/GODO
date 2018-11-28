@@ -5,7 +5,8 @@ const initalState = {
   term: null,
   isSearching: false,
   message: null,
-  isLoading: false
+  isLoading: false,
+  currentUser: null
 };
 
 export default (state = initalState, action) => {
@@ -46,6 +47,16 @@ export default (state = initalState, action) => {
       return {
         ...state,
         isLoading: true
+      }
+    case actionTypes.USER_AUTHENTICATED:
+      return {
+          ...state,
+          currentUser: action.user
+      }
+    case actionTypes.USER_NOT_AUTHENTICATED:
+      return {
+          ...state,
+          currentUser: null
       }
     default:
       return state;

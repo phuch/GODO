@@ -13,6 +13,7 @@ import SvgIcon from "../components/SvgIcon";
 import ReviewList from "../components/ReviewList";
 import EventList from "../components/EventList";
 import BaseText, { HeaderText } from "../components/Text";
+import {randomImage} from "../util/imageUtils";
 
 class UserScreen extends React.Component {
   constructor(props) {
@@ -73,7 +74,7 @@ class UserScreen extends React.Component {
   };
 
   render() {
-    const { showAddButton, ofCurrentUser } = this.props;
+    const { showAddButton, ofCurrentUser, profile } = this.props;
     const reviewData = new Array(reviews[0]);
 
     return (
@@ -97,22 +98,19 @@ class UserScreen extends React.Component {
           )}
           <View style={{ alignItems: "center" }}>
             <Avatar
-              xlarge
-              rounded
-              source={{
-                uri:
-                  "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
-              }}
-              onPress={() => console.log("Works!")}
-              activeOpacity={0.7}
-              avatarStyle={{
-                borderWidth: 8,
-                borderColor: colors.secondary,
-                borderTopLeftRadius: 1
-              }}
+                xlarge
+                rounded
+                source={randomImage()}
+                activeOpacity={0.7}
+                avatarStyle={{
+                    borderWidth: 8,
+                    borderColor: colors.secondary,
+                    borderTopLeftRadius: 1
+                }}
             />
+
             <HeaderText style={{ fontSize: 20, paddingTop: 15 }}>
-              John AppleSeed
+              {profile.fullName}
             </HeaderText>
             <BaseText style={{ fontSize: 15, paddingTop: 5 }}>
               34 points
@@ -155,12 +153,10 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = store => {
   const { events } = store.userState;
+  const { profile } = store.firebase
   return {
-    events
+    events, profile
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { fetchUsersEvents }
-)(UserScreen);
+export default connect(mapStateToProps, { fetchUsersEvents })(UserScreen);
