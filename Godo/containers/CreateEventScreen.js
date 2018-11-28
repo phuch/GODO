@@ -8,7 +8,7 @@ import AppHeader from "../components/AppHeader";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import CreateEventForm from "../components/CreateEventForm";
 import { bindActionCreators } from "redux";
-import { postEvent, fetchNearbyEvents } from "../actions/events-action";
+import { createEvent, fetchNearbyEvents } from "../actions/events-action";
 
 class CreateEventScreen extends React.Component {
   constructor(props) {
@@ -40,7 +40,8 @@ class CreateEventScreen extends React.Component {
   };
 
   handleFormSubmit = () => {
-    //postEvent(this.state.newEvent);
+    createEvent(this.state.newEvent).then(this.props.fetchNearbyEvents());
+    this.props.navigation.pop();
   };
 
   checkCanSubmit = () => {

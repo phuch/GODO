@@ -4,6 +4,7 @@ import {
   FETCH_NEARBY_EVENTS_ERROR,
   FETCH_NEARBY_EVENTS_SUCCESS
 } from "../constants/action-types";
+import moment from "moment";
 
 const initalState = {
   events: [],
@@ -33,9 +34,12 @@ export default (state = initalState, action) => {
         errorEvents: error
       };
     case FETCH_NEARBY_EVENTS_SUCCESS:
+      const activeEvents = action.events.filter(
+        event => event.time > Date.now()
+      );
       return {
         ...state,
-        nearbyEvents: action.events
+        nearbyEvents: activeEvents
       };
     default:
       return state;

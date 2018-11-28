@@ -46,7 +46,6 @@ class CreateEventForm extends Component {
           event: { ...this.state.event, time: date }
         },
         () => {
-          console.log("date", this.state.event.time);
           this.props.onChangeData(this.state.event);
         }
       );

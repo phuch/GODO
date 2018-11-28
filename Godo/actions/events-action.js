@@ -100,6 +100,7 @@ export const fetchNearbyEvents = location => async (dispatch, getState) => {
 
       count += 1;
       if (count === querySnapshot.size) {
+        console.log(events);
         dispatch(_fetchNearbyEventsSuccess(events));
         dispatch(_loadingEvents(false));
       }
@@ -107,28 +108,29 @@ export const fetchNearbyEvents = location => async (dispatch, getState) => {
   });
 };
 
-export const createEvent = async event => {
-  dispatch(_loadingEvents(true));
-  return eventsDb
-    .add({
-      name: event.name,
-      category: event.category,
-      description: event.description,
-      fee: event.fee,
-      joined: 0,
-      location: firebase.firestore().doc(event.location),
-      publisher: "Piper",
-      slots: event.slots,
-      tags: event.tags,
-      time: event.time
-    })
-    .then(() => {
-      dispatch(_loadingEvents(false));
-      dispatch(_createEventSuccess(event));
-      return event;
-    })
-    .catch(function(error) {
-      dispatch(_loadingEvents(false));
-      console.error("Error adding document: ", error);
-    });
+export const createEvent = event => {
+  //dispatch(_loadingEvents(true));
+  return (
+    eventsDb
+      .add({
+        name: event.name,
+        category: event.category,
+        description: event.description,
+        fee: event.fee,
+        joined: 0,
+        location: firebase.firestore().doc(event.location),
+        publisher: "Piper",
+        slots: event.slots,
+        tags: event.tags,
+        time: event.time
+      })
+      // .then(() => {
+      //   dispatch(_loadingEvents(false));
+      //   dispatch(_createEventSuccess(event));
+      // })
+      .catch(function(error) {
+        //dispatch(_loadingEvents(false));
+        console.error("Error adding document: ", error);
+      })
+  );
 };
