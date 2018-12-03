@@ -66,7 +66,7 @@ class CreateEventForm extends Component {
       this.setState(
         {
           selectedLocation: location,
-          event: { ...this.state.event, location: `/locations/${location.id}` }
+          event: { ...this.state.event, location }
         },
         () => this.props.onChangeData(this.state.event)
       );
@@ -83,7 +83,7 @@ class CreateEventForm extends Component {
   };
 
   _handleChangeTags = tagsString => {
-    const tags = tagsString.split(",").map(tag => tag.trim());
+    const tags = tagsString.split(",").map(tag => tag.trim().toLowerCase());
     this.setState({
       event: { ...this.state.event, tags: tags }
     });

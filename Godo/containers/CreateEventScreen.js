@@ -40,8 +40,12 @@ class CreateEventScreen extends React.Component {
   };
 
   handleFormSubmit = () => {
-    createEvent(this.state.newEvent).then(this.props.fetchNearbyEvents());
     this.props.navigation.pop();
+    this.props
+      .createEvent(this.state.newEvent)
+      .then(newEvent =>
+        this.handleNavigation("EventDetail", { event: newEvent })
+      );
   };
 
   checkCanSubmit = () => {
@@ -119,7 +123,7 @@ mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchNearbyEvents }, dispatch);
+  return bindActionCreators({ createEvent, fetchNearbyEvents }, dispatch);
 };
 
 export default connect(

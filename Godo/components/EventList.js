@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View, RefreshControl } from "react-native";
 import PropTypes from "prop-types";
 import { DotIndicator } from "react-native-indicators";
 import { assignCardBackgroundColor } from "../util/colorUtils";
@@ -19,6 +19,11 @@ class EventList extends React.Component {
         />
       </View>
     );
+  };
+
+  onRefreshEventList = () => {
+    console.log("refreshing");
+    this.props.refreshEventList();
   };
 
   render() {
@@ -45,6 +50,8 @@ class EventList extends React.Component {
           ListHeaderComponent={
             loading ? this.renderLoadingIndicator() : undefined
           }
+          onRefresh={this.onRefresh}
+          refreshing={false}
         />
       </View>
     );

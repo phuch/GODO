@@ -3,8 +3,11 @@ import {
   GET_LOCATIONS,
   GET_LOCATIONS_LOADING,
   GET_LOCATIONS_ERROR,
-  SEARCH_LOCATIONS_RESULT
+  SEARCH_LOCATIONS_RESULT,
+  GET_CURRENT_LOCATION_ERROR,
+  GET_CURRENT_LOCATION_SUCCESS
 } from "../constants/action-types";
+import { Location, Permissions } from "expo";
 
 const locationsDb = firebase.firestore().collection("locations");
 
@@ -33,6 +36,24 @@ const _searchResult = result => {
   return {
     type: SEARCH_LOCATIONS_RESULT,
     result
+  };
+};
+
+export const getCurrentLocation = () => {
+  return async dispatch => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== "granted") {
+      dispatch({
+        type: GET_CURRENT_LOCATION_ERROR,
+        errorMessage: "Permission to access location was denied"
+      });
+    }
+
+    const userLocation = await Location.getCurrentPositionAsync({});
+    dispatch({
+      type: GET_CURRENT_LOCATION_SUCCESS,
+      userLocation
+    });
   };
 };
 

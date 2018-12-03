@@ -2,7 +2,9 @@ import {
   GET_LOCATIONS,
   GET_LOCATIONS_ERROR,
   GET_LOCATIONS_LOADING,
-  SEARCH_LOCATIONS_RESULT
+  SEARCH_LOCATIONS_RESULT,
+  GET_CURRENT_LOCATION_ERROR,
+  GET_CURRENT_LOCATION_SUCCESS
 } from "../constants/action-types";
 
 const initialState = {
@@ -31,6 +33,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         searchResult: action.result
+      };
+    case GET_CURRENT_LOCATION_ERROR:
+      return {
+        ...state,
+        errorMessage: action.errorMessage
+      };
+    case GET_CURRENT_LOCATION_SUCCESS:
+      return {
+        ...state,
+        userLocation: action.userLocation
       };
     default:
       return state;

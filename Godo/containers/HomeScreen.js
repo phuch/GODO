@@ -7,16 +7,24 @@ import { assignCardBackgroundColor } from "../util/colorUtils";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {
-  getLocationAction,
-  searchAction,
-  toggleSearchAction
-} from "../actions/home-action";
-import { fetchAllEvents, fetchNearbyEvents } from "../actions/events-action";
+  fetchAllEvents,
+  fetchNearbyEvents,
+  searchEvents
+} from "../actions/events-action";
+import { getCurrentLocation } from "../actions/location-action";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 class HomeScreen extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isSearching: false
+    };
+  }
+
   componentDidMount() {
-    this.props.getLocationAction();
+    this.props.getCurrentLocation();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -31,27 +39,39 @@ class HomeScreen extends React.Component {
     navigation.navigate(routeName, params);
   };
 
+  refreshEventList = () => {
+    this.props.fetchNearbyEvents(this.props.userLocation);
+  };
+
+  toggleSearch = () => {
+    this.setState({ isSearching: !this.state.isSearching });
+  };
+
+  searchNearbyEvent = term => {
+    this.props.searchEvents(term, { nearby: true });
+  };
+
   renderListArea = () => {
     const { nearbyEvents, searchResult } = this.props;
+
     if (searchResult) {
+      console.log(searchResult);
       return this.renderEventList(searchResult, "keyword");
     } else if (nearbyEvents) {
       return this.renderEventList(nearbyEvents, "area");
-    } else {
     }
   };
 
   renderEventList = (eventList, msg) => {
     if (eventList) {
       return (
-        <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}>
-          <EventList
-            events={eventList}
-            backgroundColor={assignCardBackgroundColor}
-            navigation={this.props.navigation}
-            loading={this.props.loading}
-          />
-        </KeyboardAwareScrollView>
+        <EventList
+          events={eventList}
+          backgroundColor={assignCardBackgroundColor}
+          navigation={this.props.navigation}
+          loading={this.props.loading}
+          refreshEventList={this.refreshEventList}
+        />
       );
     } else {
       return (
@@ -63,21 +83,14 @@ class HomeScreen extends React.Component {
   };
 
   render() {
-    const {
-      errorMessage,
-      userLocation,
-      nearbyEvents,
-      isSearching,
-      searchAction,
-      toggleSearchAction
-    } = this.props;
+    const { errorMessage, userLocation, nearbyEvents } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.content}>
           <HomeHeader
-            isSearching={isSearching}
-            toggleSearchMode={toggleSearchAction}
-            handleSearch={searchAction}
+            isSearching={this.state.isSearching}
+            toggleSearchMode={this.toggleSearch}
+            handleSearch={this.searchNearbyEvent}
             handleNavigation={this.handleNavigation}
           />
           {errorMessage ? (
@@ -116,18 +129,12 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = store => {
-  const {
-    userLocation,
-    errorMessage,
-    isSearching,
-    searchResult
-  } = store.homeScreenState;
-  const { nearbyEvents, errorEvents, loading } = store.events;
+  const { userLocation, errorMessage } = store.location;
+  const { nearbyEvents, errorEvents, loading, searchResult } = store.events;
   return {
     userLocation,
     searchResult,
     errorMessage,
-    isSearching,
     nearbyEvents,
     errorEvents,
     loading
@@ -136,7 +143,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { getLocationAction, searchAction, toggleSearchAction, fetchNearbyEvents },
+    { getCurrentLocation, searchEvents, fetchNearbyEvents },
     dispatch
   );
 };

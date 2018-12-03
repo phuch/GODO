@@ -4,8 +4,7 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Dimensions,
-  ScrollView
+  Dimensions
 } from "react-native";
 import Map from "../components/Map";
 import AppHeader from "../components/AppHeader";
@@ -15,6 +14,8 @@ import Icon from "react-native-vector-icons/EvilIcons";
 import colors from "../constants/colors";
 import moment from "moment/moment";
 import basicStyles from "../constants/basicStyles";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -84,7 +85,7 @@ class EventDetailScreen extends React.Component {
               title="NOT GOING"
               buttonStyle={styles.notGoingButton}
               textStyle={basicStyles.buttonTitle}
-              onPress={this.toggleGoingStatus}
+              onPress={this.unRegisterToEvent}
             />
           ) : (
             <Button
@@ -95,7 +96,7 @@ class EventDetailScreen extends React.Component {
               title="GOING"
               buttonStyle={styles.goingButton}
               textStyle={basicStyles.buttonTitle}
-              onPress={this.toggleGoingStatus}
+              onPress={this.registerToEvent}
             />
           )}
         </View>
@@ -138,4 +139,15 @@ const styles = StyleSheet.create({
   }
 });
 
-export default EventDetailScreen;
+const mapStateToProps = state => {
+  return {};
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({}, dispatch);
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EventDetailScreen);
