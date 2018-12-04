@@ -71,9 +71,6 @@ export const userSignIn = (credentials) => {
 
 export const userSignOut = () => {
     return async dispatch => {
-        dispatch ({
-            type:  actionTypes.AUTH_REQUEST
-        })
         await firebase.auth().signOut();
         dispatch({
             type: actionTypes.USER_SIGNOUT

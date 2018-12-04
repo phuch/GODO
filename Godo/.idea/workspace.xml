@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/containers/UserScreen.js" line="155" mnemonic="8" />
+    <bookmark url="file://$PROJECT_DIR$/containers/UserScreen.js" line="52" mnemonic="8" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5695350-aabb-45b9-85a7-cbebccccaace" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/util/imageUtils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/AppTextInput.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/constants/validations.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/util/formValidator.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/actions/user-action.js" beforeDir="false" afterPath="$PROJECT_DIR$/actions/user-action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/EventList.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/EventList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants/action-types.js" beforeDir="false" afterPath="$PROJECT_DIR$/constants/action-types.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/containers/AuthenticationScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/containers/AuthenticationScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/containers/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/containers/HomeScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/containers/LoadingScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/containers/LoadingScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/LoginForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/SignupForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/SignupForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/containers/UserScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/containers/UserScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/images/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/loading.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reducers/user-reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/reducers/user-reducer.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -31,17 +30,18 @@
     <session id="1058485882">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
-          <entry key="project.open.time.0" value="3" />
+          <entry key="project.closed" value="7" />
+          <entry key="project.open.time.0" value="5" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="js" value="50" />
+          <entry key="js" value="65" />
+          <entry key="json" value="2" />
           <entry key="png" value="1" />
           <entry key="svg" value="1" />
           <entry key="ts" value="4" />
@@ -50,19 +50,20 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Image" value="1" />
-          <entry key="JavaScript" value="50" />
+          <entry key="JSON" value="2" />
+          <entry key="JavaScript" value="65" />
           <entry key="SVG" value="1" />
           <entry key="TypeScript" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="5072" />
+          <entry key="js" value="6827" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="5072" />
+          <entry key="JavaScript" value="6827" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
@@ -73,33 +74,15 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/containers/AuthenticationScreen.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="1" column="23" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/containers/UserScreen.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="151" column="3" lean-forward="true" selection-start-line="151" selection-start-column="3" selection-end-line="151" selection-end-column="3" />
+            <state relative-caret-position="142">
+              <caret line="53" column="28" selection-start-line="53" selection-start-column="28" selection-end-line="53" selection-end-column="28" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/reducers/user-reducer.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="51" selection-start-line="51" selection-end-line="51" />
             </state>
           </provider>
         </entry>
@@ -116,6 +99,7 @@
       <find>fetch</find>
       <find>fetchUsers</find>
       <find>console.log</find>
+      <find>userSignU</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -130,13 +114,11 @@
         <option value="$PROJECT_DIR$/fixtures/event.json" />
         <option value="$PROJECT_DIR$/constants/category-colors.js" />
         <option value="$PROJECT_DIR$/util/iconsUtil.js" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/components/Header.js" />
         <option value="$PROJECT_DIR$/components/EventListItem.js" />
         <option value="$PROJECT_DIR$/containers/CreateEventScreen.js" />
         <option value="$PROJECT_DIR$/components/EventInfo.js" />
         <option value="$PROJECT_DIR$/components/IconInfo.js" />
-        <option value="$PROJECT_DIR$/components/AppHeader.js" />
         <option value="$PROJECT_DIR$/containers/EventDetailScreen.js" />
         <option value="$PROJECT_DIR$/components/EventList.js" />
         <option value="$PROJECT_DIR$/assets/svgs/loading-svg.js" />
@@ -153,21 +135,26 @@
         <option value="$PROJECT_DIR$/components/SearchBar.js" />
         <option value="$PROJECT_DIR$/components/HomeHeader.js" />
         <option value="$PROJECT_DIR$/reducers/index.js" />
-        <option value="$PROJECT_DIR$/components/SignupForm.js" />
-        <option value="$PROJECT_DIR$/components/LoginForm.js" />
         <option value="$PROJECT_DIR$/navigators/RootNavigator.js" />
-        <option value="$PROJECT_DIR$/configure-store.js" />
         <option value="$PROJECT_DIR$/App.js" />
         <option value="$PROJECT_DIR$/containers/ProfileScreen.js" />
         <option value="$PROJECT_DIR$/containers/HomeScreen.js" />
         <option value="$PROJECT_DIR$/constants/action-types.js" />
-        <option value="$PROJECT_DIR$/containers/AuthenticationScreen.js" />
-        <option value="$PROJECT_DIR$/actions/user-action.js" />
         <option value="$PROJECT_DIR$/containers/LoadingScreen.js" />
         <option value="$PROJECT_DIR$/images/index.js" />
         <option value="$PROJECT_DIR$/util/imageUtils.js" />
-        <option value="$PROJECT_DIR$/containers/UserScreen.js" />
+        <option value="$PROJECT_DIR$/configure-store.js" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/util/formValidator.js" />
+        <option value="$PROJECT_DIR$/constants/validations.js" />
+        <option value="$PROJECT_DIR$/components/AppTextInput.js" />
+        <option value="$PROJECT_DIR$/components/AppHeader.js" />
         <option value="$PROJECT_DIR$/reducers/user-reducer.js" />
+        <option value="$PROJECT_DIR$/actions/user-action.js" />
+        <option value="$PROJECT_DIR$/containers/AuthenticationScreen.js" />
+        <option value="$PROJECT_DIR$/components/LoginForm.js" />
+        <option value="$PROJECT_DIR$/components/SignupForm.js" />
+        <option value="$PROJECT_DIR$/containers/UserScreen.js" />
       </list>
     </option>
   </component>
@@ -197,9 +184,8 @@
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="674" />
     <option name="y" value="23" />
-    <option name="width" value="766" />
+    <option name="width" value="1440" />
     <option name="height" value="804" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -223,7 +209,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -239,43 +224,12 @@
             <path>
               <item name="Godo" type="b2602c69:ProjectViewProjectNode" />
               <item name="Godo" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Godo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Godo" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="svgs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Godo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Godo" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Godo" type="b2602c69:ProjectViewProjectNode" />
               <item name="Godo" type="462c0819:PsiDirectoryNode" />
-              <item name="constants" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Godo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Godo" type="462c0819:PsiDirectoryNode" />
               <item name="containers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Godo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Godo" type="462c0819:PsiDirectoryNode" />
-              <item name="fixtures" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Godo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Godo" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Godo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Godo" type="462c0819:PsiDirectoryNode" />
-              <item name="navigators" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Godo" type="b2602c69:ProjectViewProjectNode" />
@@ -291,6 +245,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -347,12 +302,14 @@
       <workItem from="1543264562815" duration="7426000" />
       <workItem from="1543312044716" duration="14000" />
       <workItem from="1543352701228" duration="8269000" />
-      <workItem from="1543440417590" duration="2465000" />
+      <workItem from="1543440417590" duration="3105000" />
+      <workItem from="1543667807693" duration="4840000" />
+      <workItem from="1543954335001" duration="3641000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="118574000" />
+    <option name="totallyTimeSpent" value="127695000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -366,7 +323,7 @@
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="804" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1698379" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15574348" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -380,7 +337,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.53304595" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.33333334" />
       <window_info anchor="bottom" id="TypeScript" order="11" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -399,17 +356,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/util/iconsUtil.js" />
-    <entry file="file://$PROJECT_DIR$/reducers/app-reducer.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/containers/CreateEventScreen.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/EventInfo.js" />
     <entry file="file://$PROJECT_DIR$/assets/svgs/category-svg.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -441,13 +387,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="20" lean-forward="true" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="25" column="22" lean-forward="true" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -523,13 +462,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/AppHeader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="53" selection-start-line="53" selection-end-line="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/SearchBar.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -584,20 +516,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/LoginForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="38" column="63" selection-start-line="38" selection-start-column="63" selection-end-line="38" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/SignupForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="755">
-          <caret line="35" column="38" selection-start-line="35" selection-start-column="38" selection-end-line="35" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/constants/colors.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
@@ -608,16 +526,7 @@
     <entry file="file://$PROJECT_DIR$/images/marker.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/images/loading.svg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/configure-store.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="67" selection-start-line="10" selection-start-column="67" selection-end-line="10" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/images/loading.svg" />
     <entry file="file://$PROJECT_DIR$/navigators/RootNavigator.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1088">
@@ -642,30 +551,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/firebase/index.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="111">
           <caret line="230" column="4" selection-start-line="230" selection-start-column="4" selection-end-line="230" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/containers/LoadingScreen.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-709">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -676,16 +565,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/actions/user-action.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/containers/ProfileScreen.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
@@ -693,13 +572,6 @@
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/containers/AuthenticationScreen.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1" column="23" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -717,20 +589,116 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/containers/UserScreen.js">
+    <entry file="file://$PROJECT_DIR$/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="151" column="3" lean-forward="true" selection-start-line="151" selection-start-column="3" selection-end-line="151" selection-end-column="3" />
+        <state relative-caret-position="184">
+          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/reducers/user-reducer.js">
+    <entry file="file://$PROJECT_DIR$/configure-store.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
+          <caret line="27" column="30" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/constants/validations.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-73">
+          <caret line="4" column="34" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/formValidator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="39">
+          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/AppTextInput.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/AppHeader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="28" column="32" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reducers/user-reducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-22">
+          <caret line="46" column="26" lean-forward="true" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/actions/user-action.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="72" column="30" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/containers/LoadingScreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-527">
+          <caret line="9" column="25" lean-forward="true" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/SignupForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="117" column="50" lean-forward="true" selection-start-line="117" selection-start-column="50" selection-end-line="117" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LoginForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="20" column="5" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="20" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/containers/AuthenticationScreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="551">
+          <caret line="37" column="28" lean-forward="true" selection-start-line="37" selection-start-column="28" selection-end-line="37" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/containers/UserScreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="53" column="28" selection-start-line="53" selection-start-column="28" selection-end-line="53" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

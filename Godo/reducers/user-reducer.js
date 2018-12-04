@@ -41,8 +41,11 @@ export default (state = initalState, action) => {
         isLoading: false,
         message: 'Login failed. Please check your credentials'
       }
-    case actionTypes.USER_SIGNOUT:
-      return state
+      case actionTypes.USER_SIGNOUT:
+      return {
+          ...state,
+          isLoading: false
+      }
     case actionTypes.AUTH_REQUEST:
       return {
         ...state,
