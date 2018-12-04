@@ -8,6 +8,6 @@ export default () => createStore(
     rootReducer,
     compose(
         applyMiddleware(thunk),
-        reactReduxFirebase(firebase, {enableRedirectHandling: false})
+        reactReduxFirebase(firebase, {useFirestoreForProfile: true, userProfile: 'users', enableRedirectHandling: false})
     )
 )

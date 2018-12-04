@@ -47,7 +47,6 @@ class HomeScreen extends React.Component {
   };
 
   renderEventList = (eventList, msg) => {
-    console.log(eventList.length);
     if (eventList) {
       return (
         <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}>

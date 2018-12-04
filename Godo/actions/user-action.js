@@ -11,6 +11,28 @@ export const fetchUsersEvents = () => {
   };
 };
 
+export const getCurrentUser = () => {
+    return dispatch => {
+        return new Promise((resolve, reject) => {
+            firebase.auth().onAuthStateChanged(
+                user => {
+                    if (user) {
+                        dispatch({
+                            type: actionTypes.USER_AUTHENTICATED, user
+                        });
+                    } else {
+                        dispatch({
+                            type: actionTypes.USER_NOT_AUTHENTICATED
+                        });
+                    }
+                    resolve(user)
+                },
+                error => reject(error)
+            )
+        })
+    }
+}
+
 export const userSignUp = (newUser) => {
     return async dispatch => {
         dispatch ({
@@ -19,6 +41,7 @@ export const userSignUp = (newUser) => {
         try {
             const signupResponse = await firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password);
             await firebase.firestore().collection('users').doc(signupResponse.user.uid).set({
+                email: newUser.email,
                 fullName: newUser.fullName
             });
             dispatch({
@@ -48,9 +71,6 @@ export const userSignIn = (credentials) => {
 
 export const userSignOut = () => {
     return async dispatch => {
-        dispatch ({
-            type:  actionTypes.AUTH_REQUEST
-        })
         await firebase.auth().signOut();
         dispatch({
             type: actionTypes.USER_SIGNOUT

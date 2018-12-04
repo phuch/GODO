@@ -1,9 +1,10 @@
 import React from 'react';
-import {StyleSheet, View, TextInput } from 'react-native';
+import {StyleSheet, View } from 'react-native';
+import AppTextInput from './AppTextInput';
 import {Button} from 'react-native-elements';
 import colors from '../constants/colors';
 import basicStyles from '../constants/basicStyles'
-import Toast, {DURATION} from 'react-native-easy-toast'
+import validator from "../util/formValidator";
 
 /*redux*/
 import { connect } from "react-redux";
@@ -16,51 +17,95 @@ class SignupForm extends React.Component {
         super(props);
         this.state = {
             email: '',
+            emailError: '',
             password: '',
+            passwordError: '',
             confirmPassword: '',
-            fullName: ''
+            confirmPasswordError: '',
+            fullName: '',
+            fullNameError:'',
         }
     }
 
     handleSignUp = () => {
-        const {handleSignup} = this.props
-        const newUser = {
-            email: this.state.email,
-            password: this.state.password,
-            fullName: this.state.fullName
-        };
-        handleSignup(newUser)
+        const {fullName, email, password, confirmPassword} = this.state
+        const newUser = {email, password, fullName};
+        const fullNameError = validator('fullName', fullName)
+        const emailError = validator('email', email)
+        const passwordError = validator('password', password)
+        const confirmPasswordError = validator('confirmPassword', confirmPassword, 'password', password);
+
+        this.setState({emailError, passwordError, confirmPasswordError, fullNameError});
+
+        if (!fullNameError && !emailError && !passwordError && !confirmPasswordError) {
+            this.props.handleSignup(newUser)
+            this.setState({
+                email: '',
+                emailError: '',
+                password: '',
+                passwordError: '',
+                confirmPassword: '',
+                confirmPasswordError: '',
+                fullName: '',
+                fullNameError:'',
+            })
+        }
     };
 
     render() {
+        const {fullName, email, password, confirmPassword, fullNameError, emailError, passwordError, confirmPasswordError} = this.state;
         const {isLoading} = this.props
         return (
             <View style={styles.container}>
-                <TextInput
+                <AppTextInput
                     style={[basicStyles.textInput, styles.userInput]}
                     placeholder="Full name"
                     placeholderTextColor={colors.darkGrey}
                     onChangeText={fullName => this.setState({fullName})}
+                    onBlur={() => {
+                        this.setState({
+                            usernameError: validator('fullName', fullName)
+                        })
+                    }}ror
+                    error={fullNameError}
                 />
-                <TextInput
+                <AppTextInput
                     style={[basicStyles.textInput, styles.userInput]}
                     placeholder="Email address"
                     placeholderTextColor={colors.darkGrey}
                     onChangeText={email => this.setState({email})}
+                    onBlur={() => {
+                        this.setState({
+                            emailError: validator('email', email)
+                        })
+                    }}
+                    error={emailError}
                 />
-                <TextInput
+                <AppTextInput
                     secureTextEntry={true}
                     style={[basicStyles.textInput, styles.userInput]}
                     placeholder="Password"
                     placeholderTextColor={colors.darkGrey}
                     onChangeText={password => this.setState({password})}
+                    onBlur={() => {
+                        this.setState({
+                            passwordError: validator('password', password)
+                        })
+                    }}
+                    error={passwordError}
                 />
-                <TextInput
+                <AppTextInput
                     secureTextEntry={true}
                     style={[basicStyles.textInput, styles.userInput]}
                     placeholder="Confirm password"
                     placeholderTextColor={colors.darkGrey}
                     onChangeText={confirmPassword => this.setState({confirmPassword})}
+                    onBlur={() => {
+                        this.setState({
+                            confirmPasswordError: validator('confirmPassword', confirmPassword, 'password', password)
+                        })
+                    }}
+                    error={confirmPasswordError}
                 />
 
                 {isLoading ?
@@ -70,17 +115,15 @@ class SignupForm extends React.Component {
                         loadingProps={{ size: "large", color: "rgba(111, 202, 186, 1)" }}
                         titleStyle={{ fontWeight: "700" }}
                         buttonStyle={styles.button}
-                        onPress={() => this.handleSignUp()}
+                        onPress={this.handleSignUp}
                     /> :
                     <Button
                         title="SIGN UP"
                         buttonStyle={styles.button}
                         textStyle={basicStyles.buttonTitle}
-                        onPress={() => this.handleSignUp()}
+                        onPress={this.handleSignUp}
                     />
                 }
-
-
             </View>
         )
     }

@@ -1,18 +1,21 @@
 import React from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { connect } from "react-redux";
-import Icon from "react-native-vector-icons/EvilIcons";
+import { StyleSheet, View, TouchableOpacity, Alert } from "react-native";
+import Icon from "react-native-vector-icons/Feather";
 import { Avatar } from "react-native-elements";
 
 import colors from "../constants/colors";
 import reviews from "../fixtures/reviews.json";
-import { fetchUsersEvents } from "../actions/user-action";
 
 import AppHeader from "../components/AppHeader";
 import SvgIcon from "../components/SvgIcon";
 import ReviewList from "../components/ReviewList";
 import EventList from "../components/EventList";
 import BaseText, { HeaderText } from "../components/Text";
+import {randomImage} from "../util/imageUtils";
+
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import {fetchUsersEvents, userSignOut} from "../actions/user-action";
 
 class UserScreen extends React.Component {
   constructor(props) {
@@ -20,7 +23,7 @@ class UserScreen extends React.Component {
 
     this.state = {
       isLiked: false,
-      isDisliked: false
+      points: 0,
     };
   }
 
@@ -31,7 +34,7 @@ class UserScreen extends React.Component {
   renderLikeButton = () => {
     const { isLiked } = this.state;
     return (
-      <View>
+      <View style={{marginRight: 20}}>
         {isLiked ? (
           <SvgIcon name="LikeColor" width={50} height={50} />
         ) : (
@@ -46,34 +49,29 @@ class UserScreen extends React.Component {
     );
   };
 
-  toggleFavorite = button => {
-    if (button === "like") {
-      this.setState({ isLiked: !this.state.isLiked, isDisliked: false });
-    } else {
-      this.setState({ isLiked: false, isDisliked: !this.state.isDisliked });
-    }
+  toggleFavorite = () => {
+    this.setState({isLiked: !this.state.isLiked}, () => {
+        const {points, isLiked} = this.state
+        this.setState({points: isLiked ? points + 1 : points - 1})
+    });
   };
 
-  renderDislikeButton = () => {
-    const { isDisliked } = this.state;
-    return (
-      <View>
-        {isDisliked ? (
-          <SvgIcon name="DislikeColor" width={50} height={50} />
-        ) : (
-          <SvgIcon
-            name="DislikeGrey"
-            width={50}
-            height={50}
-            fill={colors.darkGrey}
-          />
-        )}
-      </View>
-    );
-  };
+  userSignOut = () => {
+    const { userSignOut, navigation } = this.props
+    Alert.alert(
+      '',
+      'Log out of your account?',
+      [
+        {text: 'Cancel', onPress: () => {}, style: 'cancel'},
+        {text: 'OK', onPress: () => userSignOut().then(navigation.navigate('Authentication'))},
+      ],
+      { cancelable: false }
+    )
+  }
 
   render() {
-    const { showAddButton, ofCurrentUser } = this.props;
+    const { showAddButton, ofCurrentUser, profile } = this.props;
+    const { points } = this.state
     const reviewData = new Array(reviews[0]);
 
     return (
@@ -81,48 +79,44 @@ class UserScreen extends React.Component {
         <AppHeader
           rightIcons={
             ofCurrentUser ? (
-              <TouchableOpacity>
-                <Icon name="pencil" size={35} color={colors.darkGrey} />
-              </TouchableOpacity>
+                <View style={{ flexDirection: 'row' }}>
+                  {/*<Icon style={{ marginRight: 20 }} name="edit-2" size={30} color={colors.darkGrey} />*/}
+                  <Icon name="power" size={30} color={colors.secondary} onPress={this.userSignOut}/>
+                </View>
             ) : (
               undefined
             )
           }
         />
         <View style={styles.general}>
-          {ofCurrentUser && (
-            <TouchableOpacity onPress={() => this.toggleFavorite("like")}>
-              {this.renderLikeButton()}
-            </TouchableOpacity>
-          )}
           <View style={{ alignItems: "center" }}>
             <Avatar
-              xlarge
-              rounded
-              source={{
-                uri:
-                  "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
-              }}
-              onPress={() => console.log("Works!")}
-              activeOpacity={0.7}
-              avatarStyle={{
-                borderWidth: 8,
-                borderColor: colors.secondary,
-                borderTopLeftRadius: 1
-              }}
+                xlarge
+                rounded
+                source={randomImage()}
+                activeOpacity={0.7}
+                avatarStyle={{
+                    borderWidth: 8,
+                    borderColor: colors.secondary,
+                    borderTopLeftRadius: 1
+                }}
             />
-            <HeaderText style={{ fontSize: 20, paddingTop: 15 }}>
-              John AppleSeed
-            </HeaderText>
-            <BaseText style={{ fontSize: 15, paddingTop: 5 }}>
-              34 points
-            </BaseText>
+            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop:20}}>
+              {ofCurrentUser && (
+                  <TouchableOpacity onPress={() => this.toggleFavorite()}>
+                      {this.renderLikeButton()}
+                  </TouchableOpacity>
+              )}
+              <View>
+                <HeaderText style={{ fontSize: 20, paddingTop: 15 }}>
+                  {profile.fullName}
+                </HeaderText>
+                <BaseText style={{ fontSize: 15, paddingTop: 5 }}>
+                  {points} {points === 0 || points === 1 ? `point` : `points`}
+                </BaseText>
+              </View>
+            </View>
           </View>
-          {ofCurrentUser && (
-            <TouchableOpacity onPress={() => this.toggleFavorite("dislike")}>
-              {this.renderDislikeButton()}
-            </TouchableOpacity>
-          )}
         </View>
         <View style={{ paddingHorizontal: 10, flex: 1 }}>
           <ReviewList
@@ -155,12 +149,14 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = store => {
   const { events } = store.userState;
+  const { profile } = store.firebase
   return {
-    events
+    events, profile
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { fetchUsersEvents }
-)(UserScreen);
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({ userSignOut, fetchUsersEvents }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserScreen);
