@@ -14,7 +14,7 @@ class EventListItem extends React.Component {
 
   onPress = () => {
     const { event, navigation } = this.props;
-    navigation.navigate("EventDetail", { event });
+    navigation.navigate("EventDetail", { id: event.id });
   };
 
   render() {

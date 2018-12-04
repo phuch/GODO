@@ -17,6 +17,7 @@ import basicStyles from "../constants/basicStyles";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import firebase from "../Firebase";
+import { registerToEvent, unregisterToEvent } from "../actions/events-action";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -38,9 +39,19 @@ class EventDetailScreen extends React.Component {
     navigation.navigate(routeName, params);
   };
 
+  isGoing = () => {
+    const { id } = this.props.navigation.state.params;
+    const event = this.props.nearbyEvents.find(e => e.id === id);
+
+    return event.attendees.some(docRef => {
+      return docRef.id === firebase.auth().currentUser.uid;
+    });
+  };
+
   render() {
     const { isGoing } = this.state;
-    const { event } = this.props.navigation.state.params;
+    const { id } = this.props.navigation.state.params;
+    const event = this.props.nearbyEvents.find(e => e.id === id);
     const {
       location,
       name,
@@ -89,7 +100,7 @@ class EventDetailScreen extends React.Component {
           <View style={{ padding: 20 }}>
             <Text>{description}</Text>
           </View>
-          {isGoing ? (
+          {this.isGoing() ? (
             <Button
               containerViewStyle={[
                 basicStyles.buttonContainer,
@@ -98,7 +109,7 @@ class EventDetailScreen extends React.Component {
               title="NOT GOING"
               buttonStyle={styles.notGoingButton}
               textStyle={basicStyles.buttonTitle}
-              onPress={this.unRegisterToEvent}
+              onPress={() => this.props.unregisterToEvent(event)}
             />
           ) : (
             <Button
@@ -109,7 +120,7 @@ class EventDetailScreen extends React.Component {
               title="GOING"
               buttonStyle={styles.goingButton}
               textStyle={basicStyles.buttonTitle}
-              onPress={this.registerToEvent}
+              onPress={() => this.props.registerToEvent(event)}
             />
           )}
         </View>
@@ -153,11 +164,12 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-  return {};
+  const { nearbyEvents } = state.events;
+  return { nearbyEvents };
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators({ registerToEvent, unregisterToEvent }, dispatch);
 };
 
 export default connect(

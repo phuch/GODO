@@ -22,7 +22,6 @@ class EventList extends React.Component {
   };
 
   onRefreshEventList = () => {
-    console.log("refreshing");
     this.props.refreshEventList();
   };
 

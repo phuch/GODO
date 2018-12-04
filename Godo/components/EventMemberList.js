@@ -1,7 +1,8 @@
 import React from "react";
-import { SectionList, StyleSheet, View } from "react-native";
+import { SectionList, StyleSheet, View, TouchableOpacity } from "react-native";
 import { Avatar } from "react-native-elements";
 import BaseText, { SectionHeaderText } from "./Text";
+import { randomImage } from "../util/imageUtils";
 
 import colors from "../constants/colors";
 
@@ -43,21 +44,21 @@ class EventMemberList extends React.Component {
 
   renderItem = ({ item }) => {
     return (
-      <View
+      <TouchableOpacity
         style={{
           flexDirection: "row",
           alignItems: "center",
           paddingVertical: 5
         }}
+        onPress={() =>
+          this.props.navigation.navigate("UserScreen", { profile: item })
+        }
       >
         <View>
           <Avatar
             medium
             rounded
-            source={{
-              uri:
-                "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
-            }}
+            source={randomImage()}
             activeOpacity={0.7}
             avatarStyle={{
               borderWidth: 4,
@@ -71,7 +72,7 @@ class EventMemberList extends React.Component {
             {item.fullName}
           </BaseText>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 

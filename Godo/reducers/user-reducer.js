@@ -5,7 +5,8 @@ const initalState = {
   term: null,
   isSearching: false,
   message: null,
-  isLoading: false
+  isLoading: false,
+  currentUser: null
 };
 
 export default (state = initalState, action) => {
@@ -40,12 +41,25 @@ export default (state = initalState, action) => {
         isLoading: false,
         message: 'Login failed. Please check your credentials'
       }
-    case actionTypes.USER_SIGNOUT:
-      return state
+      case actionTypes.USER_SIGNOUT:
+      return {
+          ...state,
+          isLoading: false
+      }
     case actionTypes.AUTH_REQUEST:
       return {
         ...state,
         isLoading: true
+      }
+    case actionTypes.USER_AUTHENTICATED:
+      return {
+          ...state,
+          currentUser: action.user
+      }
+    case actionTypes.USER_NOT_AUTHENTICATED:
+      return {
+          ...state,
+          currentUser: null
       }
     default:
       return state;

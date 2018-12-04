@@ -45,7 +45,6 @@ class AuthenticationScreen extends React.Component {
 
     handleSignup = (newUser) => {
         this.props.userSignUp(newUser).then(() => {
-            console.log(this.props.auth)
             const {message, auth} = this.props
             if (message !== null) {
                 this.refs.toast.show(message, 1500);

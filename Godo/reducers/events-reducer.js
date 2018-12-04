@@ -7,9 +7,12 @@ import {
   POST_EVENT_SUCCESS,
   SEARCH_SUCCESS,
   LOADING_PARTICIPANTS,
-  GET_PARTICIPANTS_SUCCESS
+  GET_PARTICIPANTS_SUCCESS,
+  REGISTER_SUCCESS,
+  UNREGISTER_SUCCESS
 } from "../constants/action-types";
 import moment from "moment";
+import firebase from "../Firebase";
 
 const initalState = {
   events: [],
@@ -99,6 +102,40 @@ export default (state = initalState, action) => {
           ]
         };
       }
+    case REGISTER_SUCCESS: {
+      return {
+        ...state,
+        nearbyEvents: state.nearbyEvents.map(event => {
+          if (event.id !== action.id) {
+            return event;
+          }
+          return {
+            ...event,
+            attendees: [
+              ...event.attendees,
+              firebase.firestore().doc(`/users/${action.curUserId}`)
+            ]
+          };
+        })
+      };
+    }
+    case UNREGISTER_SUCCESS: {
+      return {
+        ...state,
+        nearbyEvents: state.nearbyEvents.map(event => {
+          if (event.id !== action.id) {
+            return event;
+          }
+          const newAttendees = event.attendees.filter(
+            ref => ref.id !== action.curUserId
+          );
+          return {
+            ...event,
+            attendees: newAttendees
+          };
+        })
+      };
+    }
     default:
       return state;
   }

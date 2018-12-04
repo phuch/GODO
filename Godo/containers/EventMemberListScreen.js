@@ -13,13 +13,6 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 class EventMemberListScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isGoing: false
-    };
-  }
-
   componentDidMount() {
     const event = this.props.navigation.getParam("event", null);
     this.props.listParticipants(event);
@@ -39,13 +32,10 @@ class EventMemberListScreen extends Component {
   };
 
   render() {
-    const { isGoing } = this.state;
     const event = this.props.navigation.getParam("event", null);
     const { participants, loadingParticipants } = this.props;
 
-    const eventParticipants = participants.find(
-      parEvent => parEvent.id === event.id
-    );
+    const eventParticipants = participants.find(e => e.id === event.id);
 
     return (
       <View style={styles.container}>
@@ -59,46 +49,18 @@ class EventMemberListScreen extends Component {
           }
           navigation={this.props.navigation}
         />
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "space-between",
-            paddingHorizontal: 15
-          }}
-        >
-          {loadingParticipants ? (
-            this.renderLoadingIndicator()
-          ) : (
-            <View style={{ flex: 1 }}>
-              <EventMemberList
-                users={
-                  eventParticipants ? eventParticipants.participants : null
-                }
-                loading={loadingParticipants}
-                event={event}
-              />
-            </View>
-          )}
-          <View>
-            {isGoing ? (
-              <Button
-                containerViewStyle={styles.buttonContainer}
-                title="NOT GOING"
-                buttonStyle={styles.notGoingButton}
-                textStyle={basicStyles.buttonTitle}
-                onPress={() => {}}
-              />
-            ) : (
-              <Button
-                containerViewStyle={styles.buttonContainer}
-                title="GOING"
-                buttonStyle={styles.goingButton}
-                textStyle={basicStyles.buttonTitle}
-                onPress={() => {}}
-              />
-            )}
+        {loadingParticipants ? (
+          this.renderLoadingIndicator()
+        ) : (
+          <View style={{ flex: 1, paddingHorizontal: 15 }}>
+            <EventMemberList
+              users={eventParticipants ? eventParticipants.participants : null}
+              loading={loadingParticipants}
+              event={event}
+              navigation={this.props.navigation}
+            />
           </View>
-        </View>
+        )}
       </View>
     );
   }

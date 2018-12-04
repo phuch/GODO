@@ -8,7 +8,9 @@ import {
   POST_EVENT_SUCCESS,
   SEARCH_SUCCESS,
   LOADING_PARTICIPANTS,
-  GET_PARTICIPANTS_SUCCESS
+  GET_PARTICIPANTS_SUCCESS,
+  REGISTER_SUCCESS,
+  UNREGISTER_SUCCESS
 } from "../constants/action-types";
 import { calculateDistance } from "../util/geolocationUtils";
 import moment from "moment";
@@ -265,4 +267,53 @@ export const listParticipants = event => dispatch => {
       );
     })
     .catch(err => err);
+};
+
+export const registerToEvent = event => dispatch => {
+  if (!event) return;
+
+  const curAttendees = event.attendees;
+  const curUserId = firebase.auth().currentUser.uid;
+  eventsDb
+    .doc(event.id)
+    .set(
+      {
+        attendees: [
+          ...curAttendees,
+          firebase.firestore().doc(`/users/${curUserId}`)
+        ]
+      },
+      { merge: true }
+    )
+    .then(
+      dispatch({
+        type: REGISTER_SUCCESS,
+        id: event.id,
+        curUserId
+      })
+    );
+};
+
+export const unregisterToEvent = event => dispatch => {
+  if (!event) return;
+
+  const curUserId = firebase.auth().currentUser.uid;
+  const newAttendees = event.attendees.filter(
+    docRef => docRef.id !== curUserId
+  );
+  eventsDb
+    .doc(event.id)
+    .set(
+      {
+        attendees: newAttendees
+      },
+      { merge: true }
+    )
+    .then(
+      dispatch({
+        type: UNREGISTER_SUCCESS,
+        id: event.id,
+        curUserId
+      })
+    );
 };

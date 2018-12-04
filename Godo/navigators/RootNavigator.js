@@ -11,8 +11,10 @@ import EventDetailScreen from "../containers/EventDetailScreen";
 import Icon from "react-native-vector-icons/Feather";
 import CreateEventScreen from "../containers/CreateEventScreen";
 import AuthenticationScreen from "../containers/AuthenticationScreen";
-import LocationPickerModal from "../containers/LocationPickerModal";
+import LoadingSreen from "../containers/LoadingScreen";
 import EventMemberListScreen from "../containers/EventMemberListScreen";
+import LocationPickerModal from "../containers/LocationPickerModal";
+import UserScreen from "../containers/UserScreen";
 
 const HomeNavigator = createStackNavigator(
   {
@@ -33,6 +35,9 @@ const HomeNavigator = createStackNavigator(
       navigationOptions: {
         tabBarVisible: false
       }
+    },
+    UserScreen: {
+      screen: UserScreen
     }
   },
   {
@@ -63,6 +68,9 @@ const BrowseNavigator = createStackNavigator(
     },
     EventMemberListScreen: {
       screen: EventMemberListScreen
+    },
+    UserScreen: {
+      screen: UserScreen
     }
   },
   {
@@ -81,6 +89,9 @@ const ProfileNavigator = createStackNavigator(
     },
     EventMemberListScreen: {
       screen: EventMemberListScreen
+    },
+    UserScreen: {
+      screen: UserScreen
     }
   },
   {
@@ -137,6 +148,9 @@ const AppNavigator = createBottomTabNavigator(
 
 const RootNavigator = createStackNavigator(
   {
+    Loading: {
+      screen: LoadingSreen
+    },
     App: {
       screen: AppNavigator
     },
@@ -145,7 +159,7 @@ const RootNavigator = createStackNavigator(
     }
   },
   {
-    initialRouteName: "Authentication",
+    initialRouteName: "Loading",
     headerMode: "none"
   }
 );

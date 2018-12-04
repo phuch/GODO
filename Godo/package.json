@@ -40,6 +40,7 @@
     "react-redux-firebase": "^2.2.2",
     "redux": "^4.0.0",
     "redux-firestore": "^0.6.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "validate.js": "^0.12.0"
   }
 }

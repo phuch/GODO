@@ -12,14 +12,24 @@ class LoginForm extends React.Component {
             password: '',
         }
     }
+    onSubmit = () => {
+        this.props.handleLogin(this.state)
+        this.setState({
+            email: '',
+            password: ''
+        })
+    }
+
     render() {
-        const { handleLogin, isLoading } = this.props;
+        const { isLoading } = this.props;
+        const { email, password } = this.state;
         return (
             <View style={styles.container}>
                 <TextInput
                     style={[basicStyles.textInput, styles.userInput]}
                     placeholder="Email address"
                     placeholderTextColor={colors.darkGrey}
+                    value={email}
                     onChangeText={email => this.setState({email})}
                 />
                 <TextInput
@@ -27,6 +37,7 @@ class LoginForm extends React.Component {
                     style={[basicStyles.textInput, styles.userInput]}
                     placeholder="Password"
                     placeholderTextColor={colors.darkGrey}
+                    value={password}
                     onChangeText={password => this.setState({password})}
                 />
                 {isLoading ?
@@ -36,13 +47,13 @@ class LoginForm extends React.Component {
                         loadingProps={{ size: "large", color: "rgba(111, 202, 186, 1)" }}
                         titleStyle={{ fontWeight: "700" }}
                         buttonStyle={styles.button}
-                        onPress={() => handleLogin(this.state)}
+                        onPress={this.onSubmit}
                     /> :
                     <Button
                         buttonStyle={styles.button}
                         textStyle={basicStyles.buttonTitle}
                         title="LOG IN"
-                        onPress={() => handleLogin(this.state)}
+                        onPress={this.onSubmit}
                     />
                 }
             </View>
