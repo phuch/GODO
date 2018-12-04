@@ -94,7 +94,15 @@ class EventDetailScreen extends React.Component {
             />
           </View>
           <View style={styles.infoSubContainer}>
-            <IconInfo iconName="Mascot" title={publisher.fullName} />
+            <IconInfo
+              iconName="Mascot"
+              title={publisher.fullName}
+              onPress={() =>
+                this.props.navigation.navigate("UserScreen", {
+                  profile: publisher
+                })
+              }
+            />
             <IconInfo iconName="Money" title={fee} />
           </View>
           <View style={{ padding: 20 }}>
