@@ -12,6 +12,7 @@ import Icon from "react-native-vector-icons/Feather";
 import CreateEventScreen from "../containers/CreateEventScreen";
 import AuthenticationScreen from "../containers/AuthenticationScreen";
 import LocationPickerModal from "../containers/LocationPickerModal";
+import EventMemberListScreen from "../containers/EventMemberListScreen";
 
 const HomeNavigator = createStackNavigator(
   {
@@ -20,6 +21,9 @@ const HomeNavigator = createStackNavigator(
     },
     EventDetail: {
       screen: EventDetailScreen
+    },
+    EventMemberListScreen: {
+      screen: EventMemberListScreen
     },
     CreateEvent: {
       screen: CreateEventScreen
@@ -56,6 +60,9 @@ const BrowseNavigator = createStackNavigator(
     },
     EventDetail: {
       screen: EventDetailScreen
+    },
+    EventMemberListScreen: {
+      screen: EventMemberListScreen
     }
   },
   {
@@ -71,6 +78,9 @@ const ProfileNavigator = createStackNavigator(
     },
     EventDetail: {
       screen: EventDetailScreen
+    },
+    EventMemberListScreen: {
+      screen: EventMemberListScreen
     }
   },
   {

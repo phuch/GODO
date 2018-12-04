@@ -16,6 +16,7 @@ import moment from "moment/moment";
 import basicStyles from "../constants/basicStyles";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import firebase from "../Firebase";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -32,20 +33,24 @@ class EventDetailScreen extends React.Component {
     this.setState({ isGoing: !isGoing });
   };
 
+  handleNavigation = (routeName, params) => {
+    const { navigation } = this.props;
+    navigation.navigate(routeName, params);
+  };
+
   render() {
     const { isGoing } = this.state;
+    const { event } = this.props.navigation.state.params;
     const {
-      event: {
-        location,
-        name,
-        description,
-        time,
-        publisher,
-        slots,
-        joined,
-        fee
-      }
-    } = this.props.navigation.state.params;
+      location,
+      name,
+      description,
+      time,
+      publisher,
+      slots,
+      attendees,
+      fee
+    } = event;
     const formattedDate = moment.unix(time.seconds).format("MMM D");
     const formattedTime = moment.unix(time.seconds).format("k:mm");
     return (
@@ -55,9 +60,11 @@ class EventDetailScreen extends React.Component {
             hasBackButton={true}
             title={name}
             rightIcons={
-              <TouchableOpacity>
-                <Icon name="pencil" size={40} color={colors.darkGrey} />
-              </TouchableOpacity>
+              firebase.auth().currentUser.uid === publisher.id && (
+                <TouchableOpacity>
+                  <Icon name="pencil" size={40} color={colors.darkGrey} />
+                </TouchableOpacity>
+              )
             }
             navigation={this.props.navigation}
           />
@@ -65,12 +72,18 @@ class EventDetailScreen extends React.Component {
           <View style={styles.infoSubContainer}>
             <IconInfo
               iconName="Calendar"
-              title={`${formattedDate},${formattedTime}`}
+              title={`${formattedDate}, ${formattedTime}`}
             />
-            <IconInfo iconName="User" title={`${joined}/${slots}`} />
+            <IconInfo
+              iconName="User"
+              title={`${attendees.length}/${slots}`}
+              onPress={() =>
+                this.handleNavigation("EventMemberListScreen", { event })
+              }
+            />
           </View>
           <View style={styles.infoSubContainer}>
-            <IconInfo iconName="Mascot" title={publisher} />
+            <IconInfo iconName="Mascot" title={publisher.fullName} />
             <IconInfo iconName="Money" title={fee} />
           </View>
           <View style={{ padding: 20 }}>

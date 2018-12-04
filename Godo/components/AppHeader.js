@@ -73,7 +73,7 @@ AppHeader.propTypes = {
   title: PropTypes.string,
   navigation: PropTypes.object,
   hasBackButton: PropTypes.bool,
-  rightIcons: PropTypes.element
+  rightIcons: PropTypes.oneOfType([PropTypes.element, PropTypes.bool])
 };
 
 export default AppHeader;

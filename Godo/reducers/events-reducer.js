@@ -5,15 +5,17 @@ import {
   FETCH_EVENTS_ERROR,
   POST_EVENT_ERROR,
   POST_EVENT_SUCCESS,
-  SEARCH_SUCCESS
+  SEARCH_SUCCESS,
+  LOADING_PARTICIPANTS,
+  GET_PARTICIPANTS_SUCCESS
 } from "../constants/action-types";
-import { calculateDistance } from "../util/geolocationUtils";
 import moment from "moment";
 
 const initalState = {
   events: [],
   errorEvents: [],
   nearbyEvents: [],
+  participants: [],
   searchResult: null
 };
 
@@ -61,6 +63,42 @@ export default (state = initalState, action) => {
         ...state,
         searchResult: action.result
       };
+    case LOADING_PARTICIPANTS:
+      return {
+        ...state,
+        loadingParticipants: action.loading
+      };
+    case GET_PARTICIPANTS_SUCCESS:
+      const participantsList = state.participants.find(
+        event => event.id === action.id
+      );
+      if (participantsList) {
+        return {
+          ...state,
+          participants: state.participants.map(event => {
+            if (event.id !== action.id) {
+              return event;
+            }
+            return {
+              ...event,
+              participants: action.participants
+            };
+          })
+        };
+      } else {
+        return {
+          ...state,
+          participants: [
+            ...state.participants,
+            ...[
+              {
+                id: action.id,
+                participants: action.participants
+              }
+            ]
+          ]
+        };
+      }
     default:
       return state;
   }

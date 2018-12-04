@@ -6,7 +6,9 @@ import {
   FETCH_EVENTS_ERROR,
   POST_EVENT_ERROR,
   POST_EVENT_SUCCESS,
-  SEARCH_SUCCESS
+  SEARCH_SUCCESS,
+  LOADING_PARTICIPANTS,
+  GET_PARTICIPANTS_SUCCESS
 } from "../constants/action-types";
 import { calculateDistance } from "../util/geolocationUtils";
 import moment from "moment";
@@ -19,6 +21,21 @@ const _loadingEvents = loading => {
   return {
     type: LOADING_EVENTS,
     loading
+  };
+};
+
+const _loadingParticipants = loading => {
+  return {
+    type: LOADING_PARTICIPANTS,
+    loading
+  };
+};
+
+const _getParticipantsSuccess = ({ id, participants }) => {
+  return {
+    type: GET_PARTICIPANTS_SUCCESS,
+    id,
+    participants
   };
 };
 
@@ -79,9 +96,6 @@ export const fetchAllEvents = () => async dispatch => {
   dispatch(_loadingEvents(true));
 
   const querySnapshot = await eventsDb.get();
-  const userRef = await usersDb.doc(firebase.auth().currentUser.uid).get();
-  const user = userRef.data();
-
   const events = [];
 
   querySnapshot.forEach(async doc => {
@@ -90,6 +104,8 @@ export const fetchAllEvents = () => async dispatch => {
     } else {
       const event = doc.data();
       const location = await locationsDb.doc(event.location.id).get();
+      const userRef = await usersDb.doc(event.publisher.id).get();
+      const user = userRef.data();
 
       events.push({
         ...event,
@@ -98,7 +114,10 @@ export const fetchAllEvents = () => async dispatch => {
           id: event.location.id,
           ...location.data()
         },
-        publisher: user.fullName
+        publisher: {
+          fullName: user.fullName,
+          id: event.publisher.id
+        }
       });
     }
 
@@ -117,8 +136,6 @@ export const fetchNearbyEvents = location => async (dispatch, getState) => {
   dispatch(_loadingEvents(true));
 
   const querySnapshot = await eventsDb.get();
-  const userRef = await usersDb.doc(firebase.auth().currentUser.uid).get();
-  const user = userRef.data();
 
   const events = [];
   let count = 0;
@@ -129,6 +146,8 @@ export const fetchNearbyEvents = location => async (dispatch, getState) => {
     } else {
       const event = doc.data();
       const location = await locationsDb.doc(event.location.id).get();
+      const userRef = await usersDb.doc(event.publisher.id).get();
+      const user = userRef.data();
 
       const eventLatitude = location.data().coordinate.latitude;
       const eventLongitude = location.data().coordinate.longitude;
@@ -149,7 +168,10 @@ export const fetchNearbyEvents = location => async (dispatch, getState) => {
             id: event.location.id,
             ...location.data()
           },
-          publisher: user.fullName
+          publisher: {
+            fullName: user.fullName,
+            id: event.publisher.id
+          }
         });
       }
 
@@ -177,7 +199,6 @@ export const createEvent = event => async (dispatch, getState) => {
       category: event.category,
       description: event.description,
       fee: event.fee,
-      joined: 0,
       location: firebase.firestore().doc(`/locations/${event.location.id}`),
       publisher: firebase
         .firestore()
@@ -193,8 +214,10 @@ export const createEvent = event => async (dispatch, getState) => {
       const newEvent = {
         ...event,
         time: { seconds: moment(event.time).unix() },
-        joined: 0,
-        publisher: user.fullName,
+        publisher: {
+          fullName: user.fullName,
+          id: firebase.auth().currentUser.uid
+        },
         id: docRef.id,
         attendees: []
       };
@@ -220,4 +243,26 @@ export const createEvent = event => async (dispatch, getState) => {
       dispatch(_createEventError(error));
       console.error("Error adding document: ", error);
     });
+};
+
+export const listParticipants = event => dispatch => {
+  if (!event) return;
+  dispatch(_loadingParticipants(true));
+
+  const participants = event.attendees.map(async participant => {
+    const userRef = await usersDb.doc(participant.id).get();
+    return userRef.data();
+  });
+
+  Promise.all(participants)
+    .then(result => {
+      dispatch(_loadingParticipants(false));
+      dispatch(
+        _getParticipantsSuccess({
+          id: event.id,
+          participants: result
+        })
+      );
+    })
+    .catch(err => err);
 };

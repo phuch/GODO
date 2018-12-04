@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, StyleSheet, View, RefreshControl } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import PropTypes from "prop-types";
 import { DotIndicator } from "react-native-indicators";
 import { assignCardBackgroundColor } from "../util/colorUtils";
