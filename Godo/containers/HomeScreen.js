@@ -55,7 +55,6 @@ class HomeScreen extends React.Component {
     const { nearbyEvents, searchResult } = this.props;
 
     if (searchResult) {
-      console.log(searchResult);
       return this.renderEventList(searchResult, "keyword");
     } else if (nearbyEvents) {
       return this.renderEventList(nearbyEvents, "area");

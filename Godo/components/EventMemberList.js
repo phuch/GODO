@@ -13,7 +13,6 @@ class EventMemberList extends React.Component {
     };
   }
   renderSectionHeader = ({ section }) => {
-    console.log(section);
     if (section.title === "Attendees") {
       return (
         <View
@@ -96,7 +95,6 @@ class EventMemberList extends React.Component {
       data.push(participants);
     }
 
-    console.log(data);
     return (
       <View style={styles.container}>
         <SectionList
