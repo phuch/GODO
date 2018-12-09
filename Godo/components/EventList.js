@@ -3,7 +3,7 @@ import { FlatList, StyleSheet, View } from "react-native";
 import PropTypes from "prop-types";
 import { DotIndicator } from "react-native-indicators";
 import { assignCardBackgroundColor } from "../util/colorUtils";
-import { SectionHeaderText } from "./Text";
+import BaseText, { SectionHeaderText } from "./Text";
 import EventListItem from "./EventListItem";
 import colors from "../constants/colors";
 
@@ -26,7 +26,22 @@ class EventList extends React.Component {
   };
 
   render() {
-    const { events, navigation, loading } = this.props;
+    const { events, navigation, loading, dataType } = this.props;
+
+    let emptyMessage = "No activity found";
+    if (dataType === "category") {
+      emptyMessage = `${emptyMessage}, try another tag or try again later`;
+    } else if (dataType === "search") {
+      emptyMessage = `${emptyMessage}, try another keyword or try again later`;
+    } else if (dataType === "nearby") {
+      emptyMessage = `${emptyMessage}, try to move to other area`;
+    } else {
+      emptyMessage = `${emptyMessage}, try again later`;
+    }
+
+    if (loading) {
+      return this.renderLoadingIndicator();
+    }
 
     return (
       <View style={styles.container}>
@@ -46,11 +61,13 @@ class EventList extends React.Component {
             />
           )}
           style={{ padding: 5 }}
-          ListHeaderComponent={
-            loading ? this.renderLoadingIndicator() : undefined
-          }
           onRefresh={this.onRefresh}
           refreshing={false}
+          ListEmptyComponent={
+            <View>
+              <BaseText style={styles.noResultText}>{emptyMessage}</BaseText>
+            </View>
+          }
         />
       </View>
     );
@@ -60,6 +77,12 @@ class EventList extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  noResultText: {
+    margin: 20,
+    fontSize: 18,
+    fontWeight: "500",
+    textAlign: "center"
   }
 });
 

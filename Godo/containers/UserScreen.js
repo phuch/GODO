@@ -15,7 +15,8 @@ import { randomImage } from "../util/imageUtils";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchUsersEvents, userSignOut } from "../actions/user-action";
+import { userSignOut } from "../actions/user-action";
+import { fetchAllEvents } from "../actions/events-action";
 
 class UserScreen extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class UserScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchUsersEvents();
+    this.props.fetchAllEvents();
   }
 
   renderLikeButton = () => {
@@ -172,7 +173,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = store => {
-  const { events } = store.userState;
+  const { events } = store.events;
   const { profile } = store.firebase;
   return {
     events,
@@ -181,7 +182,7 @@ const mapStateToProps = store => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ userSignOut, fetchUsersEvents }, dispatch);
+  return bindActionCreators({ userSignOut, fetchAllEvents }, dispatch);
 };
 
 export default connect(

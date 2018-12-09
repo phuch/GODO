@@ -6,11 +6,7 @@ import HomeHeader from "../components/HomeHeader";
 import { assignCardBackgroundColor } from "../util/colorUtils";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import {
-  fetchAllEvents,
-  fetchNearbyEvents,
-  searchEvents
-} from "../actions/events-action";
+import { fetchNearbyEvents, searchEvents } from "../actions/events-action";
 import { getCurrentLocation } from "../actions/location-action";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -61,24 +57,17 @@ class HomeScreen extends React.Component {
     }
   };
 
-  renderEventList = (eventList, msg) => {
-    if (eventList) {
-      return (
-        <EventList
-          events={eventList}
-          backgroundColor={assignCardBackgroundColor}
-          navigation={this.props.navigation}
-          loading={this.props.loading}
-          refreshEventList={this.refreshEventList}
-        />
-      );
-    } else {
-      return (
-        <Text style={styles.noResultText}>
-          {`No activities found nearby, please try another ${msg}`}
-        </Text>
-      );
-    }
+  renderEventList = eventList => {
+    return (
+      <EventList
+        events={eventList}
+        backgroundColor={assignCardBackgroundColor}
+        navigation={this.props.navigation}
+        loading={this.props.loading}
+        refreshEventList={this.refreshEventList}
+        dataType={this.state.isSearching ? "search" : "nearby"}
+      />
+    );
   };
 
   render() {
@@ -118,12 +107,6 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     backgroundColor: "white",
     paddingHorizontal: 10
-  },
-  noResultText: {
-    margin: 20,
-    fontSize: 18,
-    fontWeight: "500",
-    textAlign: "center"
   }
 });
 

@@ -11,7 +11,9 @@ import {
   REGISTER_SUCCESS,
   UNREGISTER_SUCCESS
 } from "../constants/action-types";
+import { sortEvents } from "../util/sortingAlgorithm";
 import moment from "moment";
+import _ from "lodash";
 import firebase from "../Firebase";
 
 const initalState = {
@@ -49,7 +51,7 @@ export default (state = initalState, action) => {
       );
       return {
         ...state,
-        nearbyEvents: activeEvents
+        nearbyEvents: sortEvents(activeEvents)
       };
     case POST_EVENT_SUCCESS:
       return {

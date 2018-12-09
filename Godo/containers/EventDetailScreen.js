@@ -24,15 +24,7 @@ const screenWidth = Dimensions.get("window").width;
 class EventDetailScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isGoing: false
-    };
   }
-
-  toggleGoingStatus = () => {
-    const { isGoing } = this.state;
-    this.setState({ isGoing: !isGoing });
-  };
 
   handleNavigation = (routeName, params) => {
     const { navigation } = this.props;
@@ -49,7 +41,6 @@ class EventDetailScreen extends React.Component {
   };
 
   render() {
-    const { isGoing } = this.state;
     const { id } = this.props.navigation.state.params;
     const event = this.props.nearbyEvents.find(e => e.id === id);
     const {

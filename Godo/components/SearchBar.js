@@ -7,7 +7,7 @@ import basicStyles from "../constants/basicStyles";
 
 class SearchBar extends React.Component {
   render() {
-    const { handleSearch, style, autoFocus } = this.props;
+    const { style, autoFocus } = this.props;
     return (
       <View style={[basicStyles.textInput, { width: this.props.width }, style]}>
         <Icon name="search" color={colors.darkGrey} size={24} />

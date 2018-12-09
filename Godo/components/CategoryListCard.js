@@ -9,6 +9,7 @@ export default (CategoryListCard = props => {
   return (
     <TouchableOpacity
       style={[styles.container, { backgroundColor: props.backgroundColor }]}
+      onPress={() => props.selectCategory(props.title)}
     >
       <SectionHeaderText style={styles.title}>{props.title}</SectionHeaderText>
     </TouchableOpacity>

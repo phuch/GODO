@@ -15,6 +15,8 @@ import LoadingSreen from "../containers/LoadingScreen";
 import EventMemberListScreen from "../containers/EventMemberListScreen";
 import LocationPickerModal from "../containers/LocationPickerModal";
 import UserScreen from "../containers/UserScreen";
+import EventListScreen from "../containers/EventListScreen";
+import ChatScreen from "../containers/ChatScreen";
 
 const HomeNavigator = createStackNavigator(
   {
@@ -38,6 +40,9 @@ const HomeNavigator = createStackNavigator(
     },
     UserScreen: {
       screen: UserScreen
+    },
+    ChatScreen: {
+      screen: ChatScreen
     }
   },
   {
@@ -51,7 +56,7 @@ HomeNavigator.navigationOptions = ({ navigation }) => {
   let { routeName } = navigation.state.routes[navigation.state.index];
   let navigationOptions = {};
 
-  if (routeName === "LocationPicker" || routeName === "DateTimePicker") {
+  if (routeName === "LocationPicker" || routeName === "ChatScreen") {
     navigationOptions.tabBarVisible = false;
   }
 
@@ -71,6 +76,12 @@ const BrowseNavigator = createStackNavigator(
     },
     UserScreen: {
       screen: UserScreen
+    },
+    EventListScreen: {
+      screen: EventListScreen
+    },
+    ChatScreen: {
+      screen: ChatScreen
     }
   },
   {
@@ -78,6 +89,17 @@ const BrowseNavigator = createStackNavigator(
     headerMode: "none"
   }
 );
+
+BrowseNavigator.navigationOptions = ({ navigation }) => {
+  let { routeName } = navigation.state.routes[navigation.state.index];
+  let navigationOptions = {};
+
+  if (routeName === "ChatScreen") {
+    navigationOptions.tabBarVisible = false;
+  }
+
+  return navigationOptions;
+};
 
 const ProfileNavigator = createStackNavigator(
   {
@@ -92,6 +114,9 @@ const ProfileNavigator = createStackNavigator(
     },
     UserScreen: {
       screen: UserScreen
+    },
+    ChatScreen: {
+      screen: ChatScreen
     }
   },
   {
@@ -99,6 +124,17 @@ const ProfileNavigator = createStackNavigator(
     headerMode: "none"
   }
 );
+
+ProfileNavigator.navigationOptions = ({ navigation }) => {
+  let { routeName } = navigation.state.routes[navigation.state.index];
+  let navigationOptions = {};
+
+  if (routeName === "ChatScreen") {
+    navigationOptions.tabBarVisible = false;
+  }
+
+  return navigationOptions;
+};
 
 const AppNavigator = createBottomTabNavigator(
   {

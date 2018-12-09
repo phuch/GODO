@@ -43,7 +43,13 @@ class EventMemberListScreen extends Component {
           hasBackButton={true}
           title={event.name}
           rightIcons={
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                this.props.navigation.navigate("ChatScreen", {
+                  title: event.name
+                })
+              }
+            >
               <Icon name="comment" size={35} color={colors.darkGrey} />
             </TouchableOpacity>
           }
