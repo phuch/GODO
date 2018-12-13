@@ -19,13 +19,11 @@ class EventListScreen extends React.Component {
   }
 
   renderEventList = category => {
-    console.log(category);
     const data = this.props.events.filter(
       event =>
         event.tags.includes(category) ||
         event.name.toLowerCase().includes(category)
     );
-    console.log(data);
     return (
       <EventList
         events={data}

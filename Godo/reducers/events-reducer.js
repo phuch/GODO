@@ -107,7 +107,7 @@ export default (state = initalState, action) => {
     case REGISTER_SUCCESS: {
       return {
         ...state,
-        nearbyEvents: state.nearbyEvents.map(event => {
+        events: state.events.map(event => {
           if (event.id !== action.id) {
             return event;
           }
@@ -124,7 +124,7 @@ export default (state = initalState, action) => {
     case UNREGISTER_SUCCESS: {
       return {
         ...state,
-        nearbyEvents: state.nearbyEvents.map(event => {
+        events: state.events.map(event => {
           if (event.id !== action.id) {
             return event;
           }

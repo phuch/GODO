@@ -18,6 +18,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import firebase from "../Firebase";
 import { registerToEvent, unregisterToEvent } from "../actions/events-action";
+import BaseText from "../components/Text";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -33,7 +34,7 @@ class EventDetailScreen extends React.Component {
 
   isGoing = () => {
     const { id } = this.props.navigation.state.params;
-    const event = this.props.nearbyEvents.find(e => e.id === id);
+    const event = this.props.events.find(e => e.id === id);
 
     return event.attendees.some(docRef => {
       return docRef.id === firebase.auth().currentUser.uid;
@@ -42,7 +43,7 @@ class EventDetailScreen extends React.Component {
 
   render() {
     const { id } = this.props.navigation.state.params;
-    const event = this.props.nearbyEvents.find(e => e.id === id);
+    const event = this.props.events.find(e => e.id === id);
     const {
       location,
       name,
@@ -70,7 +71,13 @@ class EventDetailScreen extends React.Component {
             }
             navigation={this.props.navigation}
           />
-          <Map eventLocation={location} />
+          <View style={{ alignContent: "center" }}>
+            <Map eventLocation={location} />
+            <BaseText style={{ textAlign: "center", paddingTop: 5 }}>
+              {location.address}
+            </BaseText>
+          </View>
+
           <View style={styles.infoSubContainer}>
             <IconInfo
               iconName="Calendar"
@@ -94,7 +101,7 @@ class EventDetailScreen extends React.Component {
                 })
               }
             />
-            <IconInfo iconName="Money" title={fee} />
+            <IconInfo iconName="Money" title={fee === 0 ? "Free" : fee} />
           </View>
           <View style={{ padding: 20 }}>
             <Text>{description}</Text>
@@ -136,9 +143,10 @@ const styles = StyleSheet.create({
   },
   content: {
     ...StyleSheet.absoluteFillObject,
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "white"
+    backgroundColor: "white",
+    flex: 1
   },
   infoSubContainer: {
     width: screenWidth,
@@ -163,8 +171,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-  const { nearbyEvents } = state.events;
-  return { nearbyEvents };
+  const { nearbyEvents, events } = state.events;
+  return { nearbyEvents, events };
 };
 
 const mapDispatchToProps = dispatch => {

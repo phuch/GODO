@@ -9,8 +9,8 @@ import moment from "moment";
 export const sortEvents = events => {
   const calculateWeight = event => {
     const now = moment(Date.now());
-    const eventDate = moment(event.time);
-    const timeDiff = now.diff(eventDate, "days");
+    const eventDate = moment.unix(event.time.seconds);
+    const timeDiff = Math.abs(now.diff(eventDate, "days"));
     const attendeesRatio = event.attendees.length / event.slots;
 
     if (timeDiff < 8) {

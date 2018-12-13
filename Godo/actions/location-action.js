@@ -5,7 +5,8 @@ import {
   GET_LOCATIONS_ERROR,
   SEARCH_LOCATIONS_RESULT,
   GET_CURRENT_LOCATION_ERROR,
-  GET_CURRENT_LOCATION_SUCCESS
+  GET_CURRENT_LOCATION_SUCCESS,
+  CREATE_LOCATION_SUCCESS
 } from "../constants/action-types";
 import { Location, Permissions } from "expo";
 
@@ -94,4 +95,44 @@ export const searchLocations = term => (dispatch, getState) => {
 
   dispatch(_getLocationLoading(false));
   dispatch(_searchResult(result));
+};
+
+export const createLocation = ({ name, address }) => (dispatch, getState) => {
+  if (!name || !address) return;
+  const locations = getState().location.locations;
+
+  const userLatitude = getState().location.userLocation.coords.latitude;
+  const userLongitude = getState().location.userLocation.coords.longitude;
+  let id;
+
+  do {
+    id = `loca:${Math.random()
+      .toString(36)
+      .substring(2, 15) +
+      Math.random()
+        .toString(36)
+        .substring(2, 15)}`;
+  } while (locations.includes(id));
+
+  return locationsDb
+    .doc(id)
+    .set({
+      name: name,
+      address: address,
+      coordinate: new firebase.firestore.GeoPoint(userLatitude, userLongitude)
+    })
+    .then(() => {
+      const newLoc = {
+        name: name,
+        address: address,
+        coordinate: new firebase.firestore.GeoPoint(userLatitude, userLongitude)
+      };
+      dispatch({
+        type: CREATE_LOCATION_SUCCESS,
+        newLocation: newLoc
+      });
+
+      return newLoc;
+    })
+    .catch(err => console.log("Error create location", err));
 };

@@ -6,7 +6,11 @@ import HomeHeader from "../components/HomeHeader";
 import { assignCardBackgroundColor } from "../util/colorUtils";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { fetchNearbyEvents, searchEvents } from "../actions/events-action";
+import {
+  fetchNearbyEvents,
+  searchEvents,
+  fetchAllEvents
+} from "../actions/events-action";
 import { getCurrentLocation } from "../actions/location-action";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -20,6 +24,7 @@ class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
+    this.props.fetchAllEvents();
     this.props.getCurrentLocation();
   }
 
@@ -125,7 +130,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { getCurrentLocation, searchEvents, fetchNearbyEvents },
+    { getCurrentLocation, searchEvents, fetchNearbyEvents, fetchAllEvents },
     dispatch
   );
 };

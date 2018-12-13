@@ -4,7 +4,8 @@ import {
   GET_LOCATIONS_LOADING,
   SEARCH_LOCATIONS_RESULT,
   GET_CURRENT_LOCATION_ERROR,
-  GET_CURRENT_LOCATION_SUCCESS
+  GET_CURRENT_LOCATION_SUCCESS,
+  CREATE_LOCATION_SUCCESS
 } from "../constants/action-types";
 
 const initialState = {
@@ -43,6 +44,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userLocation: action.userLocation
+      };
+    case CREATE_LOCATION_SUCCESS:
+      return {
+        ...state,
+        newLocation: action.newLocation
       };
     default:
       return state;

@@ -130,7 +130,7 @@ export const fetchAllEvents = () => async dispatch => {
   });
 };
 
-export const fetchNearbyEvents = location => async (dispatch, getState) => {
+export const fetchNearbyEvents = location => async dispatch => {
   if (!location) return;
   const userLatitude = location.coords.latitude;
   const userLongitude = location.coords.longitude;
@@ -211,8 +211,6 @@ export const createEvent = event => async (dispatch, getState) => {
       attendees: []
     })
     .then(docRef => {
-      dispatch(_createEventSuccess(event));
-
       const newEvent = {
         ...event,
         time: { seconds: moment(event.time).unix() },
@@ -223,6 +221,8 @@ export const createEvent = event => async (dispatch, getState) => {
         id: docRef.id,
         attendees: []
       };
+
+      dispatch(_createEventSuccess(newEvent));
 
       if (
         calculateDistance(

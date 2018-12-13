@@ -44,7 +44,7 @@ class CreateEventScreen extends React.Component {
     this.props
       .createEvent(this.state.newEvent)
       .then(newEvent =>
-        this.handleNavigation("EventDetail", { event: newEvent })
+        this.handleNavigation("EventDetail", { id: newEvent.id })
       );
   };
 
