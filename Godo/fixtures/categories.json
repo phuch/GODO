@@ -1,47 +1,42 @@
 [
-    {
-        "title": "Sports",
-        "data": [
-            [
-                "Basketball",
-                "Football",
-                "Volleyball",
-                "Marathon",
-                "Badminton"
-            ]
-        ]
-    },
-    {
-        "title": "Music and Arts",
-        "data": [
-            [
-                "Drawing",
-                "Concert",
-                "Dance",
-                "Museum",
-                "Instruments"
-            ]
-        ]
-    },
-    {
-        "title": "Crafts",
-        "data": [
-            [
-                "Sculpture",
-                "Sewing",
-                "Carpentry",
-                "Pottery"
-            ]
-        ]
-    },
-    {
-        "title": "Others",
-        "data": [
-            [
-                "Cooking",
-                "Picnic",
-                "Meetup"
-            ]
-        ]
-    }
+  {
+    "title": "Sports",
+    "data": [
+      [
+        "Basketball",
+        "Football",
+        "Volleyball",
+        "Marathon",
+        "Badminton",
+        "Ice Hockey",
+        "Ice Skating",
+        "Fishing"
+      ]
+    ]
+  },
+  {
+    "title": "Music and Arts",
+    "data": [
+      [
+        "Drawing",
+        "Arts",
+        "Music",
+        "Concert",
+        "Dance",
+        "Museum",
+        "Instruments",
+        "Guitar",
+        "Piano",
+        "Violin"
+      ]
+    ]
+  },
+  {
+    "title": "Crafts",
+    "data": [["Sculpture", "Sewing", "Carpentry", "Pottery", "Craft"]]
+  },
+  {
+    "title": "Others",
+    "data": [["Cooking", "Picnic", "Books", "Meetup"]]
+  }
 ]

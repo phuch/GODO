@@ -12,6 +12,11 @@ import Icon from "react-native-vector-icons/Feather";
 import CreateEventScreen from "../containers/CreateEventScreen";
 import AuthenticationScreen from "../containers/AuthenticationScreen";
 import LoadingSreen from "../containers/LoadingScreen";
+import EventMemberListScreen from "../containers/EventMemberListScreen";
+import LocationPickerModal from "../containers/LocationPickerModal";
+import UserScreen from "../containers/UserScreen";
+import EventListScreen from "../containers/EventListScreen";
+import ChatScreen from "../containers/ChatScreen";
 
 const HomeNavigator = createStackNavigator(
   {
@@ -21,15 +26,42 @@ const HomeNavigator = createStackNavigator(
     EventDetail: {
       screen: EventDetailScreen
     },
+    EventMemberListScreen: {
+      screen: EventMemberListScreen
+    },
     CreateEvent: {
       screen: CreateEventScreen
+    },
+    LocationPicker: {
+      screen: LocationPickerModal,
+      navigationOptions: {
+        tabBarVisible: false
+      }
+    },
+    UserScreen: {
+      screen: UserScreen
+    },
+    ChatScreen: {
+      screen: ChatScreen
     }
   },
   {
     initialRouteName: "Home",
-    headerMode: "none"
+    headerMode: "none",
+    mode: "modal"
   }
 );
+
+HomeNavigator.navigationOptions = ({ navigation }) => {
+  let { routeName } = navigation.state.routes[navigation.state.index];
+  let navigationOptions = {};
+
+  if (routeName === "LocationPicker" || routeName === "ChatScreen") {
+    navigationOptions.tabBarVisible = false;
+  }
+
+  return navigationOptions;
+};
 
 const BrowseNavigator = createStackNavigator(
   {
@@ -38,6 +70,18 @@ const BrowseNavigator = createStackNavigator(
     },
     EventDetail: {
       screen: EventDetailScreen
+    },
+    EventMemberListScreen: {
+      screen: EventMemberListScreen
+    },
+    UserScreen: {
+      screen: UserScreen
+    },
+    EventListScreen: {
+      screen: EventListScreen
+    },
+    ChatScreen: {
+      screen: ChatScreen
     }
   },
   {
@@ -46,6 +90,17 @@ const BrowseNavigator = createStackNavigator(
   }
 );
 
+BrowseNavigator.navigationOptions = ({ navigation }) => {
+  let { routeName } = navigation.state.routes[navigation.state.index];
+  let navigationOptions = {};
+
+  if (routeName === "ChatScreen") {
+    navigationOptions.tabBarVisible = false;
+  }
+
+  return navigationOptions;
+};
+
 const ProfileNavigator = createStackNavigator(
   {
     Profile: {
@@ -53,6 +108,15 @@ const ProfileNavigator = createStackNavigator(
     },
     EventDetail: {
       screen: EventDetailScreen
+    },
+    EventMemberListScreen: {
+      screen: EventMemberListScreen
+    },
+    UserScreen: {
+      screen: UserScreen
+    },
+    ChatScreen: {
+      screen: ChatScreen
     }
   },
   {
@@ -60,6 +124,17 @@ const ProfileNavigator = createStackNavigator(
     headerMode: "none"
   }
 );
+
+ProfileNavigator.navigationOptions = ({ navigation }) => {
+  let { routeName } = navigation.state.routes[navigation.state.index];
+  let navigationOptions = {};
+
+  if (routeName === "ChatScreen") {
+    navigationOptions.tabBarVisible = false;
+  }
+
+  return navigationOptions;
+};
 
 const AppNavigator = createBottomTabNavigator(
   {
@@ -71,7 +146,8 @@ const AppNavigator = createBottomTabNavigator(
           const iconName = "map-pin";
           return <Icon name={iconName} size={24} color={tintColor} />;
         },
-        tabBarButtonComponent: Ripple
+        tabBarButtonComponent: Ripple,
+        tabBarLabel: "Home"
       }
     },
     Browse: {
@@ -81,7 +157,8 @@ const AppNavigator = createBottomTabNavigator(
           const iconName = "search";
           return <Icon name={iconName} size={24} color={tintColor} />;
         },
-        tabBarButtonComponent: Ripple
+        tabBarButtonComponent: Ripple,
+        tabBarLabel: "Browse"
       }
     },
     Profile: {
@@ -91,7 +168,8 @@ const AppNavigator = createBottomTabNavigator(
           const iconName = "user";
           return <Icon name={iconName} size={24} color={tintColor} />;
         },
-        tabBarButtonComponent: Ripple
+        tabBarButtonComponent: Ripple,
+        tabBarLabel: "Profile"
       }
     }
   },

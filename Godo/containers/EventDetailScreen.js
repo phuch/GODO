@@ -4,8 +4,7 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Dimensions,
-  ScrollView
+  Dimensions
 } from "react-native";
 import Map from "../components/Map";
 import AppHeader from "../components/AppHeader";
@@ -15,36 +14,46 @@ import Icon from "react-native-vector-icons/EvilIcons";
 import colors from "../constants/colors";
 import moment from "moment/moment";
 import basicStyles from "../constants/basicStyles";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import firebase from "../Firebase";
+import { registerToEvent, unregisterToEvent } from "../actions/events-action";
+import BaseText from "../components/Text";
 
 const screenWidth = Dimensions.get("window").width;
 
 class EventDetailScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isGoing: false
-    };
   }
 
-  toggleGoingStatus = () => {
-    const { isGoing } = this.state;
-    this.setState({ isGoing: !isGoing });
+  handleNavigation = (routeName, params) => {
+    const { navigation } = this.props;
+    navigation.navigate(routeName, params);
+  };
+
+  isGoing = () => {
+    const { id } = this.props.navigation.state.params;
+    const event = this.props.events.find(e => e.id === id);
+
+    return event.attendees.some(docRef => {
+      return docRef.id === firebase.auth().currentUser.uid;
+    });
   };
 
   render() {
-    const { isGoing } = this.state;
+    const { id } = this.props.navigation.state.params;
+    const event = this.props.events.find(e => e.id === id);
     const {
-      event: {
-        location,
-        name,
-        description,
-        time,
-        publisher,
-        slots,
-        joined,
-        fee
-      }
-    } = this.props.navigation.state.params;
+      location,
+      name,
+      description,
+      time,
+      publisher,
+      slots,
+      attendees,
+      fee
+    } = event;
     const formattedDate = moment.unix(time.seconds).format("MMM D");
     const formattedTime = moment.unix(time.seconds).format("k:mm");
     return (
@@ -54,28 +63,50 @@ class EventDetailScreen extends React.Component {
             hasBackButton={true}
             title={name}
             rightIcons={
-              <TouchableOpacity>
-                <Icon name="pencil" size={40} color={colors.darkGrey} />
-              </TouchableOpacity>
+              firebase.auth().currentUser.uid === publisher.id && (
+                <TouchableOpacity>
+                  <Icon name="pencil" size={40} color={colors.darkGrey} />
+                </TouchableOpacity>
+              )
             }
             navigation={this.props.navigation}
           />
-          <Map eventLocation={location} />
+          <View style={{ alignContent: "center" }}>
+            <Map eventLocation={location} />
+            <BaseText style={{ textAlign: "center", paddingTop: 5 }}>
+              {location.address}
+            </BaseText>
+          </View>
+
           <View style={styles.infoSubContainer}>
             <IconInfo
               iconName="Calendar"
-              title={`${formattedDate},${formattedTime}`}
+              title={`${formattedDate}, ${formattedTime}`}
             />
-            <IconInfo iconName="User" title={`${joined}/${slots}`} />
+            <IconInfo
+              iconName="User"
+              title={`${attendees.length}/${slots}`}
+              onPress={() =>
+                this.handleNavigation("EventMemberListScreen", { event })
+              }
+            />
           </View>
           <View style={styles.infoSubContainer}>
-            <IconInfo iconName="Mascot" title={publisher} />
-            <IconInfo iconName="Money" title={fee} />
+            <IconInfo
+              iconName="Mascot"
+              title={publisher.fullName}
+              onPress={() =>
+                this.props.navigation.navigate("UserScreen", {
+                  profile: publisher
+                })
+              }
+            />
+            <IconInfo iconName="Money" title={fee === 0 ? "Free" : fee} />
           </View>
           <View style={{ padding: 20 }}>
             <Text>{description}</Text>
           </View>
-          {isGoing ? (
+          {this.isGoing() ? (
             <Button
               containerViewStyle={[
                 basicStyles.buttonContainer,
@@ -84,7 +115,7 @@ class EventDetailScreen extends React.Component {
               title="NOT GOING"
               buttonStyle={styles.notGoingButton}
               textStyle={basicStyles.buttonTitle}
-              onPress={this.toggleGoingStatus}
+              onPress={() => this.props.unregisterToEvent(event)}
             />
           ) : (
             <Button
@@ -95,7 +126,7 @@ class EventDetailScreen extends React.Component {
               title="GOING"
               buttonStyle={styles.goingButton}
               textStyle={basicStyles.buttonTitle}
-              onPress={this.toggleGoingStatus}
+              onPress={() => this.props.registerToEvent(event)}
             />
           )}
         </View>
@@ -112,9 +143,10 @@ const styles = StyleSheet.create({
   },
   content: {
     ...StyleSheet.absoluteFillObject,
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "white"
+    backgroundColor: "white",
+    flex: 1
   },
   infoSubContainer: {
     width: screenWidth,
@@ -138,4 +170,16 @@ const styles = StyleSheet.create({
   }
 });
 
-export default EventDetailScreen;
+const mapStateToProps = state => {
+  const { nearbyEvents, events } = state.events;
+  return { nearbyEvents, events };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ registerToEvent, unregisterToEvent }, dispatch);
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EventDetailScreen);

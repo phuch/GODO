@@ -11,12 +11,20 @@ import SearchBar from "../components/SearchBar";
 import EventList from "../components/EventList";
 
 import colors from "../constants/colors";
-import { searchAllAction } from "../actions/browse-action";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { fetchAllEvents, searchEvents } from "../actions/events-action";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 
 class BrowseScreen extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      searchQuerry: ""
+    };
+  }
+
+  componentDidMount() {
+    this.props.fetchAllEvents();
   }
 
   renderSectionList = () => {
@@ -31,6 +39,7 @@ class BrowseScreen extends React.Component {
           <CategoryList
             category={item}
             backgroundColor={assignCardBackgroundColor(section.title)}
+            onSelectCategory={this.selectCategory}
           />
         )}
         stickySectionHeadersEnabled={false}
@@ -38,26 +47,35 @@ class BrowseScreen extends React.Component {
     );
   };
 
+  doSearch = querry => {
+    this.setState({ searchQuerry: querry });
+    this.props.searchEvents(querry, {});
+  };
+
   renderResultEventList = () => {
-    const { events } = this.props;
-    return events.length ? (
-      <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}>
+    const { searchResult } = this.props;
+    return (
+      <KeyboardAwareScrollView>
         <EventList
-          events={this.props.events}
+          events={searchResult}
           backgroundColor={assignCardBackgroundColor}
           navigation={this.props.navigation}
+          dataType={"search"}
         />
       </KeyboardAwareScrollView>
-    ) : (
-      <Text style={styles.noResultText}>
-        No activities found, please try another keyword
-      </Text>
     );
   };
 
-  render() {
-    const { isSearching, searchAllAction } = this.props;
+  handleNavigation = (routeName, params) => {
+    const { navigation } = this.props;
+    navigation.navigate(routeName, params);
+  };
 
+  selectCategory = item => {
+    this.handleNavigation("EventListScreen", { category: item });
+  };
+
+  render() {
     const screenWidth = Dimensions.get("window").width;
     const ICON_WIDTH_RATIO = 0.6;
 
@@ -71,11 +89,13 @@ class BrowseScreen extends React.Component {
           />
           <SearchBar
             width={screenWidth * ICON_WIDTH_RATIO}
-            handleSearch={searchAllAction}
+            value={this.state.searchQuerry}
+            onChangeText={text => this.doSearch(text)}
+            placeholder="Search for events by names, tags, etc."
           />
         </View>
         <View style={{ flex: 1 }}>
-          {isSearching
+          {this.state.searchQuerry
             ? this.renderResultEventList()
             : this.renderSectionList()}
         </View>
@@ -85,15 +105,15 @@ class BrowseScreen extends React.Component {
 }
 
 const mapStateToProps = store => {
-  const { isSearching, events } = store.browseScreenState;
+  const { events, searchResult } = store.events;
   return {
-    isSearching,
-    events
+    events,
+    searchResult
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ searchAllAction }, dispatch);
+  return bindActionCreators({ searchEvents, fetchAllEvents }, dispatch);
 };
 
 const styles = StyleSheet.create({

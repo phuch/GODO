@@ -11,11 +11,12 @@ import SvgIcon from "../components/SvgIcon";
 import ReviewList from "../components/ReviewList";
 import EventList from "../components/EventList";
 import BaseText, { HeaderText } from "../components/Text";
-import {randomImage} from "../util/imageUtils";
+import { randomImage } from "../util/imageUtils";
 
-import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
-import {fetchUsersEvents, userSignOut} from "../actions/user-action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { userSignOut } from "../actions/user-action";
+import { fetchAllEvents } from "../actions/events-action";
 
 class UserScreen extends React.Component {
   constructor(props) {
@@ -23,18 +24,18 @@ class UserScreen extends React.Component {
 
     this.state = {
       isLiked: false,
-      points: 0,
+      points: 0
     };
   }
 
   componentDidMount() {
-    this.props.fetchUsersEvents();
+    this.props.fetchAllEvents();
   }
 
   renderLikeButton = () => {
     const { isLiked } = this.state;
     return (
-      <View style={{marginRight: 20}}>
+      <View style={{ marginRight: 20 }}>
         {isLiked ? (
           <SvgIcon name="LikeColor" width={50} height={50} />
         ) : (
@@ -50,62 +51,82 @@ class UserScreen extends React.Component {
   };
 
   toggleFavorite = () => {
-    this.setState({isLiked: !this.state.isLiked}, () => {
-        const {points, isLiked} = this.state
-        this.setState({points: isLiked ? points + 1 : points - 1})
+    this.setState({ isLiked: !this.state.isLiked }, () => {
+      const { points, isLiked } = this.state;
+      this.setState({ points: isLiked ? points + 1 : points - 1 });
     });
   };
 
   userSignOut = () => {
-    const { userSignOut, navigation } = this.props
+    const { userSignOut, navigation } = this.props;
     Alert.alert(
-      '',
-      'Log out of your account?',
+      "",
+      "Log out of your account?",
       [
-        {text: 'Cancel', onPress: () => {}, style: 'cancel'},
-        {text: 'OK', onPress: () => userSignOut().then(navigation.navigate('Authentication'))},
+        { text: "Cancel", onPress: () => {}, style: "cancel" },
+        {
+          text: "OK",
+          onPress: () =>
+            userSignOut().then(navigation.navigate("Authentication"))
+        }
       ],
       { cancelable: false }
-    )
-  }
+    );
+  };
 
   render() {
-    const { showAddButton, ofCurrentUser, profile } = this.props;
-    const { points } = this.state
+    const { showAddButton, ofCurrentUser } = this.props;
+    const profile =
+      this.props.navigation.getParam("profile", null) || this.props.profile;
+    const { points } = this.state;
     const reviewData = new Array(reviews[0]);
 
     return (
       <View style={styles.container}>
         <AppHeader
+          hasBackButton={!ofCurrentUser}
           rightIcons={
             ofCurrentUser ? (
-                <View style={{ flexDirection: 'row' }}>
-                  {/*<Icon style={{ marginRight: 20 }} name="edit-2" size={30} color={colors.darkGrey} />*/}
-                  <Icon name="power" size={30} color={colors.secondary} onPress={this.userSignOut}/>
-                </View>
+              <View style={{ flexDirection: "row" }}>
+                {/*<Icon style={{ marginRight: 20 }} name="edit-2" size={30} color={colors.darkGrey} />*/}
+                <Icon
+                  name="power"
+                  size={30}
+                  color={colors.secondary}
+                  onPress={this.userSignOut}
+                />
+              </View>
             ) : (
               undefined
             )
           }
+          navigation={this.props.navigation}
         />
         <View style={styles.general}>
           <View style={{ alignItems: "center" }}>
             <Avatar
-                xlarge
-                rounded
-                source={randomImage()}
-                activeOpacity={0.7}
-                avatarStyle={{
-                    borderWidth: 8,
-                    borderColor: colors.secondary,
-                    borderTopLeftRadius: 1
-                }}
+              xlarge
+              rounded
+              source={randomImage()}
+              activeOpacity={0.7}
+              avatarStyle={{
+                borderWidth: 8,
+                borderColor: colors.secondary,
+                borderTopLeftRadius: 1
+              }}
             />
-            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop:20}}>
-              {ofCurrentUser && (
-                  <TouchableOpacity onPress={() => this.toggleFavorite()}>
-                      {this.renderLikeButton()}
-                  </TouchableOpacity>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: 20
+              }}
+            >
+              {!ofCurrentUser && (
+                <TouchableOpacity onPress={() => this.toggleFavorite()}>
+                  {this.renderLikeButton()}
+                </TouchableOpacity>
               )}
               <View>
                 <HeaderText style={{ fontSize: 20, paddingTop: 15 }}>
@@ -125,7 +146,11 @@ class UserScreen extends React.Component {
             showAddButton={showAddButton}
           />
           <View style={{ flex: 1 }}>
-            <EventList events={this.props.events} showHeader={true} navigation={this.props.navigation}/>
+            <EventList
+              events={this.props.events}
+              showHeader={true}
+              navigation={this.props.navigation}
+            />
           </View>
         </View>
       </View>
@@ -148,15 +173,19 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = store => {
-  const { events } = store.userState;
-  const { profile } = store.firebase
+  const { events } = store.events;
+  const { profile } = store.firebase;
   return {
-    events, profile
+    events,
+    profile
   };
 };
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({ userSignOut, fetchUsersEvents }, dispatch);
+  return bindActionCreators({ userSignOut, fetchAllEvents }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserScreen);

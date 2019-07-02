@@ -13,6 +13,7 @@ export default (CategoryList = props => {
         <CategoryListCard
           title={item}
           backgroundColor={props.backgroundColor}
+          selectCategory={props.onSelectCategory}
         />
       )}
       horizontal={true}

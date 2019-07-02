@@ -4,84 +4,85 @@ import Map from "../components/Map";
 import EventList from "../components/EventList";
 import HomeHeader from "../components/HomeHeader";
 import { assignCardBackgroundColor } from "../util/colorUtils";
-import { DotIndicator } from "react-native-indicators";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {
-  getLocationAction,
-  searchAction,
-  toggleSearchAction
-} from "../actions/home-action";
-import { fetchAllEvents } from "../actions/events-action";
-import colors from "../constants/colors";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+  fetchNearbyEvents,
+  searchEvents,
+  fetchAllEvents
+} from "../actions/events-action";
+import { getCurrentLocation } from "../actions/location-action";
 
 class HomeScreen extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isSearching: false
+    };
+  }
+
   componentDidMount() {
-    this.props.getLocationAction();
+    this.props.fetchAllEvents();
+    this.props.getCurrentLocation();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.userLocation !== nextProps.userLocation) {
-      this.props.fetchAllEvents();
+      this.props.fetchNearbyEvents(nextProps.userLocation);
     }
     return true;
   }
 
+  handleNavigation = (routeName, params) => {
+    const { navigation } = this.props;
+    navigation.navigate(routeName, params);
+  };
+
+  refreshEventList = () => {
+    this.props.fetchNearbyEvents(this.props.userLocation);
+  };
+
+  toggleSearch = () => {
+    this.setState({ isSearching: !this.state.isSearching });
+  };
+
+  searchNearbyEvent = term => {
+    this.props.searchEvents(term, { nearby: true });
+  };
+
   renderListArea = () => {
-    const { nearbyEvents, searchResult, events } = this.props;
+    const { nearbyEvents, searchResult } = this.props;
+
     if (searchResult) {
       return this.renderEventList(searchResult, "keyword");
-    } else if (events) {
-      return this.renderEventList(events, "area");
-    } else {
-      return (
-        <DotIndicator
-          count={3}
-          size={10}
-          color={colors.secondary}
-          animationDuration={800}
-        />
-      );
+    } else if (nearbyEvents) {
+      return this.renderEventList(nearbyEvents, "area");
     }
   };
 
-  renderEventList = (eventList, msg) => {
-    if (eventList) {
-      return (
-        <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}>
-          <EventList
-            events={eventList}
-            backgroundColor={assignCardBackgroundColor}
-            navigation={this.props.navigation}
-          />
-        </KeyboardAwareScrollView>
-      );
-    } else {
-      return (
-        <Text style={styles.noResultText}>
-          {`No activities found nearby, please try another ${msg}`}
-        </Text>
-      );
-    }
+  renderEventList = eventList => {
+    return (
+      <EventList
+        events={eventList}
+        backgroundColor={assignCardBackgroundColor}
+        navigation={this.props.navigation}
+        loading={this.props.loading}
+        refreshEventList={this.refreshEventList}
+        dataType={this.state.isSearching ? "search" : "nearby"}
+      />
+    );
   };
 
   render() {
-    const {
-      errorMessage,
-      userLocation,
-      nearbyEvents,
-      isSearching,
-      searchAction,
-      toggleSearchAction
-    } = this.props;
+    const { errorMessage, userLocation, nearbyEvents } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.content}>
           <HomeHeader
-            isSearching={isSearching}
-            toggleSearchMode={toggleSearchAction}
-            handleSearch={searchAction}
+            isSearching={this.state.isSearching}
+            toggleSearchMode={this.toggleSearch}
+            handleSearch={this.searchNearbyEvent}
             handleNavigation={this.handleNavigation}
           />
           {errorMessage ? (
@@ -110,37 +111,25 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     backgroundColor: "white",
     paddingHorizontal: 10
-  },
-  noResultText: {
-    margin: 20,
-    fontSize: 18,
-    fontWeight: "500",
-    textAlign: "center"
   }
 });
 
 const mapStateToProps = store => {
-  const {
-    userLocation,
-    nearbyEvents,
-    errorMessage,
-    isSearching,
-    searchResult
-  } = store.homeScreenState;
-  const { events } = store.events;
+  const { userLocation, errorMessage } = store.location;
+  const { nearbyEvents, errorEvents, loading, searchResult } = store.events;
   return {
     userLocation,
-    nearbyEvents,
     searchResult,
     errorMessage,
-    isSearching,
-    events
+    nearbyEvents,
+    errorEvents,
+    loading
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { getLocationAction, searchAction, toggleSearchAction, fetchAllEvents },
+    { getCurrentLocation, searchEvents, fetchNearbyEvents, fetchAllEvents },
     dispatch
   );
 };
