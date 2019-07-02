@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
 SearchBar.propTypes = {
   width: PropTypes.number,
   autoFocus: PropTypes.bool,
-  onChangeText: PropTypes.func.isRequired,
+  onChangeText: PropTypes.func,
   placeholder: PropTypes.string
 };
 

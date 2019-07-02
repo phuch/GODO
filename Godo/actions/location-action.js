@@ -51,6 +51,7 @@ export const getCurrentLocation = () => {
     }
 
     const userLocation = await Location.getCurrentPositionAsync({});
+    console.log(userLocation)
     dispatch({
       type: GET_CURRENT_LOCATION_SUCCESS,
       userLocation

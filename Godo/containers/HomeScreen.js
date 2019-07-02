@@ -12,7 +12,6 @@ import {
   fetchAllEvents
 } from "../actions/events-action";
 import { getCurrentLocation } from "../actions/location-action";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 class HomeScreen extends React.Component {
   constructor(props) {

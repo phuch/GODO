@@ -1,11 +1,10 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/EvilIcons";
-import _ from "lodash";
 import { connect } from "react-redux";
 import colors from "../constants/colors";
 import AppHeader from "../components/AppHeader";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 import CreateEventForm from "../components/CreateEventForm";
 import { bindActionCreators } from "redux";
 import { createEvent, fetchNearbyEvents } from "../actions/events-action";
@@ -88,7 +87,7 @@ class CreateEventScreen extends React.Component {
           }
           navigation={this.props.navigation}
         />
-        <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}>
+        <KeyboardAwareScrollView>
           <View style={styles.formContainer}>
             <CreateEventForm
               category={this.eventCategory}

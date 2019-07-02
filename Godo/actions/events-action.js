@@ -206,7 +206,7 @@ export const createEvent = event => async (dispatch, getState) => {
         .firestore()
         .doc(`/users/${firebase.auth().currentUser.uid}`),
       slots: event.slots,
-      tags: event.tags,
+      tags: event.tags ? event.tags : [],
       time: event.time,
       attendees: []
     })

@@ -12,7 +12,7 @@ import EventList from "../components/EventList";
 
 import colors from "../constants/colors";
 import { fetchAllEvents, searchEvents } from "../actions/events-action";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 
 class BrowseScreen extends React.Component {
   constructor(props) {
@@ -55,7 +55,7 @@ class BrowseScreen extends React.Component {
   renderResultEventList = () => {
     const { searchResult } = this.props;
     return (
-      <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}>
+      <KeyboardAwareScrollView>
         <EventList
           events={searchResult}
           backgroundColor={assignCardBackgroundColor}
