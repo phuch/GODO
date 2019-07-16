@@ -1,5 +1,14 @@
 {
   "expo": {
-    "sdkVersion": "33.0.0"
+    "name": "Godo",
+    "sdkVersion": "33.0.0",
+    "android": {
+      "package": "com.phuch.godo"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.phuch.godo"
+    }
+
   }
 }
