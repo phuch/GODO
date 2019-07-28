@@ -17,7 +17,7 @@ class SearchBar extends React.Component {
           clearButtonMode="while-editing"
           autoFocus={autoFocus}
           underlineColorAndroid="transparent"
-          placeholder={this.props.placeholder || "Search"}
+          placeholder={this.props.placeholder || "Search for nearby activity"}
           onChangeText={this.props.onChangeText}
           multiline={false}
         />

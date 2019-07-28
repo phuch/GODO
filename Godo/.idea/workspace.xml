@@ -4,27 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/containers/UserScreen.js" line="52" mnemonic="8" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5695350-aabb-45b9-85a7-cbebccccaace" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.babelrc" beforeDir="false" afterPath="$PROJECT_DIR$/.babelrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actions/events-action.js" beforeDir="false" afterPath="$PROJECT_DIR$/actions/events-action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actions/location-action.js" beforeDir="false" afterPath="$PROJECT_DIR$/actions/location-action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/SearchBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/SearchBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/containers/AuthenticationScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/containers/AuthenticationScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/containers/BrowseScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/containers/BrowseScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/containers/CreateEventScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/containers/CreateEventScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/containers/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/containers/HomeScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/avatar1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/images/avatar1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/avatar2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/images/avatar2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/avatar3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/images/avatar3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/avatar4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/images/avatar4.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/avatar5.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/images/avatar5.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/avatar6.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/images/avatar6.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/marker.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/marker.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-    </list>
+    <list default="true" id="a5695350-aabb-45b9-85a7-cbebccccaace" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -35,7 +15,42 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/LoginForm.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="18" column="24" lean-forward="true" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/SignupForm.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2340">
+              <caret line="117" column="50" selection-start-line="117" selection-start-column="50" selection-end-line="117" selection-end-column="50" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+                <element signature="e#315#353#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/actions/user-action.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1176">
+              <caret line="56" column="16" selection-start-line="56" selection-start-column="16" selection-end-line="56" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#57#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -155,22 +170,7 @@
             <path>
               <item name="Godo" type="b2602c69:ProjectViewProjectNode" />
               <item name="Godo" type="462c0819:PsiDirectoryNode" />
-              <item name="actions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Godo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Godo" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Godo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Godo" type="462c0819:PsiDirectoryNode" />
-              <item name="navigators" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Godo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Godo" type="462c0819:PsiDirectoryNode" />
-              <item name="reducers" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -243,7 +243,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="130192000" />
+    <option name="totallyTimeSpent" value="130832000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -255,9 +255,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="715" extended-state="6" />
+    <frame x="0" y="23" width="2048" height="1055" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25416997" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19486926" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -271,7 +271,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.4678748" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.374868" />
       <window_info anchor="bottom" id="TypeScript" order="11" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -451,18 +451,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/components/SignupForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="117" column="50" lean-forward="true" selection-start-line="117" selection-start-column="50" selection-end-line="117" selection-end-column="50" />
+        <state relative-caret-position="2340">
+          <caret line="117" column="50" selection-start-line="117" selection-start-column="50" selection-end-line="117" selection-end-column="50" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#315#353#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/components/LoginForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="20" column="5" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="20" selection-end-column="5" />
+        <state relative-caret-position="294">
+          <caret line="18" column="24" lean-forward="true" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -562,8 +563,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/actions/user-action.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1373">
-          <caret line="72" column="30" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
+        <state relative-caret-position="1176">
+          <caret line="56" column="16" selection-start-line="56" selection-start-column="16" selection-end-line="56" selection-end-column="16" />
           <folding>
             <element signature="e#0#57#0" expanded="true" />
           </folding>
