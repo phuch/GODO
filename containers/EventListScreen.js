@@ -39,13 +39,11 @@ class EventListScreen extends React.Component {
   renderResultEventList = () => {
     const { events } = this.props;
     return events.length ? (
-      <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}>
-        <EventList
-          events={this.props.events}
-          backgroundColor={assignCardBackgroundColor}
-          navigation={this.props.navigation}
-        />
-      </KeyboardAwareScrollView>
+      <EventList
+        events={this.props.events}
+        backgroundColor={assignCardBackgroundColor}
+        navigation={this.props.navigation}
+      />
     ) : (
       <Text style={styles.noResultText}>
         No activities found, please try another keyword

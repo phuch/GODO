@@ -9,7 +9,6 @@ import LinkText from '../components/Text/LinkText';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {userSignIn, userSignUp} from "../actions/user-action";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import Toast from 'react-native-easy-toast'
 
 class AuthenticationScreen extends React.Component {
@@ -58,10 +57,7 @@ class AuthenticationScreen extends React.Component {
         const {showLoginForm} = this.state
         const {isLoading} = this.props
         return (
-            <KeyboardAwareScrollView
-                contentContainerStyle={styles.container}
-                style={{ backgroundColor: 'white' }}
-            >
+            <View>
                 <Toast
                     ref="toast"
                     style={{backgroundColor: colors.secondary}}
@@ -99,7 +95,7 @@ class AuthenticationScreen extends React.Component {
                         </View>
                     }
                 </View>
-            </KeyboardAwareScrollView>
+            </View>
         )
     }
 }

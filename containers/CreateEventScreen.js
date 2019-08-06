@@ -4,7 +4,6 @@ import Icon from "react-native-vector-icons/EvilIcons";
 import { connect } from "react-redux";
 import colors from "../constants/colors";
 import AppHeader from "../components/AppHeader";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 import CreateEventForm from "../components/CreateEventForm";
 import { bindActionCreators } from "redux";
 import { createEvent, fetchNearbyEvents } from "../actions/events-action";
@@ -87,15 +86,13 @@ class CreateEventScreen extends React.Component {
           }
           navigation={this.props.navigation}
         />
-        <KeyboardAwareScrollView>
-          <View style={styles.formContainer}>
-            <CreateEventForm
-              category={this.eventCategory}
-              navigate={this.handleNavigation}
-              onChangeData={this.onChangeData}
-            />
-          </View>
-        </KeyboardAwareScrollView>
+        <View style={styles.formContainer}>
+          <CreateEventForm
+            category={this.eventCategory}
+            navigate={this.handleNavigation}
+            onChangeData={this.onChangeData}
+          />
+        </View>
       </View>
     );
   }
